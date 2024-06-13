@@ -15,7 +15,6 @@ jobs:
       url: https://pypi.org/p/crowdsec-service-api-sdk
     permissions:
       id-token: write
-    needs: [ create-release ]
 
     steps:
       - uses: actions/checkout@v4
