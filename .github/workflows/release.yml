@@ -15,6 +15,7 @@ jobs:
       url: https://pypi.org/p/crowdsec-service-api-sdk
     permissions:
       id-token: write
+      contents: read
 
     steps:
       - name: Checkout
@@ -29,7 +30,7 @@ jobs:
           pip install build
       - name: Build package
         run: python -m build
-      #- name: Publish package to PyPI
-      #  uses: pypa/gh-action-pypi-publish@release/v1
-      #  with:
-      #    package-dir: ./dist
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          package-dir: ./dist
