@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crowdsec_service_api"
+version = "1.16.0"
+license = { text = "MIT" }
+authors = [
+	{ name="crowdsec", email="info@crowdsec.net" }
+]
+description = """This is the API to manage Crowdsec services"""
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+	"httpx",
+	"botocore",
+	"pydantic>=2.5.0,<3.0.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["crowdsec_service_api", "crowdsec_service_api.services"]
+
+[project.optional-dependencies]
