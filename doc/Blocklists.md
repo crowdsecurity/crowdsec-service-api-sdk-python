@@ -3,35 +3,22 @@
 # Blocklists Methods
 | Method | Description |
 | ------ | ----------- |
-| [get_blocklists](#get_blocklists) | Get multiple blocklists. Only blocklists owned by your organization, 
-    shared with your organization or public blocklists are returned. Filters and pagination are available as query parameters. |
-| [create_blocklist](#create_blocklist) | Create a new blocklist owned by your organization. The name must be unique within your organization. 
-    The list will only be visible to your organization and organizations you shared the blocklist with. This operation is submitted to quotas |
+| [get_blocklists](#get_blocklists) | Get multiple blocklists. Only blocklists owned by your organization, shared with your organization or public blocklists are returned. Filters and pagination are available as query parameters. |
+| [create_blocklist](#create_blocklist) | Create a new blocklist owned by your organization. The name must be unique within your organization. The list will only be visible to your organization and organizations you shared the blocklist with. This operation is submitted to quotas |
 | [get_blocklist](#get_blocklist) | Get the details of a blocklist by ID. The content of the blocklist is not returned. |
-| [delete_blocklist](#delete_blocklist) | Delete a blocklist by ID. If the blocklist is shared with other organizations or it has subscriptions, the operation will fail.
-    If you want to force delete the blocklist, you can use the force query parameter, so the blocklists will be unshared / unsubscribed. |
+| [delete_blocklist](#delete_blocklist) | Delete a blocklist by ID. If the blocklist is shared with other organizations or it has subscriptions, the operation will fail. If you want to force delete the blocklist, you can use the force query parameter, so the blocklists will be unshared / unsubscribed. |
 | [update_blocklist](#update_blocklist) | Update a blocklist's details by ID. It is not possible to update the blocklist content using this operation. |
 | [add_ips_to_blocklist](#add_ips_to_blocklist) | Add IPs to a blocklist. If an IP is already in the blocklist, its expiration will be updated with the new expiration. |
 | [delete_ips_from_blocklist](#delete_ips_from_blocklist) | Delete IPs from a blocklist |
-| [download_blocklist_content](#download_blocklist_content) | Download blocklist content as a list of ips as plain text separated by new lines. The response will include the ETag header for cache control.
-    If_Modified_Since and If_None_Match cache control headers are supported for conditional requests. |
+| [download_blocklist_content](#download_blocklist_content) | Download blocklist content as a list of ips as plain text separated by new lines. The response will include the ETag header for cache control. If_Modified_Since and If_None_Match cache control headers are supported for conditional requests. |
 | [get_blocklist_subscribers](#get_blocklist_subscribers) | Get blocklist subscribers within your organization. |
-| [subscribe_blocklist](#subscribe_blocklist) | Subscribe to a blocklist with a remediation type. If the entity type is the full organization or a Tag, 
-    all the engines belonging to the organization or the Tag will be subscribed 
-    and new engines that will join the organization or the Tag will also be automatically subscribed.
-    If the subscription has been done on an organization or Tag you cannot unsubscribe individual engines.
-    In case of errors for some subscribers, the operation will still succeed for the entities that were successfully subscribed 
-    and you'll have the list of errors in the operation's result.
-    This operation is submitted to quotas. |
+| [subscribe_blocklist](#subscribe_blocklist) | Subscribe to a blocklist with a remediation type. If the entity type is the full organization or a Tag, all the engines belonging to the organization or the Tag will be subscribed and new engines that will join the organization or the Tag will also be automatically subscribed. If the subscription has been done on an organization or Tag you cannot unsubscribe individual engines. In case of errors for some subscribers, the operation will still succeed for the entities that were successfully subscribed and you'll have the list of errors in the operation's result. This operation is submitted to quotas. |
 | [unsubscribe_blocklist](#unsubscribe_blocklist) | Unsubscribe from a blocklist. You cannot unsubscribe individual engines if the subscription has been done on an organization or Tag. |
-| [share_blocklist](#share_blocklist) | Share a blocklist with other organizations given their IDs. The blocklist must be owned by your organization.
-    You can give read-only access or read-write access to the blocklist. Sharing a blocklist will not automatically subscribe the shared organizations to the blocklist. |
-| [unshare_blocklist](#unshare_blocklist) | Unshare a blocklist with other organizations. If the blocklist is subscribed by the organization, the operation will fail.
-    Use force query parameter to unshare a blocklist even if subscriptions exists. |
+| [share_blocklist](#share_blocklist) | Share a blocklist with other organizations given their IDs. The blocklist must be owned by your organization. You can give read-only access or read-write access to the blocklist. Sharing a blocklist will not automatically subscribe the shared organizations to the blocklist. |
+| [unshare_blocklist](#unshare_blocklist) | Unshare a blocklist with other organizations. If the blocklist is subscribed by the organization, the operation will fail.Use force query parameter to unshare a blocklist even if subscriptions exists. |
 
 ## **get_blocklists**
-### Get multiple blocklists. Only blocklists owned by your organization, 
-    shared with your organization or public blocklists are returned. Filters and pagination are available as query parameters. 
+### Get multiple blocklists. Only blocklists owned by your organization, shared with your organization or public blocklists are returned. Filters and pagination are available as query parameters. 
 - Endpoint: `/blocklists`
 - Method: `GET`
 
@@ -73,8 +60,7 @@ print(response)
 
 
 ## **create_blocklist**
-### Create a new blocklist owned by your organization. The name must be unique within your organization. 
-    The list will only be visible to your organization and organizations you shared the blocklist with. This operation is submitted to quotas 
+### Create a new blocklist owned by your organization. The name must be unique within your organization. The list will only be visible to your organization and organizations you shared the blocklist with. This operation is submitted to quotas 
 - Endpoint: `/blocklists`
 - Method: `POST`
 
@@ -149,8 +135,7 @@ print(response)
 
 
 ## **delete_blocklist**
-### Delete a blocklist by ID. If the blocklist is shared with other organizations or it has subscriptions, the operation will fail.
-    If you want to force delete the blocklist, you can use the force query parameter, so the blocklists will be unshared / unsubscribed. 
+### Delete a blocklist by ID. If the blocklist is shared with other organizations or it has subscriptions, the operation will fail. If you want to force delete the blocklist, you can use the force query parameter, so the blocklists will be unshared / unsubscribed. 
 - Endpoint: `/blocklists/{blocklist_id}`
 - Method: `DELETE`
 
@@ -306,8 +291,7 @@ print(response)
 
 
 ## **download_blocklist_content**
-### Download blocklist content as a list of ips as plain text separated by new lines. The response will include the ETag header for cache control.
-    If_Modified_Since and If_None_Match cache control headers are supported for conditional requests. 
+### Download blocklist content as a list of ips as plain text separated by new lines. The response will include the ETag header for cache control. If_Modified_Since and If_None_Match cache control headers are supported for conditional requests. 
 - Endpoint: `/blocklists/{blocklist_id}/download`
 - Method: `GET`
 
@@ -379,13 +363,7 @@ print(response)
 
 
 ## **subscribe_blocklist**
-### Subscribe to a blocklist with a remediation type. If the entity type is the full organization or a Tag, 
-    all the engines belonging to the organization or the Tag will be subscribed 
-    and new engines that will join the organization or the Tag will also be automatically subscribed.
-    If the subscription has been done on an organization or Tag you cannot unsubscribe individual engines.
-    In case of errors for some subscribers, the operation will still succeed for the entities that were successfully subscribed 
-    and you'll have the list of errors in the operation's result.
-    This operation is submitted to quotas. 
+### Subscribe to a blocklist with a remediation type. If the entity type is the full organization or a Tag, all the engines belonging to the organization or the Tag will be subscribed and new engines that will join the organization or the Tag will also be automatically subscribed. If the subscription has been done on an organization or Tag you cannot unsubscribe individual engines. In case of errors for some subscribers, the operation will still succeed for the entities that were successfully subscribed and you'll have the list of errors in the operation's result. This operation is submitted to quotas. 
 - Endpoint: `/blocklists/{blocklist_id}/subscribers`
 - Method: `POST`
 
@@ -458,8 +436,7 @@ print(response)
 
 
 ## **share_blocklist**
-### Share a blocklist with other organizations given their IDs. The blocklist must be owned by your organization.
-    You can give read-only access or read-write access to the blocklist. Sharing a blocklist will not automatically subscribe the shared organizations to the blocklist. 
+### Share a blocklist with other organizations given their IDs. The blocklist must be owned by your organization. You can give read-only access or read-write access to the blocklist. Sharing a blocklist will not automatically subscribe the shared organizations to the blocklist. 
 - Endpoint: `/blocklists/{blocklist_id}/shares`
 - Method: `POST`
 
@@ -496,8 +473,7 @@ print(response)
 
 
 ## **unshare_blocklist**
-### Unshare a blocklist with other organizations. If the blocklist is subscribed by the organization, the operation will fail.
-    Use force query parameter to unshare a blocklist even if subscriptions exists. 
+### Unshare a blocklist with other organizations. If the blocklist is subscribed by the organization, the operation will fail.Use force query parameter to unshare a blocklist even if subscriptions exists. 
 - Endpoint: `/blocklists/{blocklist_id}/shares/{unshare_organization_id}`
 - Method: `DELETE`
 

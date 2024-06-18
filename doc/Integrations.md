@@ -4,16 +4,13 @@
 | Method | Description |
 | ------ | ----------- |
 | [get_integrations](#get_integrations) | Get integrations owned by your organization |
-| [create_integration](#create_integration) | Create an integration to a firewall or remediation component, owned by your organization. 
-    The name should be unique within the organization.
-    This operation is submitted to quotas. |
+| [create_integration](#create_integration) | Create an integration to a firewall or remediation component, owned by your organization. The name should be unique within the organization. This operation is submitted to quotas. |
 | [get_integration](#get_integration) | Get an integration by ID |
 | [delete_integration](#delete_integration) | Delete the integration by ID |
 | [update_integration](#update_integration) | Update the integration details |
 | [get_integration_content](#get_integration_content) | Get the ips associated to the integration in plain text format. The content can be paginated to accomodate limits in firewalls. |
 | [head_integration_content](#head_integration_content) | Check if the integration has content |
-| [get_integration_content_stream](#get_integration_content_stream) | Get the ips associated to the integration in a format compatible with a remediation component.
-    As for the remediation components, you can fetch the full content with startup=true or only the changes since the last pull |
+| [get_integration_content_stream](#get_integration_content_stream) | Get the ips associated to the integration in a format compatible with a remediation component. As for the remediation components, you can fetch the full content with startup=true or only the changes since the last pull |
 
 ## **get_integrations**
 ### Get integrations owned by your organization 
@@ -50,9 +47,7 @@ print(response)
 
 
 ## **create_integration**
-### Create an integration to a firewall or remediation component, owned by your organization. 
-    The name should be unique within the organization.
-    This operation is submitted to quotas. 
+### Create an integration to a firewall or remediation component, owned by your organization. The name should be unique within the organization. This operation is submitted to quotas. 
 - Endpoint: `/integrations`
 - Method: `POST`
 
@@ -258,8 +253,7 @@ print(response)
 
 
 ## **get_integration_content_stream**
-### Get the ips associated to the integration in a format compatible with a remediation component.
-    As for the remediation components, you can fetch the full content with startup=true or only the changes since the last pull 
+### Get the ips associated to the integration in a format compatible with a remediation component. As for the remediation components, you can fetch the full content with startup=true or only the changes since the last pull 
 - Endpoint: `/integrations/{integration_id}/v1/decisions/stream`
 - Method: `GET`
 
