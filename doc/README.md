@@ -1,3 +1,14 @@
+# Introduction
+
+**crowdsec_service_api** is a Python library to use the [Crowdsec Service API](https://docs.crowdsec.net/u/service_api/intro/).
+You can manage your Crowdsec resources such as (blocklists, integrations) from your Python applications.
+
+If you have any question, any remark, or if you find a bug in this library, please [open an issue](https://github.com/crowdsecurity/crowdsec-service-api-sdk-python/issues).
+
+You can find a Quickstart about this SDK, following this [documentation](https://docs.crowdsec.net/u/service_api/sdks)
+
+
+
 ## API Endpoint services
 
 [Blocklists](./Blocklists.md)
