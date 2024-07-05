@@ -42,6 +42,7 @@ __all__ = [
     'CtiScenario',
     'EntityType',
     'HTTPValidationError',
+    'InfoResponse',
     'IntegrationCreateRequest',
     'IntegrationCreateResponse',
     'IntegrationGetResponse',

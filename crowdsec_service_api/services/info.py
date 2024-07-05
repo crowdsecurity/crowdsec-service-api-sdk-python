@@ -8,7 +8,7 @@ class Info(Service):
     
     def get_info(
         self,
-    ):
+    )-> InfoResponse:
         endpoint_url = "/info"
         loc = locals()
         headers = {}
@@ -19,5 +19,5 @@ class Info(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return None
+        return InfoResponse(**response.json())
     
