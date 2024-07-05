@@ -13,6 +13,8 @@
 ### Parameters:
 | Parameter | Type | Description | Required | Default |
 | --------- | ---- | ----------- | -------- | ------- |
+### Returns:
+[InfoResponse](./Models.md#inforesponse)
 ### Usage
 
 ```python

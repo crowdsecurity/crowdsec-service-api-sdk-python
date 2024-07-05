@@ -77,6 +77,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [HTTPValidationError](./Models.md#httpvalidationerror)
 
+[InfoResponse](./Models.md#inforesponse)
+
 [IntegrationCreateRequest](./Models.md#integrationcreaterequest)
 
 [IntegrationCreateResponse](./Models.md#integrationcreateresponse)

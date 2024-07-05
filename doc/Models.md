@@ -319,6 +319,16 @@ ORG, TAG, ENGINE, FIREWALL_INTEGRATION, REMEDIATION_COMPONENT_INTEGRATION
 |----------|------|-------------|---------|
 | detail | list[ValidationError] | None ||
 
+# **InfoResponse**
+## Required: 
+organization_id, subscription_type, api_key_name
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| organization_id | str | The organization ID ||
+| subscription_type | str | The organization subscription type ||
+| api_key_name | str | The API key name that is used ||
+
 # **IntegrationCreateRequest**
 ## Required: 
 name, entity_type, output_format
