@@ -4,6 +4,7 @@ from .models import *
 from .services.blocklists import Blocklists
 from .services.integrations import Integrations
 from .services.info import Info
+from .services.hub import Hub
 from .http_client import ApiKeyAuth
 
 class Server(Enum):
@@ -13,6 +14,7 @@ __all__ = [
     'Blocklists',
     'Integrations',
     'Info',
+    'Hub',
     'ApiKeyCredentials',
     'BasicAuthCredentials',
     'BlocklistAddIPsRequest',
@@ -58,6 +60,7 @@ __all__ = [
     'Share',
     'Stats',
     'ValidationError',
+    'HubType',
     'ApiKeyAuth',
     'Server',
     'Page'

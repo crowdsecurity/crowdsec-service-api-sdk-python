@@ -17,6 +17,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [Info](./Info.md)
 
+[Hub](./Hub.md)
+
 ## API Endpoint models
 
 [ApiKeyCredentials](./Models.md#apikeycredentials)
@@ -108,3 +110,5 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [Stats](./Models.md#stats)
 
 [ValidationError](./Models.md#validationerror)
+
+[HubType](./Models.md#hubtype)

@@ -194,6 +194,7 @@ id, name, label
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | id | str | None ||
+| remediation | Optional[str] | None ||
 | name | str | None ||
 | label | str | None ||
 
@@ -488,3 +489,7 @@ loc, msg, type
 | loc | list[Union[str, int]] | None ||
 | msg | str | None ||
 | type | str | None ||
+
+# **HubType**
+## Enum: 
+PARSERS, POSTOVERFLOWS, SCENARIOS, COLLECTIONS, CONTEXTS, APPSEC-CONFIGS, APPSEC-RULES
