@@ -11,7 +11,7 @@ pip install crowdsec_service_api
 
 ## Usage
 
-You can follow this [documentation](https://docs.crowdsec.net/u/service_api/sdks) to see the basic usage of the SDK.
+You can follow this [documentation](https://docs.crowdsec.net/u/service_api/quickstart/blocklists) to see the basic usage of the SDK.
 
 ## Documentation
 You can access the full usage documentation [here](https://github.com/crowdsecurity/crowdsec-service-api-sdk-python/tree/main/doc).
