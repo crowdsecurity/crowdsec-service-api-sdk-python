@@ -51,6 +51,26 @@ class Blocklists(Service):
         
         return BlocklistCreateResponse(**response.json())
     
+    def search_blocklist(
+        self,
+        request: BlocklistSearchRequest,
+    )-> PaginatedBlocklistResponse:
+        endpoint_url = "/blocklists/search"
+        loc = locals()
+        headers = {}
+        params = {}
+        path_params = {}
+        
+        response = self.http_client.post(
+            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=json.loads(
+                request.model_dump_json(
+                    exclude_none=True
+                )
+            )
+        )
+        
+        return PaginatedBlocklistResponse(**response.json())
+    
     def get_blocklist(
         self,
         blocklist_id: str,
