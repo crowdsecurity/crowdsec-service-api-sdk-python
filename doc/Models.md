@@ -142,6 +142,22 @@ id, created_at, updated_at, name, label, description, references, is_private, ta
 | organization_id | Optional[str] | Blocklists owner's organization id ||
 | subscribers | list[BlocklistSubscriberEntity] | List of subscribers to the blocklist. Only subscribers belonging to your organization are returned ||
 
+# **BlocklistSearchRequest**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| page | int | Page number ||
+| page_size | int | Page size ||
+| pricing_tiers | list[PricingTiers] | Pricing tiers ||
+| query | str | Search query ||
+| targeted_countries | list[str] | Targeted countries ||
+| classifications | list[str] | Classifications ||
+| behaviors | list[str] | Behaviors ||
+| min_ips | int | Minimum number of IPs ||
+| sources | list[BlocklistSources] | Sources ||
+| is_private | Optional[bool] | Private blocklist ||
+| is_subscribed | Optional[bool] | Subscribed blocklist (None: all) ||
+
 # **BlocklistShareRequest**
 ## Required: 
 organizations
@@ -455,6 +471,18 @@ items, total, page, size, links
 | pages | Optional[int] | None ||
 | links | object | None ||
 
+# **PaginatedBlocklistResponse**
+## Required: 
+items, page, total, size, pages
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[BlocklistResponse] | List of blocklists ||
+| page | int | Page number ||
+| total | int | Total number of blocklists ||
+| size | int | Page size ||
+| pages | int | Total number of pages ||
+
 # **Permission**
 ## Enum: 
 READ, WRITE
@@ -490,6 +518,10 @@ loc, msg, type
 | msg | str | None ||
 | type | str | None ||
 
+# **HubItem**
+
 # **HubType**
 ## Enum: 
 PARSERS, POSTOVERFLOWS, SCENARIOS, COLLECTIONS, CONTEXTS, APPSEC-CONFIGS, APPSEC-RULES
+
+# **Index**

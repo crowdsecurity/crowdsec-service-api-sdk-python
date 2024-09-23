@@ -2,6 +2,7 @@ import json
 from httpx import Auth
 from ..models import *
 from ..base_model import Page, Service
+from pydantic import BaseModel
 from ..http_client import HttpClient
 
 class Hub(Service):
@@ -11,7 +12,7 @@ class Hub(Service):
         branch: str,
         tenant: str,
         with_content: bool = False,
-    )-> Response Getindex:
+    )-> Index:
         endpoint_url = "/hub/index/{tenant}/{branch}/.index.json"
         loc = locals()
         headers = {}
@@ -30,7 +31,7 @@ class Hub(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return Response Getindex(**response.json())
+        return Index(**response.json())
     
     def get_item_content(
         self,

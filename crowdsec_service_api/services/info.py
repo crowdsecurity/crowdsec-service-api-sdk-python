@@ -2,6 +2,7 @@ import json
 from httpx import Auth
 from ..models import *
 from ..base_model import Page, Service
+from pydantic import BaseModel
 from ..http_client import HttpClient
 
 class Info(Service):

@@ -41,6 +41,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [BlocklistResponse](./Models.md#blocklistresponse)
 
+[BlocklistSearchRequest](./Models.md#blocklistsearchrequest)
+
 [BlocklistShareRequest](./Models.md#blocklistsharerequest)
 
 [BlocklistSources](./Models.md#blocklistsources)
@@ -101,6 +103,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [Page_IntegrationGetResponse_](./Models.md#page_integrationgetresponse_)
 
+[PaginatedBlocklistResponse](./Models.md#paginatedblocklistresponse)
+
 [Permission](./Models.md#permission)
 
 [PricingTiers](./Models.md#pricingtiers)
@@ -111,4 +115,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [ValidationError](./Models.md#validationerror)
 
+[HubItem](./Models.md#hubitem)
+
 [HubType](./Models.md#hubtype)
+
+[Index](./Models.md#index)
