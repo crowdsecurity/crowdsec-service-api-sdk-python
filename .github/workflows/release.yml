@@ -7,8 +7,27 @@ on:
       - prereleased
 
 jobs:
+  test-package:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: setup python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.11
+      - name: Install SDK
+        run: |
+          pip install -e .
+      - name: Run basic import
+        run: |
+          python -c "import crowdsec_service_api"
+
   publish-on-pypi:
     name: Publish to PyPI
+    needs: test-package
     runs-on: ubuntu-latest
     environment:
       name: pypi
