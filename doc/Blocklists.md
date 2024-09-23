@@ -5,6 +5,7 @@
 | ------ | ----------- |
 | [get_blocklists](#get_blocklists) | Get multiple blocklists. Only blocklists owned by your organization, shared with your organization or public blocklists are returned. Filters and pagination are available as query parameters. |
 | [create_blocklist](#create_blocklist) | Create a new blocklist owned by your organization. The name must be unique within your organization. The list will only be visible to your organization and organizations you shared the blocklist with. This operation is submitted to quotas |
+| [search_blocklist](#search_blocklist) | Search blocklists |
 | [get_blocklist](#get_blocklist) | Get the details of a blocklist by ID. The content of the blocklist is not returned. |
 | [delete_blocklist](#delete_blocklist) | Delete a blocklist by ID. If the blocklist is shared with other organizations or it has subscriptions, the operation will fail. If you want to force delete the blocklist, you can use the force query parameter, so the blocklists will be unshared / unsubscribed. |
 | [update_blocklist](#update_blocklist) | Update a blocklist's details by ID. It is not possible to update the blocklist content using this operation. |
@@ -95,6 +96,51 @@ request = BlocklistCreateRequest(
         since='since',
 )
 response = client.create_blocklist(
+    request=request,
+)
+print(response)
+```
+
+
+## **search_blocklist**
+### Search blocklists 
+- Endpoint: `/blocklists/search`
+- Method: `POST`
+
+### Parameters:
+| Parameter | Type | Description | Required | Default |
+| --------- | ---- | ----------- | -------- | ------- |
+| request | [BlocklistSearchRequest](./Models.md#blocklistsearchrequest) | Request body | Yes | - |
+### Returns:
+[PaginatedBlocklistResponse](./Models.md#paginatedblocklistresponse)
+### Errors:
+| Code | Description |
+| ---- | ----------- |
+| 422 | Validation Error |
+### Usage
+
+```python
+from crowdsec_service_api import (
+    Blocklists,
+    Server,
+    ApiKeyAuth,
+)
+auth = ApiKeyAuth(api_key='your_api_key')
+client = Blocklists(base_url=Server.production_server.value, auth=auth)
+request = BlocklistSearchRequest(
+        page=1,
+        page_size=100,
+        pricing_tiers=None,
+        query='query',
+        targeted_countries=['sample-item'],
+        classifications=['sample-item'],
+        behaviors=['sample-item'],
+        min_ips=1,
+        sources=None,
+        is_private=None,
+        is_subscribed=None,
+)
+response = client.search_blocklist(
     request=request,
 )
 print(response)

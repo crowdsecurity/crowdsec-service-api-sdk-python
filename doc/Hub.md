@@ -26,7 +26,7 @@ content is returned. |
 | tenant | str |  | True |  |
 | with_content | bool | Include content in the index | False | False |
 ### Returns:
-[Response Getindex](./Models.md#response getindex)
+[Index](./Models.md#index)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
@@ -64,7 +64,7 @@ cache expiration policies. No body content is returned.
 | tenant | str |  | True |  |
 | with_content | bool | Include content in the index | False | False |
 ### Returns:
-[Response Headindex](./Models.md#response headindex)
+[Index](./Models.md#index)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
