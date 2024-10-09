@@ -518,10 +518,35 @@ loc, msg, type
 | msg | str | None ||
 | type | str | None ||
 
-# **HubItem**
-
 # **HubType**
 ## Enum: 
 PARSERS, POSTOVERFLOWS, SCENARIOS, COLLECTIONS, CONTEXTS, APPSEC-CONFIGS, APPSEC-RULES
 
 # **Index**
+
+# **IndexItem**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| appsec-configs | Optional[list[str]] | List of appsec-configs in the item (only if type=collection) ||
+| appsec-rules | Optional[list[str]] | List of appsec-rules in the item (only if type=collection) ||
+| collections | Optional[list[str]] | List of collections in the item (only if type=collection) ||
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| contexts | Optional[list[str]] | List of contexts in the item (only if type=collection) ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| parsers | Optional[list[str]] | List of parsers in the item (only if type=collection) ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| postoverflows | Optional[list[str]] | List of postoverflows in the item (only if type=collection) ||
+| references | Optional[list[str]] | List of references to external resources ||
+| scenarios | Optional[list[str]] | List of scenarios in the item (only if type=collection) ||
+| stage | Optional[str] | The stage of the parser/postoverflow, ignored for other types ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
+
+# **VersionDetail**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| deprecated | Optional[bool] | Indicates whether this version is deprecated. ||
+| digest | str | The SHA256 digest of the versioned file. ||

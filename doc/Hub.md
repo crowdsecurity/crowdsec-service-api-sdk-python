@@ -5,12 +5,12 @@
 | ------ | ----------- |
 | [get_index](#get_index) | Get a (minimized) index file for 'cscli hub update'. May or may not include unused fields
 (content, long descriptions, labels...) or redundant ones (author, name). |
-| [head_index](#head_index) | This endpoint returns cache-related headers for the index file without the full content. 
-It is useful for validating cache, checking resource freshness, and managing client-side 
+| [head_index](#head_index) | This endpoint returns cache-related headers for the index file without the full content.
+It is useful for validating cache, checking resource freshness, and managing client-side
 cache expiration policies. No body content is returned. |
 | [get_item_content](#get_item_content) | Get an item's content from its path. This is usually a YAML file. |
-| [head_item_content](#head_item_content) | This endpoint returns cache-related headers for an item's content. It is useful for validating 
-cache, checking resource freshness, and managing client-side cache expiration policies. No body 
+| [head_item_content](#head_item_content) | This endpoint returns cache-related headers for an item's content. It is useful for validating
+cache, checking resource freshness, and managing client-side cache expiration policies. No body
 content is returned. |
 
 ## **get_index**
@@ -51,8 +51,8 @@ print(response)
 
 
 ## **head_index**
-### This endpoint returns cache-related headers for the index file without the full content. 
-It is useful for validating cache, checking resource freshness, and managing client-side 
+### This endpoint returns cache-related headers for the index file without the full content.
+It is useful for validating cache, checking resource freshness, and managing client-side
 cache expiration policies. No body content is returned. 
 - Endpoint: `/hub/index/{tenant}/{branch}/.index.json`
 - Method: `HEAD`
@@ -124,8 +124,8 @@ print(response)
 
 
 ## **head_item_content**
-### This endpoint returns cache-related headers for an item's content. It is useful for validating 
-cache, checking resource freshness, and managing client-side cache expiration policies. No body 
+### This endpoint returns cache-related headers for an item's content. It is useful for validating
+cache, checking resource freshness, and managing client-side cache expiration policies. No body
 content is returned. 
 - Endpoint: `/hub/index/{tenant}/{branch}/{item_path}`
 - Method: `HEAD`
