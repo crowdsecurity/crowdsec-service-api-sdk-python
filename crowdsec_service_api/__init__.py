@@ -62,9 +62,10 @@ __all__ = [
     'Share',
     'Stats',
     'ValidationError',
-    'HubItem',
     'HubType',
     'Index',
+    'IndexItem',
+    'VersionDetail',
     'ApiKeyAuth',
     'Server',
     'Page'

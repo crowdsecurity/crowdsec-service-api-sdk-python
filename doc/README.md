@@ -115,8 +115,10 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [ValidationError](./Models.md#validationerror)
 
-[HubItem](./Models.md#hubitem)
-
 [HubType](./Models.md#hubtype)
 
 [Index](./Models.md#index)
+
+[IndexItem](./Models.md#indexitem)
+
+[VersionDetail](./Models.md#versiondetail)
