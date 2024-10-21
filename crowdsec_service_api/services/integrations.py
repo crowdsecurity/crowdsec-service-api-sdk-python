@@ -9,6 +9,7 @@ class Integrations(Service):
     
     def get_integrations(
         self,
+        tag: Optional[list[str]] = None,
         page: int = 1,
         size: int = 50,
     )-> Page[IntegrationGetResponse]:
