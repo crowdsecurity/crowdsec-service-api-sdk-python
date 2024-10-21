@@ -375,6 +375,7 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
 | endpoint | str | Url that should be used by the firewall or the remediation component to fetch the integration's content ||
 | stats | object | None ||
+| tags | list[str] | Tags associated with the integration ||
 | credentials | Union[object, object] | Credentials that were generated for the integration ||
 
 # **IntegrationGetResponse**
@@ -395,6 +396,7 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
 | endpoint | str | Url that should be used by the firewall or the remediation component to fetch the integration's content ||
 | stats | object | None ||
+| tags | list[str] | Tags associated with the integration ||
 
 # **IntegrationType**
 ## Enum: 
@@ -427,6 +429,7 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
 | endpoint | str | Url that should be used by the firewall or the remediation component to fetch the integration's content ||
 | stats | object | None ||
+| tags | list[str] | Tags associated with the integration ||
 | credentials | Optional[object, object] | Credentials for the integration ||
 
 # **Links**
@@ -518,10 +521,118 @@ loc, msg, type
 | msg | str | None ||
 | type | str | None ||
 
-# **HubItem**
+# **AppsecConfigIndex**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| references | Optional[list[str]] | List of references to external resources ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
 
-# **HubType**
-## Enum: 
-PARSERS, POSTOVERFLOWS, SCENARIOS, COLLECTIONS, CONTEXTS, APPSEC-CONFIGS, APPSEC-RULES
+# **AppsecRuleIndex**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| references | Optional[list[str]] | List of references to external resources ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
+
+# **CollectionIndex**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| appsec-configs | Optional[list[str]] | List of appsec-configs ||
+| appsec-rules | Optional[list[str]] | List of appsec-rules ||
+| collections | Optional[list[str]] | List of collections ||
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| contexts | Optional[list[str]] | List of contexts ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| parsers | Optional[list[str]] | List of parsers ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| postoverflows | Optional[list[str]] | List of postoverflows ||
+| references | Optional[list[str]] | List of references to external resources ||
+| scenarios | Optional[list[str]] | List of scenarios ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
+
+# **ContextIndex**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| references | Optional[list[str]] | List of references to external resources ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
 
 # **Index**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| appsec-configs | object | None ||
+| appsec-rules | object | None ||
+| collections | object | None ||
+| contexts | object | None ||
+| parsers | object | None ||
+| postoverflows | object | None ||
+| scenarios | object | None ||
+
+# **ParserIndex**
+## Required: 
+stage
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| references | Optional[list[str]] | List of references to external resources ||
+| stage | str | The stage of the parser ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
+
+# **PostoverflowIndex**
+## Required: 
+stage
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| references | Optional[list[str]] | List of references to external resources ||
+| stage | str | The stage of the postoverflow ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
+
+# **ScenarioIndex**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| references | Optional[list[str]] | List of references to external resources ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
+
+# **VersionDetail**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| deprecated | Optional[bool] | Indicates whether this version is deprecated. ||
+| digest | str | The SHA256 digest of the versioned file. ||

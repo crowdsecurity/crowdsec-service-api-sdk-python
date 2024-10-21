@@ -115,8 +115,20 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [ValidationError](./Models.md#validationerror)
 
-[HubItem](./Models.md#hubitem)
+[AppsecConfigIndex](./Models.md#appsecconfigindex)
 
-[HubType](./Models.md#hubtype)
+[AppsecRuleIndex](./Models.md#appsecruleindex)
+
+[CollectionIndex](./Models.md#collectionindex)
+
+[ContextIndex](./Models.md#contextindex)
 
 [Index](./Models.md#index)
+
+[ParserIndex](./Models.md#parserindex)
+
+[PostoverflowIndex](./Models.md#postoverflowindex)
+
+[ScenarioIndex](./Models.md#scenarioindex)
+
+[VersionDetail](./Models.md#versiondetail)

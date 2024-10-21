@@ -20,6 +20,7 @@
 ### Parameters:
 | Parameter | Type | Description | Required | Default |
 | --------- | ---- | ----------- | -------- | ------- |
+| tag | Optional[list[str]] | List of tags associated with the integrations (any of) | False | None |
 | page | int | Page number | False | 1 |
 | size | int | Page size | False | 50 |
 ### Returns:
@@ -39,6 +40,7 @@ from crowdsec_service_api import (
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Integrations(base_url=Server.production_server.value, auth=auth)
 response = client.get_integrations(
+    tag=None,
     page=1,
     size=50,
 )
