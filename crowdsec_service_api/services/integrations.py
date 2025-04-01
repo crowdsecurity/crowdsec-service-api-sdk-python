@@ -1,14 +1,19 @@
 import json
-from httpx import Auth
+from types import NoneType
+from typing import Optional, Union, Annotated
+
 from ..models import *
 from ..base_model import Page, Service
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from pydantic.fields import FieldInfo
+from httpx import Auth
 from ..http_client import HttpClient
 
 class Integrations(Service):
     
     def get_integrations(
         self,
+        tag: Optional[list[str]] = None,
         page: int = 1,
         size: int = 50,
     )-> Page[IntegrationGetResponse]:
@@ -26,7 +31,7 @@ class Integrations(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return Page[IntegrationGetResponse](**response.json())
+        return Page[IntegrationGetResponse](_client=self, **response.json())
     
     def create_integration(
         self,
@@ -38,12 +43,13 @@ class Integrations(Service):
         params = {}
         path_params = {}
         
-        response = self.http_client.post(
-            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=json.loads(
-                request.model_dump_json(
-                    exclude_none=True
-                )
+        payload = json.loads(
+            request.model_dump_json(
+                exclude_none=True
             )
+        ) if "request" in loc else None
+        response = self.http_client.post(
+            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=payload
         )
         
         return IntegrationCreateResponse(**response.json())

@@ -28,12 +28,13 @@
 | --------- | ---- | ----------- | -------- | ------- |
 | page | int | Page number | False | 1 |
 | page_size | int | Page size | False | 100 |
-| subscribed_only | bool | Fetch only blocklists subscribed by your organization, engines or tags | False | False |
-| exclude_subscribed | bool | Exclude subscribed blocklists | False | False |
+| subscribed_only | bool | only subscribed blocklists | False | False |
+| exclude_subscribed | bool | exclude subscribed blocklists | False | False |
 | include_filter | list[BlocklistIncludeFilters] | Include blocklists with the specified filters | False | ['private', 'shared'] |
+| category | Optional[list[str]] | Filter by category | False | None |
 | size | int | Page size | False | 50 |
 ### Returns:
-[Page[BlocklistResponse]](./Models.md#page[blocklistresponse])
+[Page[PublicBlocklistResponse]](./Models.md#page[publicblocklistresponse])
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
@@ -54,6 +55,7 @@ response = client.get_blocklists(
     subscribed_only=True,
     exclude_subscribed=True,
     include_filter=['private', 'shared'],
+    category=None,
     size=50,
 )
 print(response)
@@ -70,7 +72,7 @@ print(response)
 | --------- | ---- | ----------- | -------- | ------- |
 | request | [BlocklistCreateRequest](./Models.md#blocklistcreaterequest) | Request body | Yes | - |
 ### Returns:
-[BlocklistCreateResponse](./Models.md#blocklistcreateresponse)
+[PublicBlocklistResponse](./Models.md#publicblocklistresponse)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
@@ -87,13 +89,11 @@ from crowdsec_service_api import (
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
 request = BlocklistCreateRequest(
-        name='name',
-        label='label',
-        description='description',
-        references=['sample-item'],
-        tags=['sample-item'],
-        from_cti_query='from_cti_query',
-        since='since',
+        name=None,
+        label=None,
+        description=None,
+        references=None,
+        tags=None,
 )
 response = client.create_blocklist(
     request=request,
@@ -112,7 +112,7 @@ print(response)
 | --------- | ---- | ----------- | -------- | ------- |
 | request | [BlocklistSearchRequest](./Models.md#blocklistsearchrequest) | Request body | Yes | - |
 ### Returns:
-[PaginatedBlocklistResponse](./Models.md#paginatedblocklistresponse)
+[PublicPaginatedBlocklistResponse](./Models.md#publicpaginatedblocklistresponse)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
@@ -128,15 +128,16 @@ from crowdsec_service_api import (
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
 request = BlocklistSearchRequest(
-        page=1,
-        page_size=100,
+        page=None,
+        page_size=None,
         pricing_tiers=None,
-        query='query',
-        targeted_countries=['sample-item'],
-        classifications=['sample-item'],
-        behaviors=['sample-item'],
-        min_ips=1,
+        query=None,
+        targeted_countries=None,
+        classifications=None,
+        behaviors=None,
+        min_ips=None,
         sources=None,
+        categories=None,
         is_private=None,
         is_subscribed=None,
 )
@@ -157,7 +158,7 @@ print(response)
 | --------- | ---- | ----------- | -------- | ------- |
 | blocklist_id | str |  | True |  |
 ### Returns:
-[BlocklistGetResponse](./Models.md#blocklistgetresponse)
+[PublicBlocklistResponse](./Models.md#publicblocklistresponse)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
@@ -224,7 +225,7 @@ print(response)
 | request | [BlocklistUpdateRequest](./Models.md#blocklistupdaterequest) | Request body | Yes | - |
 | blocklist_id | str |  | True |  |
 ### Returns:
-[BlocklistResponse](./Models.md#blocklistresponse)
+[PublicBlocklistResponse](./Models.md#publicblocklistresponse)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
@@ -243,12 +244,12 @@ from crowdsec_service_api import (
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
 request = BlocklistUpdateRequest(
-        label='label',
-        description='description',
-        references=['sample-item'],
-        tags=['sample-item'],
-        from_cti_query='from_cti_query',
-        since='since',
+        label=None,
+        description=None,
+        references=None,
+        tags=None,
+        from_cti_query=None,
+        since=None,
 )
 response = client.update_blocklist(
     request=request,
@@ -287,8 +288,8 @@ from crowdsec_service_api import (
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
 request = BlocklistAddIPsRequest(
-        ips=['sample-item'],
-        expiration='expiration',
+        ips=None,
+        expiration=None,
 )
 response = client.add_ips_to_blocklist(
     request=request,
@@ -326,7 +327,7 @@ from crowdsec_service_api import (
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
 request = BlocklistDeleteIPsRequest(
-        ips=['sample-item'],
+        ips=None,
 )
 response = client.delete_ips_from_blocklist(
     request=request,
@@ -436,8 +437,8 @@ from crowdsec_service_api import (
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
 request = BlocklistSubscriptionRequest(
-        ids=['sample-item'],
-        entity_type='entity_type',
+        ids=None,
+        entity_type=None,
         remediation=None,
 )
 response = client.subscribe_blocklist(

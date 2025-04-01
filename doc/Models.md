@@ -1,5 +1,162 @@
 
 
+# **AllowlistCreateRequest**
+## Required: 
+name
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| name | str | Name of the allowlist ||
+| description | Optional[str] | Description of the allowlist ||
+
+# **AllowlistCreateResponse**
+## Required: 
+id, organization_id, name, created_at, total_items
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | ID of the allowlist ||
+| organization_id | str | ID of the owner organization ||
+| name | str | Name of the allowlist ||
+| description | str | Description of the allowlist ||
+| created_at | str | Time the allowlist was created ||
+| updated_at | Optional[str] | Time the allowlist was updated ||
+| from_cti_query | Optional[str] | CTI query from which the blocklist was created ||
+| since | Optional[str] | Since duration for the CTI query (eg. 5m, 2h, 7d). Max is 30 days ||
+| total_items | int | Number of items in the allowlist ||
+
+# **AllowlistGetItemsResponse**
+## Required: 
+id, allowlist_id, description, scope, value, created_at, created_by
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | ID of the allowlist entry ||
+| allowlist_id | str | ID of the allowlist ||
+| description | str | Description of the allowlist entry ||
+| scope | str | None ||
+| value | Union[str, str] | Value of the allowlist entry ||
+| created_at | str | Time the allowlist entry was created ||
+| updated_at | Optional[str] | Time the allowlist entry was updated ||
+| created_by | SourceInfo | None ||
+| updated_by | Optional[SourceInfo] | The source user who updated the allowlist entry ||
+| expiration | Optional[str] | Time the allowlist entry will expire ||
+
+# **AllowlistGetResponse**
+## Required: 
+id, organization_id, name, created_at, total_items
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | ID of the allowlist ||
+| organization_id | str | ID of the owner organization ||
+| name | str | Name of the allowlist ||
+| description | str | Description of the allowlist ||
+| created_at | str | Time the allowlist was created ||
+| updated_at | Optional[str] | Time the allowlist was updated ||
+| from_cti_query | Optional[str] | CTI query from which the blocklist was created ||
+| since | Optional[str] | Since duration for the CTI query (eg. 5m, 2h, 7d). Max is 30 days ||
+| total_items | int | Number of items in the allowlist ||
+| subscribers | list[AllowlistSubscribersCount] | List of subscribers count by entity type ||
+
+# **AllowlistItemUpdateRequest**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| description | str | Description of the allowlist entry ||
+| expiration | Optional[str] | Time the allowlist entry will expire ||
+
+# **AllowlistItemUpdateResponse**
+## Required: 
+id, allowlist_id, description, scope, value, created_at, updated_at, created_by, updated_by
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | ID of the allowlist entry ||
+| allowlist_id | str | ID of the allowlist ||
+| description | str | Description of the allowlist entry ||
+| scope | str | None ||
+| value | Union[str, str] | Value of the allowlist entry ||
+| created_at | str | Time the allowlist entry was created ||
+| updated_at | str | Time the allowlist entry was updated ||
+| created_by | SourceInfo | None ||
+| updated_by | SourceInfo | None ||
+| expiration | Optional[str] | Time the allowlist entry will expire ||
+
+# **AllowlistItemsCreateRequest**
+## Required: 
+items, description
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[Union[str, str]] | List of values to add to the allowlist ||
+| description | str | Description of the allowlist entry ||
+| expiration | Optional[str] | Time the allowlist entry will expire ||
+
+# **AllowlistScope**
+## Enum: 
+IP, RANGE
+
+# **AllowlistSubscriberEntity**
+## Required: 
+id, entity_type
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | Subscriber entity id ||
+| entity_type | str | None ||
+
+# **AllowlistSubscribersCount**
+## Required: 
+entity_type, count
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| entity_type | str | None ||
+| count | int | Subscriber entity count ||
+
+# **AllowlistSubscriptionRequest**
+## Required: 
+entity_type
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| ids | list[str] | List of subscriber entity id ||
+| entity_type | str | None ||
+
+# **AllowlistSubscriptionResponse**
+## Required: 
+updated, errors
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| updated | Optional[list[str]] | List of updated allowlist ids ||
+| errors | Optional[list[object]] | List of errors if any ||
+
+# **AllowlistUpdateRequest**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| name | Optional[str] | Name of the allowlist ||
+| description | Optional[str] | Description of the allowlist ||
+
+# **AllowlistUpdateResponse**
+## Required: 
+id, organization_id, name, created_at, total_items
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | ID of the allowlist ||
+| organization_id | str | ID of the owner organization ||
+| name | str | Name of the allowlist ||
+| description | str | Description of the allowlist ||
+| created_at | str | Time the allowlist was created ||
+| updated_at | Optional[str] | Time the allowlist was updated ||
+| from_cti_query | Optional[str] | CTI query from which the blocklist was created ||
+| since | Optional[str] | Since duration for the CTI query (eg. 5m, 2h, 7d). Max is 30 days ||
+| total_items | int | Number of items in the allowlist ||
+| subscribers | list[AllowlistSubscribersCount] | List of subscribers count by entity type ||
+
 # **ApiKeyCredentials**
 ## Required: 
 api_key
@@ -7,6 +164,17 @@ api_key
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | api_key | str | API key for the integration ||
+
+# **AttacksMetrics**
+## Required: 
+total, label, progression, data
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| total | Union[int, float] | Total value of the metric ||
+| label | str | Label of the metric which is the attack type ||
+| progression | Optional[int] | Progression of the metric value from the previous period ||
+| data | list[RemediationMetricsData] | Data points ||
 
 # **BasicAuthCredentials**
 ## Required: 
@@ -25,6 +193,17 @@ ips
 |----------|------|-------------|---------|
 | ips | list[str] | List of IPs or networks ||
 | expiration | str | Expiration date ||
+
+# **BlocklistCategory**
+## Required: 
+name, label, description, priority
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| name | str | None ||
+| label | str | None ||
+| description | str | None ||
+| priority | int | None ||
 
 # **BlocklistContentStats**
 ## Properties
@@ -55,32 +234,6 @@ name, description
 | description | str | Blocklist description ||
 | references | list[str] | Useful references on the list's origins ||
 | tags | list[str] | Classification tags ||
-| from_cti_query | str | CTI query (doc link available soon) ||
-| since | str | Since duration for the CTI query (5m, 2h, 7d). Max is 30 days ||
-
-# **BlocklistCreateResponse**
-## Required: 
-id, created_at, updated_at, name, label, description, references, is_private, tags, pricing_tier, source, stats, from_cti_query, since, shared_with, organization_id, subscribers
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| id | str | Blocklist id ||
-| created_at | str | Blocklist creation date ||
-| updated_at | str | Blocklist update date ||
-| name | str | Blocklist name, unique within the organization ||
-| label | str | Blocklist human readable name ||
-| description | str | Blocklist description ||
-| references | list[str] | Blocklist references ||
-| is_private | bool | Private blocklist if True or public if False ||
-| tags | list[str] | Classification tags ||
-| pricing_tier | str | None ||
-| source | str | None ||
-| stats | object | None ||
-| from_cti_query | Optional[str] | CTI query from which the blocklist was created ||
-| since | Optional[str] | Since duration for the CTI query (eg. 5m, 2h, 7d). Max is 30 days ||
-| shared_with | list[Share] | List of organizations shared with ||
-| organization_id | Optional[str] | Blocklists owner's organization id ||
-| subscribers | list[BlocklistSubscriberEntity] | List of subscribers to the blocklist. Only subscribers belonging to your organization are returned ||
 
 # **BlocklistDeleteIPsRequest**
 ## Required: 
@@ -90,57 +243,19 @@ ips
 |----------|------|-------------|---------|
 | ips | list[str] | List of IPs or networks ||
 
-# **BlocklistGetResponse**
-## Required: 
-id, created_at, updated_at, name, label, description, references, is_private, tags, pricing_tier, source, stats, from_cti_query, since, shared_with, organization_id, subscribers
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| id | str | Blocklist id ||
-| created_at | str | Blocklist creation date ||
-| updated_at | str | Blocklist update date ||
-| name | str | Blocklist name, unique within the organization ||
-| label | str | Blocklist human readable name ||
-| description | str | Blocklist description ||
-| references | list[str] | Blocklist references ||
-| is_private | bool | Private blocklist if True or public if False ||
-| tags | list[str] | Classification tags ||
-| pricing_tier | str | None ||
-| source | str | None ||
-| stats | object | None ||
-| from_cti_query | Optional[str] | CTI query from which the blocklist was created ||
-| since | Optional[str] | Since duration for the CTI query (eg. 5m, 2h, 7d). Max is 30 days ||
-| shared_with | list[Share] | List of organizations shared with ||
-| organization_id | Optional[str] | Blocklists owner's organization id ||
-| subscribers | list[BlocklistSubscriberEntity] | List of subscribers to the blocklist. Only subscribers belonging to your organization are returned ||
-
 # **BlocklistIncludeFilters**
 ## Enum: 
 PUBLIC, PRIVATE, SHARED, ALL
 
-# **BlocklistResponse**
+# **BlocklistOrigin**
 ## Required: 
-id, created_at, updated_at, name, label, description, references, is_private, tags, pricing_tier, source, stats, from_cti_query, since, shared_with, organization_id, subscribers
+label, id, pricing_tier
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| id | str | Blocklist id ||
-| created_at | str | Blocklist creation date ||
-| updated_at | str | Blocklist update date ||
-| name | str | Blocklist name, unique within the organization ||
-| label | str | Blocklist human readable name ||
-| description | str | Blocklist description ||
-| references | list[str] | Blocklist references ||
-| is_private | bool | Private blocklist if True or public if False ||
-| tags | list[str] | Classification tags ||
+| label | str | Label of the blocklist ||
+| id | str | ID of the blocklist ||
 | pricing_tier | str | None ||
-| source | str | None ||
-| stats | object | None ||
-| from_cti_query | Optional[str] | CTI query from which the blocklist was created ||
-| since | Optional[str] | Since duration for the CTI query (eg. 5m, 2h, 7d). Max is 30 days ||
-| shared_with | list[Share] | List of organizations shared with ||
-| organization_id | Optional[str] | Blocklists owner's organization id ||
-| subscribers | list[BlocklistSubscriberEntity] | List of subscribers to the blocklist. Only subscribers belonging to your organization are returned ||
 
 # **BlocklistSearchRequest**
 ## Properties
@@ -155,6 +270,7 @@ id, created_at, updated_at, name, label, description, references, is_private, ta
 | behaviors | list[str] | Behaviors ||
 | min_ips | int | Minimum number of IPs ||
 | sources | list[BlocklistSources] | Sources ||
+| categories | list[str] | Categories ||
 | is_private | Optional[bool] | Private blocklist ||
 | is_subscribed | Optional[bool] | Subscribed blocklist (None: all) ||
 
@@ -174,8 +290,8 @@ CROWDSEC, THIRD_PARTY, CUSTOM
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| content_stats | object | None ||
-| usage_stats | Optional[object] | None ||
+| content_stats | BlocklistContentStats | None ||
+| usage_stats | Optional[BlocklistUsageStats] | None ||
 | addition_2days | int | None ||
 | addition_month | int | None ||
 | suppression_2days | int | None ||
@@ -252,6 +368,7 @@ updated, errors
 | engines_subscribed_through_org | int | None ||
 | engines_subscribed_through_tag | int | None ||
 | total_subscribed_engines | int | None ||
+| total_subscribed_organizations | int | None ||
 | updated_at | str | None ||
 
 # **Body_uploadBlocklistContent**
@@ -261,6 +378,24 @@ file
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | file | str | Blocklist file in txt format ||
+
+# **ComputedMetrics**
+## Required: 
+saved
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| saved | ComputedSavedMetrics | None ||
+| dropped | list[RemediationMetrics] | estimated dropped metrics ||
+| prevented | list[AttacksMetrics] | prevented attacks metrics ||
+
+# **ComputedSavedMetrics**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| log_lines | list[RemediationMetrics] | estimated log lines saved ||
+| storage | list[RemediationMetrics] | estimated storage saved ||
+| egress_traffic | list[RemediationMetrics] | estimated egress traffic saved ||
 
 # **CtiAs**
 ## Required: 
@@ -328,7 +463,16 @@ name, label, description, references, total_ips
 
 # **EntityType**
 ## Enum: 
-ORG, TAG, ENGINE, FIREWALL_INTEGRATION, REMEDIATION_COMPONENT_INTEGRATION
+ORG, TAG, ENGINE, FIREWALL_INTEGRATION, REMEDIATION_COMPONENT_INTEGRATION, REMEDIATION_COMPONENT, LOG_PROCESSOR
+
+# **GetRemediationMetricsResponse**
+## Required: 
+raw, computed
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| raw | RawMetrics | None ||
+| computed | ComputedMetrics | None ||
 
 # **HTTPValidationError**
 ## Properties
@@ -371,11 +515,12 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | updated_at | str | Last time the integration was updated ||
 | entity_type | str | None ||
 | output_format | str | None ||
-| last_pull | str | Last time the integration pulled blocklists ||
+| last_pull | Optional[str] | Last time the integration pulled blocklists ||
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
 | endpoint | str | Url that should be used by the firewall or the remediation component to fetch the integration's content ||
-| stats | object | None ||
-| credentials | Union[object, object] | Credentials that were generated for the integration ||
+| stats | Stats | None ||
+| tags | list[str] | Tags associated with the integration ||
+| credentials | Union[ApiKeyCredentials, BasicAuthCredentials] | Credentials that were generated for the integration ||
 
 # **IntegrationGetResponse**
 ## Required: 
@@ -391,10 +536,11 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | updated_at | str | Last time the integration was updated ||
 | entity_type | str | None ||
 | output_format | str | None ||
-| last_pull | str | Last time the integration pulled blocklists ||
+| last_pull | Optional[str] | Last time the integration pulled blocklists ||
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
 | endpoint | str | Url that should be used by the firewall or the remediation component to fetch the integration's content ||
-| stats | object | None ||
+| stats | Stats | None ||
+| tags | list[str] | Tags associated with the integration ||
 
 # **IntegrationType**
 ## Enum: 
@@ -423,11 +569,12 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | updated_at | str | Last time the integration was updated ||
 | entity_type | str | None ||
 | output_format | str | None ||
-| last_pull | str | Last time the integration pulled blocklists ||
+| last_pull | Optional[str] | Last time the integration pulled blocklists ||
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
 | endpoint | str | Url that should be used by the firewall or the remediation component to fetch the integration's content ||
-| stats | object | None ||
-| credentials | Optional[object, object] | Credentials for the integration ||
+| stats | Stats | None ||
+| tags | list[str] | Tags associated with the integration ||
+| credentials | Optional[ApiKeyCredentials, BasicAuthCredentials] | Credentials for the integration ||
 
 # **Links**
 ## Required: 
@@ -441,22 +588,61 @@ first, last, self, next, prev
 | next | Optional[str] | None ||
 | prev | Optional[str] | None ||
 
+# **MetricUnits**
+## Enum: 
+BYTE, PACKET, REQUEST, IP, LINE
+
+# **OriginMetrics**
+## Required: 
+origin, data
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| origin | Optional[BlocklistOrigin, str] | Origin of the metric ||
+| data | list[RemediationMetricsData] | Data points ||
+
 # **OutputFormat**
 ## Enum: 
-PLAIN_TEXT, F5, REMEDIATION_COMPONENT, FORTIGATE, PALOALTO, CHECKPOINT, CISCO
+PLAIN_TEXT, F5, REMEDIATION_COMPONENT, FORTIGATE, PALOALTO, CHECKPOINT, CISCO, JUNIPER, MIKROTIK, PFSENSE, OPNSENSE, SOPHOS
 
-# **Page_BlocklistResponse_**
+# **Page_AllowlistGetItemsResponse_**
 ## Required: 
 items, total, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| items | list[BlocklistResponse] | None ||
+| items | list[AllowlistGetItemsResponse] | None ||
 | total | Optional[int] | None ||
 | page | Optional[int] | None ||
 | size | Optional[int] | None ||
 | pages | Optional[int] | None ||
-| links | object | None ||
+| links | Links | None ||
+
+# **Page_AllowlistGetResponse_**
+## Required: 
+items, total, page, size, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[AllowlistGetResponse] | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
+| links | Links | None ||
+
+# **Page_AllowlistSubscriberEntity_**
+## Required: 
+items, total, page, size, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[AllowlistSubscriberEntity] | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
+| links | Links | None ||
 
 # **Page_IntegrationGetResponse_**
 ## Required: 
@@ -469,19 +655,20 @@ items, total, page, size, links
 | page | Optional[int] | None ||
 | size | Optional[int] | None ||
 | pages | Optional[int] | None ||
-| links | object | None ||
+| links | Links | None ||
 
-# **PaginatedBlocklistResponse**
+# **Page_PublicBlocklistResponse_**
 ## Required: 
-items, page, total, size, pages
+items, total, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| items | list[BlocklistResponse] | List of blocklists ||
-| page | int | Page number ||
-| total | int | Total number of blocklists ||
-| size | int | Page size ||
-| pages | int | Total number of pages ||
+| items | list[PublicBlocklistResponse] | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
+| links | Links | None ||
 
 # **Permission**
 ## Enum: 
@@ -490,6 +677,70 @@ READ, WRITE
 # **PricingTiers**
 ## Enum: 
 FREE, PREMIUM, PLATINUM
+
+# **PublicBlocklistResponse**
+## Required: 
+id, created_at, updated_at, name, description, is_private, pricing_tier, source, stats
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | Blocklist id ||
+| created_at | str | Blocklist creation date ||
+| updated_at | str | Blocklist update date ||
+| name | str | Blocklist name, unique within the organization ||
+| label | str | Blocklist human readable name ||
+| description | str | Blocklist description ||
+| references | list[str] | Blocklist references ||
+| is_private | bool | Private blocklist if True or public if False ||
+| tags | list[str] | Classification tags ||
+| pricing_tier | str | None ||
+| source | str | None ||
+| stats | BlocklistStats | None ||
+| from_cti_query | Optional[str] | CTI query from which the blocklist was created ||
+| since | Optional[str] | Since duration for the CTI query (eg. 5m, 2h, 7d). Max is 30 days ||
+| shared_with | list[Share] | List of organizations shared with ||
+| organization_id | Optional[str] | Blocklists owner's organization id ||
+| subscribers | list[BlocklistSubscriberEntity] | List of subscribers to the blocklist. Only subscribers belonging to your organization are returned ||
+| categories | list[BlocklistCategory] | List of categories for the blocklist ||
+
+# **PublicPaginatedBlocklistResponse**
+## Required: 
+items, page, total, size, pages
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[PublicBlocklistResponse] | List of blocklists ||
+| page | int | Page number ||
+| total | int | Total number of blocklists ||
+| size | int | Page size ||
+| pages | int | Total number of pages ||
+
+# **RawMetrics**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| dropped | list[RemediationMetrics] | dropped metrics ||
+| processed | list[RemediationMetrics] | processed metrics ||
+
+# **RemediationMetrics**
+## Required: 
+total, unit, progression, data
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| total | Union[int, float] | Total value of the metric ||
+| unit | str | None ||
+| progression | Optional[int] | Progression of the metric value from the previous period ||
+| data | list[OriginMetrics] | Data points per origin ||
+
+# **RemediationMetricsData**
+## Required: 
+value, timestamp
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| value | Union[int, float] | Value of the metric ||
+| timestamp | str | Timestamp of the metric ||
 
 # **Share**
 ## Required: 
@@ -500,6 +751,19 @@ organization_id, permission
 | organization_id | str | None ||
 | permission | str | None ||
 
+# **SourceInfo**
+## Required: 
+source_type, identifier
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| source_type | str | None ||
+| identifier | str | The source identifier that created the allowlist entry ||
+
+# **SourceType**
+## Enum: 
+USER, APIKEY
+
 # **Stats**
 ## Required: 
 count
@@ -507,6 +771,10 @@ count
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | count | int | Number of total blocklists items the integration will pull ||
+
+# **SubscriberEntityType**
+## Enum: 
+ORG, TAG, ENGINE, FIREWALL_INTEGRATION, REMEDIATION_COMPONENT_INTEGRATION
 
 # **ValidationError**
 ## Required: 
@@ -518,10 +786,120 @@ loc, msg, type
 | msg | str | None ||
 | type | str | None ||
 
-# **HubItem**
+# **AppsecConfigIndex**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| references | Optional[list[str]] | List of references to external resources ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
 
-# **HubType**
-## Enum: 
-PARSERS, POSTOVERFLOWS, SCENARIOS, COLLECTIONS, CONTEXTS, APPSEC-CONFIGS, APPSEC-RULES
+# **AppsecRuleIndex**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| references | Optional[list[str]] | List of references to external resources ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
+
+# **CollectionIndex**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| appsec-configs | Optional[list[str]] | List of appsec-configs ||
+| appsec-rules | Optional[list[str]] | List of appsec-rules ||
+| collections | Optional[list[str]] | List of collections ||
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| contexts | Optional[list[str]] | List of contexts ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| parsers | Optional[list[str]] | List of parsers ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| postoverflows | Optional[list[str]] | List of postoverflows ||
+| references | Optional[list[str]] | List of references to external resources ||
+| scenarios | Optional[list[str]] | List of scenarios ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
+
+# **ContextIndex**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| references | Optional[list[str]] | List of references to external resources ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
 
 # **Index**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| appsec-configs | Appsec-Configs | None ||
+| appsec-rules | Appsec-Rules | None ||
+| collections | Collections | None ||
+| contexts | Contexts | None ||
+| parsers | Parsers | None ||
+| postoverflows | Postoverflows | None ||
+| scenarios | Scenarios | None ||
+
+# **ParserIndex**
+## Required: 
+stage
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| references | Optional[list[str]] | List of references to external resources ||
+| stage | str | The stage of the parser ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
+
+# **PostoverflowIndex**
+## Required: 
+stage
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| references | Optional[list[str]] | List of references to external resources ||
+| stage | str | The stage of the postoverflow ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
+
+# **ScenarioIndex**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| content | Optional[str] | The YAML content of the item, in plaintext. ||
+| description | Optional[str] | A short, plaintext description of the item ||
+| labels | Optional[object] | Classification labels for the item ||
+| path | Optional[str] | Relative path to the item's YAML content ||
+| references | Optional[list[str]] | List of references to external resources ||
+| version | Optional[str] | Current version of the collection ||
+| versions | Optional[object] | A dictionary where each key is a version number (e.g., '0.1', '0.2') ||
+
+# **VersionDetail**
+## Required: 
+digest
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| deprecated | Optional[bool] | Indicates whether this version is deprecated. ||
+| digest | str | The SHA256 digest of the versioned file. ||
