@@ -9,20 +9,28 @@ from pydantic.fields import FieldInfo
 from httpx import Auth
 from ..http_client import HttpClient
 
-class Info(Service):
+class Metrics(Service):
     
-    def get_info(
+    def get_metrics_remediation(
         self,
-    )-> InfoResponse:
-        endpoint_url = "/info"
+        start_date: str,
+        end_date: str,
+        engine_ids: list[str] = [],
+        tags: list[str] = [],
+    )-> GetRemediationMetricsResponse:
+        endpoint_url = "/metrics/remediation"
         loc = locals()
         headers = {}
-        params = {}
+        params = json.loads(
+            MetricsGetMetricsRemediationQueryParameters(**loc).model_dump_json(
+                exclude_none=True
+            )
+        )
         path_params = {}
         
         response = self.http_client.get(
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return InfoResponse(**response.json())
+        return GetRemediationMetricsResponse(**response.json())
     

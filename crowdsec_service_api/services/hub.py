@@ -1,8 +1,12 @@
 import json
-from httpx import Auth
+from types import NoneType
+from typing import Optional, Union, Annotated
+
 from ..models import *
 from ..base_model import Page, Service
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from pydantic.fields import FieldInfo
+from httpx import Auth
 from ..http_client import HttpClient
 
 class Hub(Service):

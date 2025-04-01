@@ -1,8 +1,12 @@
 import json
-from httpx import Auth
+from types import NoneType
+from typing import Optional, Union, Annotated
+
 from ..models import *
 from ..base_model import Page, Service
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from pydantic.fields import FieldInfo
+from httpx import Auth
 from ..http_client import HttpClient
 
 class Blocklists(Service):
@@ -14,8 +18,9 @@ class Blocklists(Service):
         subscribed_only: bool = False,
         exclude_subscribed: bool = False,
         include_filter: list[BlocklistIncludeFilters] = ['private', 'shared'],
+        category: Optional[list[str]] = None,
         size: int = 50,
-    )-> Page[BlocklistResponse]:
+    )-> Page[PublicBlocklistResponse]:
         endpoint_url = "/blocklists"
         loc = locals()
         headers = {}
@@ -30,52 +35,54 @@ class Blocklists(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return Page[BlocklistResponse](**response.json())
+        return Page[PublicBlocklistResponse](_client=self, **response.json())
     
     def create_blocklist(
         self,
         request: BlocklistCreateRequest,
-    )-> BlocklistCreateResponse:
+    )-> PublicBlocklistResponse:
         endpoint_url = "/blocklists"
         loc = locals()
         headers = {}
         params = {}
         path_params = {}
         
-        response = self.http_client.post(
-            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=json.loads(
-                request.model_dump_json(
-                    exclude_none=True
-                )
+        payload = json.loads(
+            request.model_dump_json(
+                exclude_none=True
             )
+        ) if "request" in loc else None
+        response = self.http_client.post(
+            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=payload
         )
         
-        return BlocklistCreateResponse(**response.json())
+        return PublicBlocklistResponse(**response.json())
     
     def search_blocklist(
         self,
         request: BlocklistSearchRequest,
-    )-> PaginatedBlocklistResponse:
+    )-> PublicPaginatedBlocklistResponse:
         endpoint_url = "/blocklists/search"
         loc = locals()
         headers = {}
         params = {}
         path_params = {}
         
-        response = self.http_client.post(
-            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=json.loads(
-                request.model_dump_json(
-                    exclude_none=True
-                )
+        payload = json.loads(
+            request.model_dump_json(
+                exclude_none=True
             )
+        ) if "request" in loc else None
+        response = self.http_client.post(
+            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=payload
         )
         
-        return PaginatedBlocklistResponse(**response.json())
+        return PublicPaginatedBlocklistResponse(**response.json())
     
     def get_blocklist(
         self,
         blocklist_id: str,
-    )-> BlocklistGetResponse:
+    )-> PublicBlocklistResponse:
         endpoint_url = "/blocklists/{blocklist_id}"
         loc = locals()
         headers = {}
@@ -90,7 +97,7 @@ class Blocklists(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return BlocklistGetResponse(**response.json())
+        return PublicBlocklistResponse(**response.json())
     
     def delete_blocklist(
         self,
@@ -121,7 +128,7 @@ class Blocklists(Service):
         self,
         request: BlocklistUpdateRequest,
         blocklist_id: str,
-    )-> BlocklistResponse:
+    )-> PublicBlocklistResponse:
         endpoint_url = "/blocklists/{blocklist_id}"
         loc = locals()
         headers = {}
@@ -140,7 +147,7 @@ class Blocklists(Service):
             )
         )
         
-        return BlocklistResponse(**response.json())
+        return PublicBlocklistResponse(**response.json())
     
     def add_ips_to_blocklist(
         self,
@@ -157,12 +164,13 @@ class Blocklists(Service):
             )
         )
         
-        response = self.http_client.post(
-            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=json.loads(
-                request.model_dump_json(
-                    exclude_none=True
-                )
+        payload = json.loads(
+            request.model_dump_json(
+                exclude_none=True
             )
+        ) if "request" in loc else None
+        response = self.http_client.post(
+            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=payload
         )
         
         return None
@@ -182,12 +190,13 @@ class Blocklists(Service):
             )
         )
         
-        response = self.http_client.post(
-            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=json.loads(
-                request.model_dump_json(
-                    exclude_none=True
-                )
+        payload = json.loads(
+            request.model_dump_json(
+                exclude_none=True
             )
+        ) if "request" in loc else None
+        response = self.http_client.post(
+            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=payload
         )
         
         return None
@@ -253,12 +262,13 @@ class Blocklists(Service):
             )
         )
         
-        response = self.http_client.post(
-            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=json.loads(
-                request.model_dump_json(
-                    exclude_none=True
-                )
+        payload = json.loads(
+            request.model_dump_json(
+                exclude_none=True
             )
+        ) if "request" in loc else None
+        response = self.http_client.post(
+            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=payload
         )
         
         return BlocklistSubscriptionResponse(**response.json())
@@ -299,12 +309,13 @@ class Blocklists(Service):
             )
         )
         
-        response = self.http_client.post(
-            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=json.loads(
-                request.model_dump_json(
-                    exclude_none=True
-                )
+        payload = json.loads(
+            request.model_dump_json(
+                exclude_none=True
             )
+        ) if "request" in loc else None
+        response = self.http_client.post(
+            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=payload
         )
         
         return None

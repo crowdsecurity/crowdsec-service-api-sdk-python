@@ -20,6 +20,7 @@
 ### Parameters:
 | Parameter | Type | Description | Required | Default |
 | --------- | ---- | ----------- | -------- | ------- |
+| tag | Optional[list[str]] | List of tags associated with the integrations (any of) | False | None |
 | page | int | Page number | False | 1 |
 | size | int | Page size | False | 50 |
 ### Returns:
@@ -39,6 +40,7 @@ from crowdsec_service_api import (
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Integrations(base_url=Server.production_server.value, auth=auth)
 response = client.get_integrations(
+    tag=None,
     page=1,
     size=50,
 )
@@ -72,10 +74,10 @@ from crowdsec_service_api import (
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Integrations(base_url=Server.production_server.value, auth=auth)
 request = IntegrationCreateRequest(
-        name='name',
-        description='description',
-        entity_type='entity_type',
-        output_format='output_format',
+        name=None,
+        description=None,
+        entity_type=None,
+        output_format=None,
 )
 response = client.create_integration(
     request=request,
@@ -173,10 +175,10 @@ from crowdsec_service_api import (
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Integrations(base_url=Server.production_server.value, auth=auth)
 request = IntegrationUpdateRequest(
-        name='name',
-        description='description',
-        output_format='output_format',
-        regenerate_credentials=True,
+        name=None,
+        description=None,
+        output_format=None,
+        regenerate_credentials=None,
 )
 response = client.update_integration(
     request=request,

@@ -53,12 +53,13 @@ class HttpClient:
         self.timeout = 30
 
     def _replace_path_params(self, url: str, path_params: dict):
-        for param, value in path_params.items():
-            if not value:
-                raise ValueError(
-                    f"Parameter {param} is required, cannot be empty or blank."
-                )
-            url = url.replace(f"{{{param}}}", quote(str(value)))
+        if path_params:
+            for param, value in path_params.items():
+                if not value:
+                    raise ValueError(
+                        f"Parameter {param} is required, cannot be empty or blank."
+                    )
+                url = url.replace(f"{{{param}}}", quote(str(value)))
         return url
 
     def _normalize_url(self, url: str):
@@ -70,9 +71,9 @@ class HttpClient:
     def get(
         self,
         url: str,
-        path_params: dict = {},
-        params: dict = {},
-        headers: dict = {},
+        path_params: dict = None,
+        params: dict = None,
+        headers: dict = None,
     ):
         url = self._replace_path_params(
             url=self._normalize_url(url), path_params=path_params

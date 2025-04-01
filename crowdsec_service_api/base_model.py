@@ -15,6 +15,7 @@ T = TypeVar("T")
 
 
 class Page(BaseModelSdk, Generic[T]):
+    _client: "Service"
     items: Sequence[T]
     total: Optional[int]
     page: Optional[int]
@@ -22,8 +23,12 @@ class Page(BaseModelSdk, Generic[T]):
     pages: Optional[int] = None
     links: Optional[dict] = None
 
-    def next(self, client: "Service") -> "Page[T]":
-        return client.next_page(self)
+    def __init__(self, _client: "Service", **data):
+        super().__init__(**data)
+        self._client = _client
+
+    def next(self, client: "Service" = None) -> "Page[T]":
+        return (client if client is not None else self._client).next_page(self)
 
 
 class Service:
@@ -39,7 +44,7 @@ class Service:
             # links are relative to host not to full base url. We need to pass a full formatted url here
             parsed_url = urlparse(self.http_client.base_url)
             response = self.http_client.get(
-                f"{parsed_url.scheme}://{parsed_url.netloc}{page.links['next']}"
+                f"{parsed_url.scheme}://{parsed_url.netloc}{page.links['next']}", path_params=None, params=None, headers=None
             )
-            return Page[T](**response.json())
+            return page.__class__(_client=self, **response.json())
         return None
