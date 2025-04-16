@@ -385,8 +385,10 @@ print(response)
 | Parameter | Type | Description | Required | Default |
 | --------- | ---- | ----------- | -------- | ------- |
 | blocklist_id | str |  | True |  |
+| page | int | Page number | False | 1 |
+| size | int | Page size | False | 50 |
 ### Returns:
-[BlocklistSubscribersResponse](./Models.md#blocklistsubscribersresponse)
+[Page[BlocklistSubscriberEntity]](./Models.md#page[blocklistsubscriberentity])
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
@@ -404,6 +406,8 @@ auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
 response = client.get_blocklist_subscribers(
     blocklist_id='sample-blocklist-id',
+    page=1,
+    size=50,
 )
 print(response)
 ```

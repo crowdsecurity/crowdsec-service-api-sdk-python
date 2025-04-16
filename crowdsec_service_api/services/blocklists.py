@@ -230,11 +230,17 @@ class Blocklists(Service):
     def get_blocklist_subscribers(
         self,
         blocklist_id: str,
-    )-> BlocklistSubscribersResponse:
+        page: int = 1,
+        size: int = 50,
+    )-> Page[BlocklistSubscriberEntity]:
         endpoint_url = "/blocklists/{blocklist_id}/subscribers"
         loc = locals()
         headers = {}
-        params = {}
+        params = json.loads(
+            BlocklistsGetBlocklistSubscribersQueryParameters(**loc).model_dump_json(
+                exclude_none=True
+            )
+        )
         path_params = json.loads(
             BlocklistsGetBlocklistSubscribersPathParameters(**loc).model_dump_json(
                 exclude_none=True
@@ -245,7 +251,7 @@ class Blocklists(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return BlocklistSubscribersResponse(**response.json())
+        return Page[BlocklistSubscriberEntity](_client=self, **response.json())
     
     def subscribe_blocklist(
         self,
