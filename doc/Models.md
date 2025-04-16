@@ -311,13 +311,14 @@ id, entity_type, remediation
 | entity_type | str | None ||
 | remediation | str | Remediation ||
 
-# **BlocklistSubscribersResponse**
+# **BlocklistSubscribersCount**
 ## Required: 
-subscribers
+entity_type, count
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| subscribers | list[BlocklistSubscriberEntity] | List of subscribers ||
+| entity_type | str | None ||
+| count | int | Subscriber entity count ||
 
 # **BlocklistSubscription**
 ## Required: 
@@ -644,6 +645,19 @@ items, total, page, size, links
 | pages | Optional[int] | None ||
 | links | Links | None ||
 
+# **Page_BlocklistSubscriberEntity_**
+## Required: 
+items, total, page, size, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[BlocklistSubscriberEntity] | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
+| links | Links | None ||
+
 # **Page_IntegrationGetResponse_**
 ## Required: 
 items, total, page, size, links
@@ -700,7 +714,7 @@ id, created_at, updated_at, name, description, is_private, pricing_tier, source,
 | since | Optional[str] | Since duration for the CTI query (eg. 5m, 2h, 7d). Max is 30 days ||
 | shared_with | list[Share] | List of organizations shared with ||
 | organization_id | Optional[str] | Blocklists owner's organization id ||
-| subscribers | list[BlocklistSubscriberEntity] | List of subscribers to the blocklist. Only subscribers belonging to your organization are returned ||
+| subscribers | list[BlocklistSubscribersCount] | List of subscribers to the blocklist. Only subscribers belonging to your organization are returned ||
 | categories | list[BlocklistCategory] | List of categories for the blocklist ||
 
 # **PublicPaginatedBlocklistResponse**

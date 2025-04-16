@@ -83,7 +83,7 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [BlocklistSubscriberEntity](./Models.md#blocklistsubscriberentity)
 
-[BlocklistSubscribersResponse](./Models.md#blocklistsubscribersresponse)
+[BlocklistSubscribersCount](./Models.md#blocklistsubscriberscount)
 
 [BlocklistSubscription](./Models.md#blocklistsubscription)
 
@@ -146,6 +146,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [PageAllowlistGetResponse](./Models.md#pageallowlistgetresponse)
 
 [PageAllowlistSubscriberEntity](./Models.md#pageallowlistsubscriberentity)
+
+[PageBlocklistSubscriberEntity](./Models.md#pageblocklistsubscriberentity)
 
 [PageIntegrationGetResponse](./Models.md#pageintegrationgetresponse)
 
