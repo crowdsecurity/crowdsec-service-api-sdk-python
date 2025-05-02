@@ -10,6 +10,7 @@
 | [delete_blocklist](#delete_blocklist) | Delete a blocklist by ID. If the blocklist is shared with other organizations or it has subscriptions, the operation will fail. If you want to force delete the blocklist, you can use the force query parameter, so the blocklists will be unshared / unsubscribed. |
 | [update_blocklist](#update_blocklist) | Update a blocklist's details by ID. It is not possible to update the blocklist content using this operation. |
 | [add_ips_to_blocklist](#add_ips_to_blocklist) | Add IPs to a blocklist. If an IP is already in the blocklist, its expiration will be updated with the new expiration. |
+| [overwrite_ips](#overwrite_ips) | Overwrite blocklist content |
 | [delete_ips_from_blocklist](#delete_ips_from_blocklist) | Delete IPs from a blocklist |
 | [download_blocklist_content](#download_blocklist_content) | Download blocklist content as a list of ips as plain text separated by new lines. The response will include the ETag header for cache control. If_Modified_Since and If_None_Match cache control headers are supported for conditional requests. |
 | [get_blocklist_subscribers](#get_blocklist_subscribers) | Get blocklist subscribers within your organization. |
@@ -85,6 +86,7 @@ from crowdsec_service_api import (
     Blocklists,
     Server,
     ApiKeyAuth,
+    BlocklistCreateRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
@@ -124,6 +126,7 @@ from crowdsec_service_api import (
     Blocklists,
     Server,
     ApiKeyAuth,
+    BlocklistSearchRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
@@ -240,6 +243,7 @@ from crowdsec_service_api import (
     Blocklists,
     Server,
     ApiKeyAuth,
+    BlocklistUpdateRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
@@ -284,6 +288,7 @@ from crowdsec_service_api import (
     Blocklists,
     Server,
     ApiKeyAuth,
+    BlocklistAddIPsRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
@@ -292,6 +297,47 @@ request = BlocklistAddIPsRequest(
         expiration=None,
 )
 response = client.add_ips_to_blocklist(
+    request=request,
+    blocklist_id='sample-blocklist-id',
+)
+print(response)
+```
+
+
+## **overwrite_ips**
+### Overwrite blocklist content 
+- Endpoint: `/blocklists/{blocklist_id}/ips/bulk_overwrite`
+- Method: `POST`
+
+### Parameters:
+| Parameter | Type | Description | Required | Default |
+| --------- | ---- | ----------- | -------- | ------- |
+| request | [BlocklistAddIPsRequest](./Models.md#blocklistaddipsrequest) | Request body | Yes | - |
+| blocklist_id | str |  | True |  |
+### Errors:
+| Code | Description |
+| ---- | ----------- |
+| 403 | Blocklist is read-only |
+| 404 | Blocklist not found |
+| 412 | Payload too large for one operation, limit is 20000 IPs per request |
+| 500 | Internal server error |
+| 422 | Validation Error |
+### Usage
+
+```python
+from crowdsec_service_api import (
+    Blocklists,
+    Server,
+    ApiKeyAuth,
+    BlocklistAddIPsRequest,
+)
+auth = ApiKeyAuth(api_key='your_api_key')
+client = Blocklists(base_url=Server.production_server.value, auth=auth)
+request = BlocklistAddIPsRequest(
+        ips=None,
+        expiration=None,
+)
+response = client.overwrite_ips(
     request=request,
     blocklist_id='sample-blocklist-id',
 )
@@ -323,6 +369,7 @@ from crowdsec_service_api import (
     Blocklists,
     Server,
     ApiKeyAuth,
+    BlocklistDeleteIPsRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
@@ -437,6 +484,7 @@ from crowdsec_service_api import (
     Blocklists,
     Server,
     ApiKeyAuth,
+    BlocklistSubscriptionRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)
@@ -509,6 +557,7 @@ from crowdsec_service_api import (
     Blocklists,
     Server,
     ApiKeyAuth,
+    BlocklistShareRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Blocklists(base_url=Server.production_server.value, auth=auth)

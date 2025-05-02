@@ -141,17 +141,17 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [OutputFormat](./Models.md#outputformat)
 
-[PageAllowlistGetItemsResponse](./Models.md#pageallowlistgetitemsresponse)
+[PageTAnyCustomizedAllowlistGetItemsResponse](./Models.md#pagetanycustomizedallowlistgetitemsresponse)
 
-[PageAllowlistGetResponse](./Models.md#pageallowlistgetresponse)
+[PageTAnyCustomizedAllowlistGetResponse](./Models.md#pagetanycustomizedallowlistgetresponse)
 
-[PageAllowlistSubscriberEntity](./Models.md#pageallowlistsubscriberentity)
+[PageTAnyCustomizedAllowlistSubscriberEntity](./Models.md#pagetanycustomizedallowlistsubscriberentity)
 
-[PageBlocklistSubscriberEntity](./Models.md#pageblocklistsubscriberentity)
+[PageTAnyCustomizedBlocklistSubscriberEntity](./Models.md#pagetanycustomizedblocklistsubscriberentity)
 
-[PageIntegrationGetResponse](./Models.md#pageintegrationgetresponse)
+[PageTAnyCustomizedIntegrationGetResponse](./Models.md#pagetanycustomizedintegrationgetresponse)
 
-[PagePublicBlocklistResponse](./Models.md#pagepublicblocklistresponse)
+[PageTAnyCustomizedPublicBlocklistResponse](./Models.md#pagetanycustomizedpublicblocklistresponse)
 
 [Permission](./Models.md#permission)
 

@@ -70,6 +70,7 @@ from crowdsec_service_api import (
     Integrations,
     Server,
     ApiKeyAuth,
+    IntegrationCreateRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Integrations(base_url=Server.production_server.value, auth=auth)
@@ -171,6 +172,7 @@ from crowdsec_service_api import (
     Integrations,
     Server,
     ApiKeyAuth,
+    IntegrationUpdateRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Integrations(base_url=Server.production_server.value, auth=auth)
