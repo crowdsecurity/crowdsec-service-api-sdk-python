@@ -73,6 +73,7 @@ from crowdsec_service_api import (
     Allowlists,
     Server,
     ApiKeyAuth,
+    AllowlistCreateRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Allowlists(base_url=Server.production_server.value, auth=auth)
@@ -177,6 +178,7 @@ from crowdsec_service_api import (
     Allowlists,
     Server,
     ApiKeyAuth,
+    AllowlistUpdateRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Allowlists(base_url=Server.production_server.value, auth=auth)
@@ -251,6 +253,7 @@ from crowdsec_service_api import (
     Allowlists,
     Server,
     ApiKeyAuth,
+    AllowlistItemsCreateRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Allowlists(base_url=Server.production_server.value, auth=auth)
@@ -360,6 +363,7 @@ from crowdsec_service_api import (
     Allowlists,
     Server,
     ApiKeyAuth,
+    AllowlistItemUpdateRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Allowlists(base_url=Server.production_server.value, auth=auth)
@@ -437,6 +441,7 @@ from crowdsec_service_api import (
     Allowlists,
     Server,
     ApiKeyAuth,
+    AllowlistSubscriptionRequest,
 )
 auth = ApiKeyAuth(api_key='your_api_key')
 client = Allowlists(base_url=Server.production_server.value, auth=auth)

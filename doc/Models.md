@@ -578,8 +578,6 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | credentials | Optional[ApiKeyCredentials, BasicAuthCredentials] | Credentials for the integration ||
 
 # **Links**
-## Required: 
-first, last, self, next, prev
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
@@ -606,9 +604,9 @@ origin, data
 ## Enum: 
 PLAIN_TEXT, F5, REMEDIATION_COMPONENT, FORTIGATE, PALOALTO, CHECKPOINT, CISCO, JUNIPER, MIKROTIK, PFSENSE, OPNSENSE, SOPHOS
 
-# **Page_AllowlistGetItemsResponse_**
+# **Page__TAny_Customized_AllowlistGetItemsResponse_**
 ## Required: 
-items, total, page, size, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
@@ -619,9 +617,9 @@ items, total, page, size, links
 | pages | Optional[int] | None ||
 | links | Links | None ||
 
-# **Page_AllowlistGetResponse_**
+# **Page__TAny_Customized_AllowlistGetResponse_**
 ## Required: 
-items, total, page, size, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
@@ -632,9 +630,9 @@ items, total, page, size, links
 | pages | Optional[int] | None ||
 | links | Links | None ||
 
-# **Page_AllowlistSubscriberEntity_**
+# **Page__TAny_Customized_AllowlistSubscriberEntity_**
 ## Required: 
-items, total, page, size, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
@@ -645,9 +643,9 @@ items, total, page, size, links
 | pages | Optional[int] | None ||
 | links | Links | None ||
 
-# **Page_BlocklistSubscriberEntity_**
+# **Page__TAny_Customized_BlocklistSubscriberEntity_**
 ## Required: 
-items, total, page, size, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
@@ -658,9 +656,9 @@ items, total, page, size, links
 | pages | Optional[int] | None ||
 | links | Links | None ||
 
-# **Page_IntegrationGetResponse_**
+# **Page__TAny_Customized_IntegrationGetResponse_**
 ## Required: 
-items, total, page, size, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
@@ -671,9 +669,9 @@ items, total, page, size, links
 | pages | Optional[int] | None ||
 | links | Links | None ||
 
-# **Page_PublicBlocklistResponse_**
+# **Page__TAny_Customized_PublicBlocklistResponse_**
 ## Required: 
-items, total, page, size, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|

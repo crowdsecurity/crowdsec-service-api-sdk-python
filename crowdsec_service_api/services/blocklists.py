@@ -175,6 +175,32 @@ class Blocklists(Service):
         
         return None
     
+    def overwrite_ips(
+        self,
+        request: BlocklistAddIPsRequest,
+        blocklist_id: str,
+    ):
+        endpoint_url = "/blocklists/{blocklist_id}/ips/bulk_overwrite"
+        loc = locals()
+        headers = {}
+        params = {}
+        path_params = json.loads(
+            BlocklistsOverwriteIpsPathParameters(**loc).model_dump_json(
+                exclude_none=True
+            )
+        )
+        
+        payload = json.loads(
+            request.model_dump_json(
+                exclude_none=True
+            )
+        ) if "request" in loc else None
+        response = self.http_client.post(
+            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=payload
+        )
+        
+        return None
+    
     def delete_ips_from_blocklist(
         self,
         request: BlocklistDeleteIPsRequest,
