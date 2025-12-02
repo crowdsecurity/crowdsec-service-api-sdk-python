@@ -54,7 +54,7 @@ print(response)
 | page | int | Page number | False | 1 |
 | size | int | Page size | False | 50 |
 ### Returns:
-[Page[IPItem]](./Models.md#page[ipitem])
+[GetCVEIPsResponsePage](./Models.md#getcveipsresponsepage)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |

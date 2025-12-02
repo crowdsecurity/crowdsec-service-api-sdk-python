@@ -24,7 +24,7 @@
 | page | int | Page number | False | 1 |
 | size | int | Page size | False | 50 |
 ### Returns:
-[Page[IntegrationGetResponse]](./Models.md#page[integrationgetresponse])
+[IntegrationGetResponsePage](./Models.md#integrationgetresponsepage)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |

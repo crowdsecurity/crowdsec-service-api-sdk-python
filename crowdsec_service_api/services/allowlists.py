@@ -15,7 +15,7 @@ class Allowlists(Service):
         self,
         page: int = 1,
         size: int = 50,
-    )-> Page[AllowlistGetResponse]:
+    )-> AllowlistGetResponsePage:
         endpoint_url = "/allowlists"
         loc = locals()
         headers = {}
@@ -30,7 +30,7 @@ class Allowlists(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return Page[AllowlistGetResponse](_client=self, **response.json())
+        return AllowlistGetResponsePage(**response.json())
     
     def create_allowlist(
         self,
@@ -128,7 +128,7 @@ class Allowlists(Service):
         allowlist_id: str,
         page: int = 1,
         size: int = 50,
-    )-> Page[AllowlistGetItemsResponse]:
+    )-> AllowlistGetItemsResponsePage:
         endpoint_url = "/allowlists/{allowlist_id}/items"
         loc = locals()
         headers = {}
@@ -147,7 +147,7 @@ class Allowlists(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return Page[AllowlistGetItemsResponse](_client=self, **response.json())
+        return AllowlistGetItemsResponsePage(**response.json())
     
     def create_allowlist_items(
         self,
@@ -248,7 +248,7 @@ class Allowlists(Service):
         allowlist_id: str,
         page: int = 1,
         size: int = 50,
-    )-> Page[AllowlistSubscriberEntity]:
+    )-> AllowlistSubscriberEntityPage:
         endpoint_url = "/allowlists/{allowlist_id}/subscribers"
         loc = locals()
         headers = {}
@@ -267,7 +267,7 @@ class Allowlists(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return Page[AllowlistSubscriberEntity](_client=self, **response.json())
+        return AllowlistSubscriberEntityPage(**response.json())
     
     def subscribe_allowlist(
         self,

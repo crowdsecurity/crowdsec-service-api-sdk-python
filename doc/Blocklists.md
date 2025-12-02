@@ -35,7 +35,7 @@
 | category | Optional[list[str]] | Filter by category | False | None |
 | size | int | Page size | False | 50 |
 ### Returns:
-[Page[PublicBlocklistResponse]](./Models.md#page[publicblocklistresponse])
+[PublicBlocklistResponsePage](./Models.md#publicblocklistresponsepage)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
@@ -113,8 +113,10 @@ print(response)
 | Parameter | Type | Description | Required | Default |
 | --------- | ---- | ----------- | -------- | ------- |
 | request | [BlocklistSearchRequest](./Models.md#blocklistsearchrequest) | Request body | Yes | - |
+| page | int | Page number | False | 1 |
+| size | int | Page size | False | 50 |
 ### Returns:
-[PublicPaginatedBlocklistResponse](./Models.md#publicpaginatedblocklistresponse)
+[PublicBlocklistResponsePage](./Models.md#publicblocklistresponsepage)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
@@ -146,6 +148,8 @@ request = BlocklistSearchRequest(
 )
 response = client.search_blocklist(
     request=request,
+    page=1,
+    size=50,
 )
 print(response)
 ```
@@ -435,7 +439,7 @@ print(response)
 | page | int | Page number | False | 1 |
 | size | int | Page size | False | 50 |
 ### Returns:
-[Page[BlocklistSubscriberEntity]](./Models.md#page[blocklistsubscriberentity])
+[BlocklistSubscriberEntityPage](./Models.md#blocklistsubscriberentitypage)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |

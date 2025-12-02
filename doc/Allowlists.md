@@ -28,7 +28,7 @@
 | page | int | Page number | False | 1 |
 | size | int | Page size | False | 50 |
 ### Returns:
-[Page[AllowlistGetResponse]](./Models.md#page[allowlistgetresponse])
+[AllowlistGetResponsePage](./Models.md#allowlistgetresponsepage)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
@@ -206,7 +206,7 @@ print(response)
 | page | int | Page number | False | 1 |
 | size | int | Page size | False | 50 |
 ### Returns:
-[Page[AllowlistGetItemsResponse]](./Models.md#page[allowlistgetitemsresponse])
+[AllowlistGetItemsResponsePage](./Models.md#allowlistgetitemsresponsepage)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
@@ -392,7 +392,7 @@ print(response)
 | page | int | Page number | False | 1 |
 | size | int | Page size | False | 50 |
 ### Returns:
-[Page[AllowlistSubscriberEntity]](./Models.md#page[allowlistsubscriberentity])
+[AllowlistSubscriberEntityPage](./Models.md#allowlistsubscriberentitypage)
 ### Errors:
 | Code | Description |
 | ---- | ----------- |

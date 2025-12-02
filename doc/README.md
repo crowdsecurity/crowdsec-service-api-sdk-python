@@ -33,7 +33,11 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [AllowlistGetItemsResponse](./Models.md#allowlistgetitemsresponse)
 
+[AllowlistGetItemsResponsePage](./Models.md#allowlistgetitemsresponsepage)
+
 [AllowlistGetResponse](./Models.md#allowlistgetresponse)
+
+[AllowlistGetResponsePage](./Models.md#allowlistgetresponsepage)
 
 [AllowlistItemUpdateRequest](./Models.md#allowlistitemupdaterequest)
 
@@ -44,6 +48,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [AllowlistScope](./Models.md#allowlistscope)
 
 [AllowlistSubscriberEntity](./Models.md#allowlistsubscriberentity)
+
+[AllowlistSubscriberEntityPage](./Models.md#allowlistsubscriberentitypage)
 
 [AllowlistSubscribersCount](./Models.md#allowlistsubscriberscount)
 
@@ -84,6 +90,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [BlocklistStats](./Models.md#blockliststats)
 
 [BlocklistSubscriberEntity](./Models.md#blocklistsubscriberentity)
+
+[BlocklistSubscriberEntityPage](./Models.md#blocklistsubscriberentitypage)
 
 [BlocklistSubscribersCount](./Models.md#blocklistsubscriberscount)
 
@@ -129,6 +137,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [IntegrationGetResponse](./Models.md#integrationgetresponse)
 
+[IntegrationGetResponsePage](./Models.md#integrationgetresponsepage)
+
 [IntegrationType](./Models.md#integrationtype)
 
 [IntegrationUpdateRequest](./Models.md#integrationupdaterequest)
@@ -143,25 +153,13 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [OutputFormat](./Models.md#outputformat)
 
-[PageTAnyCustomizedAllowlistGetItemsResponse](./Models.md#pagetanycustomizedallowlistgetitemsresponse)
-
-[PageTAnyCustomizedAllowlistGetResponse](./Models.md#pagetanycustomizedallowlistgetresponse)
-
-[PageTAnyCustomizedAllowlistSubscriberEntity](./Models.md#pagetanycustomizedallowlistsubscriberentity)
-
-[PageTAnyCustomizedBlocklistSubscriberEntity](./Models.md#pagetanycustomizedblocklistsubscriberentity)
-
-[PageTAnyCustomizedIntegrationGetResponse](./Models.md#pagetanycustomizedintegrationgetresponse)
-
-[PageTAnyCustomizedPublicBlocklistResponse](./Models.md#pagetanycustomizedpublicblocklistresponse)
-
 [Permission](./Models.md#permission)
 
 [PricingTiers](./Models.md#pricingtiers)
 
 [PublicBlocklistResponse](./Models.md#publicblocklistresponse)
 
-[PublicPaginatedBlocklistResponse](./Models.md#publicpaginatedblocklistresponse)
+[PublicBlocklistResponsePage](./Models.md#publicblocklistresponsepage)
 
 [RawMetrics](./Models.md#rawmetrics)
 
@@ -209,6 +207,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [Classifications](./Models.md#classifications)
 
+[GetCVEIPsResponsePage](./Models.md#getcveipsresponsepage)
+
 [GetCVEResponse](./Models.md#getcveresponse)
 
 [History](./Models.md#history)
@@ -218,8 +218,6 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [Location](./Models.md#location)
 
 [MitreTechnique](./Models.md#mitretechnique)
-
-[PageTypeVarCustomizedIPItem](./Models.md#pagetypevarcustomizedipitem)
 
 [Reference](./Models.md#reference)
 
