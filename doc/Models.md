@@ -221,7 +221,7 @@ name, label, description, priority
 | top_as | list[CtiAs] | None ||
 | top_attacking_countries | list[CtiCountry] | None ||
 | top_ips | list[CtiIp] | None ||
-| updated_at | str | None ||
+| updated_at | Optional[str] | None ||
 
 # **BlocklistCreateRequest**
 ## Required: 
@@ -299,7 +299,7 @@ CROWDSEC, THIRD_PARTY, CUSTOM
 | change_2days_percentage | float | None ||
 | change_month_percentage | float | None ||
 | count | int | None ||
-| updated_at | str | None ||
+| updated_at | Optional[str] | None ||
 
 # **BlocklistSubscriberEntity**
 ## Required: 
@@ -370,7 +370,7 @@ updated, errors
 | engines_subscribed_through_tag | int | None ||
 | total_subscribed_engines | int | None ||
 | total_subscribed_organizations | int | None ||
-| updated_at | str | None ||
+| updated_at | Optional[str] | None ||
 
 # **Body_uploadBlocklistContent**
 ## Required: 
@@ -589,7 +589,7 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 
 # **MetricUnits**
 ## Enum: 
-BYTE, PACKET, REQUEST, IP, LINE
+BYTE, PACKET, REQUEST, IP, LINE, EVENT
 
 # **OriginMetrics**
 ## Required: 
@@ -606,80 +606,80 @@ PLAIN_TEXT, F5, REMEDIATION_COMPONENT, FORTIGATE, PALOALTO, CHECKPOINT, CISCO, J
 
 # **Page__TAny_Customized_AllowlistGetItemsResponse_**
 ## Required: 
-items, page, size, links
+items, total, page, size, pages, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[AllowlistGetItemsResponse] | None ||
-| total | Optional[int] | None ||
-| page | Optional[int] | None ||
-| size | Optional[int] | None ||
-| pages | Optional[int] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
 | links | Links | None ||
 
 # **Page__TAny_Customized_AllowlistGetResponse_**
 ## Required: 
-items, page, size, links
+items, total, page, size, pages, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[AllowlistGetResponse] | None ||
-| total | Optional[int] | None ||
-| page | Optional[int] | None ||
-| size | Optional[int] | None ||
-| pages | Optional[int] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
 | links | Links | None ||
 
 # **Page__TAny_Customized_AllowlistSubscriberEntity_**
 ## Required: 
-items, page, size, links
+items, total, page, size, pages, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[AllowlistSubscriberEntity] | None ||
-| total | Optional[int] | None ||
-| page | Optional[int] | None ||
-| size | Optional[int] | None ||
-| pages | Optional[int] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
 | links | Links | None ||
 
 # **Page__TAny_Customized_BlocklistSubscriberEntity_**
 ## Required: 
-items, page, size, links
+items, total, page, size, pages, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[BlocklistSubscriberEntity] | None ||
-| total | Optional[int] | None ||
-| page | Optional[int] | None ||
-| size | Optional[int] | None ||
-| pages | Optional[int] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
 | links | Links | None ||
 
 # **Page__TAny_Customized_IntegrationGetResponse_**
 ## Required: 
-items, page, size, links
+items, total, page, size, pages, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[IntegrationGetResponse] | None ||
-| total | Optional[int] | None ||
-| page | Optional[int] | None ||
-| size | Optional[int] | None ||
-| pages | Optional[int] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
 | links | Links | None ||
 
 # **Page__TAny_Customized_PublicBlocklistResponse_**
 ## Required: 
-items, page, size, links
+items, total, page, size, pages, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[PublicBlocklistResponse] | None ||
-| total | Optional[int] | None ||
-| page | Optional[int] | None ||
-| size | Optional[int] | None ||
-| pages | Optional[int] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
 | links | Links | None ||
 
 # **Permission**
@@ -915,3 +915,180 @@ digest
 |----------|------|-------------|---------|
 | deprecated | Optional[bool] | Indicates whether this version is deprecated. ||
 | digest | str | The SHA256 digest of the versioned file. ||
+
+# **AffectedComponent**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| vendor | str | Vendor of the affected component ||
+| product | str | Product name of the affected component ||
+
+# **AttackDetail**
+## Required: 
+name, label, description
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| name | str | Attack detail name ||
+| label | str | Attack detail label ||
+| description | str | Attack detail description ||
+| references | list[str] | Attack detail references ||
+
+# **Behavior**
+## Required: 
+name, label, description
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| name | str | Behavior name ||
+| label | str | Behavior label ||
+| description | str | Behavior description ||
+
+# **Classification**
+## Required: 
+name, label, description
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| name | str | Classification name ||
+| label | str | Classification label ||
+| description | str | Classification description ||
+
+# **Classifications**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| false_positives | list[Classification] | False positive classifications ||
+| classifications | list[Classification] | Main classifications ||
+
+# **GetCVEResponse**
+## Required: 
+id, name, affected_components, let_score, first_seen, last_seen, nb_ips, published_date, cvss_score, references, description
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | ID of the CVE ||
+| name | str | Name of the CVE ||
+| affected_components | list[AffectedComponent] | List of affected components ||
+| let_score | int | LET score of the CVE ||
+| first_seen | str | First seen date ||
+| last_seen | str | Last seen date ||
+| nb_ips | int | Number of unique IPs affected ||
+| published_date | str | Published date of the CVE ||
+| cvss_score | float | CVSS score of the CVE ||
+| references | list[str] | List of references for the CVE ||
+| description | str | Description of the CVE ||
+
+# **History**
+## Required: 
+first_seen, last_seen, full_age, days_age
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| first_seen | str | First seen timestamp ||
+| last_seen | str | Last seen timestamp ||
+| full_age | int | Full age in days ||
+| days_age | int | Days age ||
+
+# **IPItem**
+## Required: 
+ip
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| ip | str | IP address ||
+| reputation | str | Reputation of the IP ||
+| ip_range | Optional[str] | IP range ||
+| ip_range_score | Optional[int] | IP range score ||
+| ip_range_24 | Optional[str] | IP range /24 ||
+| ip_range_24_reputation | Optional[str] | IP range /24 reputation ||
+| ip_range_24_score | Optional[int] | IP range /24 score ||
+| as_name | Optional[str] | AS name ||
+| as_num | Optional[int] | AS number ||
+| background_noise_score | int | Background noise score ||
+| background_noise | Optional[str] | Background noise level ||
+| confidence | Optional[str] | Confidence level ||
+| location | Optional[Location] | IP location information ||
+| reverse_dns | Optional[str] | Reverse DNS ||
+| behaviors | list[Behavior] | List of behaviors ||
+| references | list[Reference] | List of references ||
+| history | History | None ||
+| classifications | Classifications | None ||
+| mitre_techniques | list[MitreTechnique] | MITRE techniques ||
+| cves | list[str] | List of CVEs ||
+| attack_details | list[AttackDetail] | Attack details ||
+| target_countries | Target Countries | Target countries ||
+| scores | Scores | None ||
+
+# **Location**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| country | Optional[str] | Country code ||
+| city | Optional[str] | City name ||
+| latitude | Optional[float] | Latitude coordinate ||
+| longitude | Optional[float] | Longitude coordinate ||
+
+# **MitreTechnique**
+## Required: 
+name, label, description
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| name | str | MITRE technique ID ||
+| label | str | MITRE technique label ||
+| description | str | MITRE technique description ||
+
+# **Page_TypeVar_Customized_IPItem_**
+## Required: 
+items, total, page, size, pages, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[IPItem] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
+| links | Links | None ||
+
+# **Reference**
+## Required: 
+name, label, description
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| name | str | Reference name ||
+| label | str | Reference label ||
+| description | str | Reference description ||
+
+# **ScoreBreakdown**
+## Required: 
+aggressiveness, threat, trust, anomaly, total
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| aggressiveness | int | Aggressiveness score ||
+| threat | int | Threat score ||
+| trust | int | Trust score ||
+| anomaly | int | Anomaly score ||
+| total | int | Total score ||
+
+# **Scores**
+## Required: 
+overall, last_day, last_week, last_month
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| overall | ScoreBreakdown | None ||
+| last_day | ScoreBreakdown | None ||
+| last_week | ScoreBreakdown | None ||
+| last_month | ScoreBreakdown | None ||
+
+# **SubscribeCVEIntegrationRequest**
+## Required: 
+name
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| name | str | Name of the integration to subscribe ||

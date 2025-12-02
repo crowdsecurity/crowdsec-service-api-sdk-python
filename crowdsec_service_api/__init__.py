@@ -7,6 +7,7 @@ from .services.integrations import Integrations
 from .services.info import Info
 from .services.metrics import Metrics
 from .services.hub import Hub
+from .services.cves import Cves
 from .http_client import ApiKeyAuth
 
 class Server(Enum):
@@ -19,6 +20,7 @@ __all__ = [
     'Info',
     'Metrics',
     'Hub',
+    'Cves',
     'AllowlistCreateRequest',
     'AllowlistCreateResponse',
     'AllowlistGetItemsResponse',
@@ -105,6 +107,21 @@ __all__ = [
     'PostoverflowIndex',
     'ScenarioIndex',
     'VersionDetail',
+    'AffectedComponent',
+    'AttackDetail',
+    'Behavior',
+    'Classification',
+    'Classifications',
+    'GetCVEResponse',
+    'History',
+    'IPItem',
+    'Location',
+    'MitreTechnique',
+    'PageTypeVarCustomizedIPItem',
+    'Reference',
+    'ScoreBreakdown',
+    'Scores',
+    'SubscribeCVEIntegrationRequest',
     'ApiKeyAuth',
     'Server',
     'Page'
