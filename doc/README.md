@@ -23,6 +23,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [Hub](./Hub.md)
 
+[Cves](./Cves.md)
+
 ## API Endpoint models
 
 [AllowlistCreateRequest](./Models.md#allowlistcreaterequest)
@@ -196,3 +198,33 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [ScenarioIndex](./Models.md#scenarioindex)
 
 [VersionDetail](./Models.md#versiondetail)
+
+[AffectedComponent](./Models.md#affectedcomponent)
+
+[AttackDetail](./Models.md#attackdetail)
+
+[Behavior](./Models.md#behavior)
+
+[Classification](./Models.md#classification)
+
+[Classifications](./Models.md#classifications)
+
+[GetCVEResponse](./Models.md#getcveresponse)
+
+[History](./Models.md#history)
+
+[IPItem](./Models.md#ipitem)
+
+[Location](./Models.md#location)
+
+[MitreTechnique](./Models.md#mitretechnique)
+
+[PageTypeVarCustomizedIPItem](./Models.md#pagetypevarcustomizedipitem)
+
+[Reference](./Models.md#reference)
+
+[ScoreBreakdown](./Models.md#scorebreakdown)
+
+[Scores](./Models.md#scores)
+
+[SubscribeCVEIntegrationRequest](./Models.md#subscribecveintegrationrequest)

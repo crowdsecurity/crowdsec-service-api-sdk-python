@@ -16,6 +16,7 @@ class Metrics(Service):
         start_date: str,
         end_date: str,
         engine_ids: list[str] = [],
+        integration_ids: list[str] = [],
         tags: list[str] = [],
     )-> GetRemediationMetricsResponse:
         endpoint_url = "/metrics/remediation"
