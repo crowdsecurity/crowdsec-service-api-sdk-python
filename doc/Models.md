@@ -42,6 +42,19 @@ id, allowlist_id, description, scope, value, created_at, created_by
 | updated_by | Optional[SourceInfo] | The source user who updated the allowlist entry ||
 | expiration | Optional[str] | Time the allowlist entry will expire ||
 
+# **AllowlistGetItemsResponsePage**
+## Required: 
+items, total, page, size, pages, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[AllowlistGetItemsResponse] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
+| links | Links | None ||
+
 # **AllowlistGetResponse**
 ## Required: 
 id, organization_id, name, created_at, total_items
@@ -58,6 +71,19 @@ id, organization_id, name, created_at, total_items
 | since | Optional[str] | Since duration for the CTI query (eg. 5m, 2h, 7d). Max is 30 days ||
 | total_items | int | Number of items in the allowlist ||
 | subscribers | list[AllowlistSubscribersCount] | List of subscribers count by entity type ||
+
+# **AllowlistGetResponsePage**
+## Required: 
+items, total, page, size, pages, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[AllowlistGetResponse] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
+| links | Links | None ||
 
 # **AllowlistItemUpdateRequest**
 ## Properties
@@ -105,6 +131,19 @@ id, entity_type
 |----------|------|-------------|---------|
 | id | str | Subscriber entity id ||
 | entity_type | str | None ||
+
+# **AllowlistSubscriberEntityPage**
+## Required: 
+items, total, page, size, pages, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[AllowlistSubscriberEntity] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
+| links | Links | None ||
 
 # **AllowlistSubscribersCount**
 ## Required: 
@@ -310,6 +349,19 @@ id, entity_type, remediation
 | id | str | Subscriber entity id ||
 | entity_type | str | None ||
 | remediation | str | Remediation ||
+
+# **BlocklistSubscriberEntityPage**
+## Required: 
+items, total, page, size, pages, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[BlocklistSubscriberEntity] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
+| links | Links | None ||
 
 # **BlocklistSubscribersCount**
 ## Required: 
@@ -543,6 +595,19 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | stats | Stats | None ||
 | tags | list[str] | Tags associated with the integration ||
 
+# **IntegrationGetResponsePage**
+## Required: 
+items, total, page, size, pages, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[IntegrationGetResponse] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
+| links | Links | None ||
+
 # **IntegrationType**
 ## Enum: 
 FIREWALL_INTEGRATION, REMEDIATION_COMPONENT_INTEGRATION
@@ -604,84 +669,6 @@ origin, data
 ## Enum: 
 PLAIN_TEXT, F5, REMEDIATION_COMPONENT, FORTIGATE, PALOALTO, CHECKPOINT, CISCO, JUNIPER, MIKROTIK, PFSENSE, OPNSENSE, SOPHOS
 
-# **Page__TAny_Customized_AllowlistGetItemsResponse_**
-## Required: 
-items, total, page, size, pages, links
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| items | list[AllowlistGetItemsResponse] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
-| links | Links | None ||
-
-# **Page__TAny_Customized_AllowlistGetResponse_**
-## Required: 
-items, total, page, size, pages, links
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| items | list[AllowlistGetResponse] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
-| links | Links | None ||
-
-# **Page__TAny_Customized_AllowlistSubscriberEntity_**
-## Required: 
-items, total, page, size, pages, links
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| items | list[AllowlistSubscriberEntity] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
-| links | Links | None ||
-
-# **Page__TAny_Customized_BlocklistSubscriberEntity_**
-## Required: 
-items, total, page, size, pages, links
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| items | list[BlocklistSubscriberEntity] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
-| links | Links | None ||
-
-# **Page__TAny_Customized_IntegrationGetResponse_**
-## Required: 
-items, total, page, size, pages, links
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| items | list[IntegrationGetResponse] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
-| links | Links | None ||
-
-# **Page__TAny_Customized_PublicBlocklistResponse_**
-## Required: 
-items, total, page, size, pages, links
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| items | list[PublicBlocklistResponse] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
-| links | Links | None ||
-
 # **Permission**
 ## Enum: 
 READ, WRITE
@@ -715,17 +702,18 @@ id, created_at, updated_at, name, description, is_private, pricing_tier, source,
 | subscribers | list[BlocklistSubscribersCount] | List of subscribers to the blocklist. Only subscribers belonging to your organization are returned ||
 | categories | list[BlocklistCategory] | List of categories for the blocklist ||
 
-# **PublicPaginatedBlocklistResponse**
+# **PublicBlocklistResponsePage**
 ## Required: 
-items, page, total, size, pages
+items, total, page, size, pages, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| items | list[PublicBlocklistResponse] | List of blocklists ||
-| page | int | Page number ||
-| total | int | Total number of blocklists ||
-| size | int | Page size ||
-| pages | int | Total number of pages ||
+| items | list[PublicBlocklistResponse] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
+| links | Links | None ||
 
 # **RawMetrics**
 ## Properties
@@ -961,6 +949,19 @@ name, label, description
 | false_positives | list[Classification] | False positive classifications ||
 | classifications | list[Classification] | Main classifications ||
 
+# **GetCVEIPsResponsePage**
+## Required: 
+items, total, page, size, pages, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[IPItem] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
+| links | Links | None ||
+
 # **GetCVEResponse**
 ## Required: 
 id, name, affected_components, let_score, first_seen, last_seen, nb_ips, published_date, cvss_score, references, description
@@ -1038,19 +1039,6 @@ name, label, description
 | name | str | MITRE technique ID ||
 | label | str | MITRE technique label ||
 | description | str | MITRE technique description ||
-
-# **Page_TypeVar_Customized_IPItem_**
-## Required: 
-items, total, page, size, pages, links
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| items | list[IPItem] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
-| links | Links | None ||
 
 # **Reference**
 ## Required: 

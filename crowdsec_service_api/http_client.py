@@ -63,6 +63,7 @@ class HttpClient:
         return url
 
     def _normalize_url(self, url: str):
+        self.base_url = self.base_url.rstrip("/")
         parsed_url = urlparse(url)
         if not parsed_url.netloc:
             return f"{self.base_url}{url}"

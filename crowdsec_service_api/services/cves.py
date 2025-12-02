@@ -37,7 +37,7 @@ class Cves(Service):
         since: Optional[str] = None,
         page: int = 1,
         size: int = 50,
-    )-> Page[IPItem]:
+    )-> GetCVEIPsResponsePage:
         endpoint_url = "/cves/{cve_id}/ips"
         loc = locals()
         headers = {}
@@ -56,7 +56,7 @@ class Cves(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return Page[IPItem](_client=self, **response.json())
+        return GetCVEIPsResponsePage(**response.json())
     
     def subscribe_integration_to_cve(
         self,

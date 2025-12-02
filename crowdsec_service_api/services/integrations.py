@@ -16,7 +16,7 @@ class Integrations(Service):
         tag: Optional[list[str]] = None,
         page: int = 1,
         size: int = 50,
-    )-> Page[IntegrationGetResponse]:
+    )-> IntegrationGetResponsePage:
         endpoint_url = "/integrations"
         loc = locals()
         headers = {}
@@ -31,7 +31,7 @@ class Integrations(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return Page[IntegrationGetResponse](_client=self, **response.json())
+        return IntegrationGetResponsePage(**response.json())
     
     def create_integration(
         self,

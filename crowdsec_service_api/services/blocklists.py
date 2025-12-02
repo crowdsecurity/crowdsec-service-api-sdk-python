@@ -20,7 +20,7 @@ class Blocklists(Service):
         include_filter: list[BlocklistIncludeFilters] = ['private', 'shared'],
         category: Optional[list[str]] = None,
         size: int = 50,
-    )-> Page[PublicBlocklistResponse]:
+    )-> PublicBlocklistResponsePage:
         endpoint_url = "/blocklists"
         loc = locals()
         headers = {}
@@ -35,7 +35,7 @@ class Blocklists(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return Page[PublicBlocklistResponse](_client=self, **response.json())
+        return PublicBlocklistResponsePage(**response.json())
     
     def create_blocklist(
         self,
@@ -61,11 +61,17 @@ class Blocklists(Service):
     def search_blocklist(
         self,
         request: BlocklistSearchRequest,
-    )-> PublicPaginatedBlocklistResponse:
+        page: int = 1,
+        size: int = 50,
+    )-> PublicBlocklistResponsePage:
         endpoint_url = "/blocklists/search"
         loc = locals()
         headers = {}
-        params = {}
+        params = json.loads(
+            BlocklistsSearchBlocklistQueryParameters(**loc).model_dump_json(
+                exclude_none=True
+            )
+        )
         path_params = {}
         
         payload = json.loads(
@@ -77,7 +83,7 @@ class Blocklists(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers, json=payload
         )
         
-        return PublicPaginatedBlocklistResponse(**response.json())
+        return PublicBlocklistResponsePage(**response.json())
     
     def get_blocklist(
         self,
@@ -258,7 +264,7 @@ class Blocklists(Service):
         blocklist_id: str,
         page: int = 1,
         size: int = 50,
-    )-> Page[BlocklistSubscriberEntity]:
+    )-> BlocklistSubscriberEntityPage:
         endpoint_url = "/blocklists/{blocklist_id}/subscribers"
         loc = locals()
         headers = {}
@@ -277,7 +283,7 @@ class Blocklists(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return Page[BlocklistSubscriberEntity](_client=self, **response.json())
+        return BlocklistSubscriberEntityPage(**response.json())
     
     def subscribe_blocklist(
         self,
