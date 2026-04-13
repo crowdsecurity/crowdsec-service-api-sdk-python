@@ -34,7 +34,7 @@ id, allowlist_id, description, scope, value, created_at, created_by
 | id | str | ID of the allowlist entry ||
 | allowlist_id | str | ID of the allowlist ||
 | description | str | Description of the allowlist entry ||
-| scope | str | None ||
+| scope | AllowlistScope | None ||
 | value | Union[str, str] | Value of the allowlist entry ||
 | created_at | str | Time the allowlist entry was created ||
 | updated_at | Optional[str] | Time the allowlist entry was updated ||
@@ -101,7 +101,7 @@ id, allowlist_id, description, scope, value, created_at, updated_at, created_by,
 | id | str | ID of the allowlist entry ||
 | allowlist_id | str | ID of the allowlist ||
 | description | str | Description of the allowlist entry ||
-| scope | str | None ||
+| scope | AllowlistScope | None ||
 | value | Union[str, str] | Value of the allowlist entry ||
 | created_at | str | Time the allowlist entry was created ||
 | updated_at | str | Time the allowlist entry was updated ||
@@ -130,7 +130,7 @@ id, entity_type
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | id | str | Subscriber entity id ||
-| entity_type | str | None ||
+| entity_type | SubscriberEntityType | None ||
 
 # **AllowlistSubscriberEntityPage**
 ## Required: 
@@ -151,7 +151,7 @@ entity_type, count
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| entity_type | str | None ||
+| entity_type | SubscriberEntityType | None ||
 | count | int | Subscriber entity count ||
 
 # **AllowlistSubscriptionRequest**
@@ -161,7 +161,7 @@ entity_type
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | ids | list[str] | List of subscriber entity id ||
-| entity_type | str | None ||
+| entity_type | EntityType | None ||
 
 # **AllowlistSubscriptionResponse**
 ## Required: 
@@ -294,7 +294,7 @@ label, id, pricing_tier
 |----------|------|-------------|---------|
 | label | str | Label of the blocklist ||
 | id | str | ID of the blocklist ||
-| pricing_tier | str | None ||
+| pricing_tier | PricingTiers | None ||
 
 # **BlocklistSearchRequest**
 ## Properties
@@ -347,7 +347,7 @@ id, entity_type, remediation
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | id | str | Subscriber entity id ||
-| entity_type | str | None ||
+| entity_type | SubscriberEntityType | None ||
 | remediation | str | Remediation ||
 
 # **BlocklistSubscriberEntityPage**
@@ -369,7 +369,7 @@ entity_type, count
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| entity_type | str | None ||
+| entity_type | SubscriberEntityType | None ||
 | count | int | Subscriber entity count ||
 
 # **BlocklistSubscription**
@@ -390,7 +390,7 @@ entity_type
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | ids | list[str] | List of subscriber entity id ||
-| entity_type | str | None ||
+| entity_type | SubscriberEntityType | None ||
 | remediation | Optional[str] | Remediation ||
 
 # **BlocklistSubscriptionResponse**
@@ -431,6 +431,14 @@ file
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | file | str | Blocklist file in txt format ||
+
+# **CVESubscription**
+## Required: 
+id
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | CVE ID ||
 
 # **ComputedMetrics**
 ## Required: 
@@ -514,9 +522,105 @@ name, label, description, references, total_ips
 | references | list[str] | None ||
 | total_ips | int | None ||
 
+# **DecisionCreateRequest**
+## Required: 
+duration, origin, scenario, scope, type, value, target
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| created_at | str | None ||
+| uuid | Optional[str] | UUID of the decision ||
+| id | Optional[int] | ID of the decision ||
+| duration | str | Duration of the decision ||
+| origin | str | Origin of the decision ||
+| scenario | str | Scenario of the decision ||
+| scope | str | Scope of the decision ||
+| type | str | Type of the decision ||
+| value | str | Value of the decision ||
+| country | Optional[str] | Country associated with the decision ||
+| as_name | Optional[str] | AS name associated with the decision ||
+| as_num | Optional[int] | AS number associated with the decision ||
+| city | Optional[str] | City associated with the decision ||
+| latitude | Optional[float] | Latitude associated with the decision ||
+| longitude | Optional[float] | Longitude associated with the decision ||
+| target | DecisionTargetModel | None ||
+
+# **DecisionCreateResponse**
+## Required: 
+uuid
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| uuid | str | UUID of the created decision ||
+
+# **DecisionResponse**
+## Required: 
+uuid, id, duration, origin, scenario, scope, type, value, target
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| created_at | str | None ||
+| uuid | str | UUID of the decision ||
+| id | int | ID of the decision ||
+| duration | str | Duration of the decision ||
+| origin | str | Origin of the decision ||
+| scenario | str | Scenario of the decision ||
+| scope | str | Scope of the decision ||
+| type | str | Type of the decision ||
+| value | str | Value of the decision ||
+| country | Optional[str] | Country associated with the decision ||
+| as_name | Optional[str] | AS name associated with the decision ||
+| as_num | Optional[int] | AS number associated with the decision ||
+| city | Optional[str] | City associated with the decision ||
+| latitude | Optional[float] | Latitude associated with the decision ||
+| longitude | Optional[float] | Longitude associated with the decision ||
+| target | DecisionTargetModel | None ||
+
+# **DecisionTargetModel**
+## Required: 
+type, value
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| type | DecisionTargetType | None ||
+| value | str | Value of the decision target ||
+
+# **DecisionTargetType**
+## Enum: 
+ORG, TAG, ENTITY
+
+# **DecisionsGetResponsePage**
+## Required: 
+items, total, page, size, pages, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[DecisionResponse] | None ||
+| total | int | None ||
+| page | int | None ||
+| size | int | None ||
+| pages | int | None ||
+| links | Links | None ||
+
+# **DecisionsSortBy**
+## Enum: 
+CREATED_AT, EXPIRE_AT
+
+# **DecisionsSortOrder**
+## Enum: 
+ASC, DESC
+
 # **EntityType**
 ## Enum: 
 ORG, TAG, ENGINE, FIREWALL_INTEGRATION, REMEDIATION_COMPONENT_INTEGRATION, REMEDIATION_COMPONENT, LOG_PROCESSOR
+
+# **FingerprintSubscription**
+## Required: 
+id
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | Fingerprint ID ||
 
 # **GetRemediationMetricsResponse**
 ## Required: 
@@ -551,12 +655,14 @@ name, entity_type, output_format
 |----------|------|-------------|---------|
 | name | str | Name of the integration ||
 | description | str | Description of the integration ||
-| entity_type | str | None ||
-| output_format | str | None ||
+| entity_type | IntegrationType | None ||
+| output_format | OutputFormat | None ||
+| pull_limit | Optional[int] | Maximum number of items to pull ||
+| enable_ip_aggregation | bool | Whether to enable IP aggregation into ranges ||
 
 # **IntegrationCreateResponse**
 ## Required: 
-id, name, organization_id, created_at, updated_at, entity_type, output_format, blocklists, endpoint, credentials
+id, name, organization_id, created_at, updated_at, entity_type, output_format, blocklists, cves, fingerprints, vendors, endpoint, credentials
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
@@ -566,18 +672,23 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | description | str | Description of the integration ||
 | created_at | str | Time the integration was created ||
 | updated_at | str | Last time the integration was updated ||
-| entity_type | str | None ||
-| output_format | str | None ||
+| entity_type | IntegrationType | None ||
+| output_format | OutputFormat | None ||
 | last_pull | Optional[str] | Last time the integration pulled blocklists ||
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
+| cves | list[CVESubscription] | CVEs that are subscribed by the integration ||
+| fingerprints | list[FingerprintSubscription] | Fingerprints that are subscribed by the integration ||
+| vendors | list[VendorSubscription] | Vendors that are subscribed by the integration ||
 | endpoint | str | Url that should be used by the firewall or the remediation component to fetch the integration's content ||
 | stats | Stats | None ||
 | tags | list[str] | Tags associated with the integration ||
+| pull_limit | Optional[int] | Maximum number of items to pull ||
+| enable_ip_aggregation | bool | Whether to enable IP aggregation into ranges ||
 | credentials | Union[ApiKeyCredentials, BasicAuthCredentials] | Credentials that were generated for the integration ||
 
 # **IntegrationGetResponse**
 ## Required: 
-id, name, organization_id, created_at, updated_at, entity_type, output_format, blocklists, endpoint
+id, name, organization_id, created_at, updated_at, entity_type, output_format, blocklists, cves, fingerprints, vendors, endpoint
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
@@ -587,13 +698,18 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | description | str | Description of the integration ||
 | created_at | str | Time the integration was created ||
 | updated_at | str | Last time the integration was updated ||
-| entity_type | str | None ||
-| output_format | str | None ||
+| entity_type | IntegrationType | None ||
+| output_format | OutputFormat | None ||
 | last_pull | Optional[str] | Last time the integration pulled blocklists ||
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
+| cves | list[CVESubscription] | CVEs that are subscribed by the integration ||
+| fingerprints | list[FingerprintSubscription] | Fingerprints that are subscribed by the integration ||
+| vendors | list[VendorSubscription] | Vendors that are subscribed by the integration ||
 | endpoint | str | Url that should be used by the firewall or the remediation component to fetch the integration's content ||
 | stats | Stats | None ||
 | tags | list[str] | Tags associated with the integration ||
+| pull_limit | Optional[int] | Maximum number of items to pull ||
+| enable_ip_aggregation | bool | Whether to enable IP aggregation into ranges ||
 
 # **IntegrationGetResponsePage**
 ## Required: 
@@ -618,12 +734,14 @@ FIREWALL_INTEGRATION, REMEDIATION_COMPONENT_INTEGRATION
 |----------|------|-------------|---------|
 | name | str | New name ||
 | description | str | New description ||
-| output_format | str | None ||
+| output_format | OutputFormat | None ||
 | regenerate_credentials | bool | Regenerate credentials for the integration ||
+| pull_limit | Optional[int] | Maximum number of items to pull ||
+| enable_ip_aggregation | bool | Whether to enable IP aggregation into ranges ||
 
 # **IntegrationUpdateResponse**
 ## Required: 
-id, name, organization_id, created_at, updated_at, entity_type, output_format, blocklists, endpoint
+id, name, organization_id, created_at, updated_at, entity_type, output_format, blocklists, cves, fingerprints, vendors, endpoint
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
@@ -633,13 +751,18 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | description | str | Description of the integration ||
 | created_at | str | Time the integration was created ||
 | updated_at | str | Last time the integration was updated ||
-| entity_type | str | None ||
-| output_format | str | None ||
+| entity_type | IntegrationType | None ||
+| output_format | OutputFormat | None ||
 | last_pull | Optional[str] | Last time the integration pulled blocklists ||
 | blocklists | list[BlocklistSubscription] | Blocklists that are subscribed by the integration ||
+| cves | list[CVESubscription] | CVEs that are subscribed by the integration ||
+| fingerprints | list[FingerprintSubscription] | Fingerprints that are subscribed by the integration ||
+| vendors | list[VendorSubscription] | Vendors that are subscribed by the integration ||
 | endpoint | str | Url that should be used by the firewall or the remediation component to fetch the integration's content ||
 | stats | Stats | None ||
 | tags | list[str] | Tags associated with the integration ||
+| pull_limit | Optional[int] | Maximum number of items to pull ||
+| enable_ip_aggregation | bool | Whether to enable IP aggregation into ranges ||
 | credentials | Optional[ApiKeyCredentials, BasicAuthCredentials] | Credentials for the integration ||
 
 # **Links**
@@ -692,8 +815,8 @@ id, created_at, updated_at, name, description, is_private, pricing_tier, source,
 | references | list[str] | Blocklist references ||
 | is_private | bool | Private blocklist if True or public if False ||
 | tags | list[str] | Classification tags ||
-| pricing_tier | str | None ||
-| source | str | None ||
+| pricing_tier | PricingTiers | None ||
+| source | BlocklistSources | None ||
 | stats | BlocklistStats | None ||
 | from_cti_query | Optional[str] | CTI query from which the blocklist was created ||
 | since | Optional[str] | Since duration for the CTI query (eg. 5m, 2h, 7d). Max is 30 days ||
@@ -729,7 +852,7 @@ total, unit, progression, data
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | total | Union[int, float] | Total value of the metric ||
-| unit | str | None ||
+| unit | MetricUnits | None ||
 | progression | Optional[int] | Progression of the metric value from the previous period ||
 | data | list[OriginMetrics] | Data points per origin ||
 
@@ -749,7 +872,7 @@ organization_id, permission
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | organization_id | str | None ||
-| permission | str | None ||
+| permission | Permission | None ||
 
 # **SourceInfo**
 ## Required: 
@@ -757,7 +880,7 @@ source_type, identifier
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| source_type | str | None ||
+| source_type | SourceType | None ||
 | identifier | str | The source identifier that created the allowlist entry ||
 
 # **SourceType**
@@ -785,6 +908,14 @@ loc, msg, type
 | loc | list[Union[str, int]] | None ||
 | msg | str | None ||
 | type | str | None ||
+
+# **VendorSubscription**
+## Required: 
+id
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | Vendor ID ||
 
 # **AppsecConfigIndex**
 ## Properties
@@ -903,180 +1034,3 @@ digest
 |----------|------|-------------|---------|
 | deprecated | Optional[bool] | Indicates whether this version is deprecated. ||
 | digest | str | The SHA256 digest of the versioned file. ||
-
-# **AffectedComponent**
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| vendor | str | Vendor of the affected component ||
-| product | str | Product name of the affected component ||
-
-# **AttackDetail**
-## Required: 
-name, label, description
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| name | str | Attack detail name ||
-| label | str | Attack detail label ||
-| description | str | Attack detail description ||
-| references | list[str] | Attack detail references ||
-
-# **Behavior**
-## Required: 
-name, label, description
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| name | str | Behavior name ||
-| label | str | Behavior label ||
-| description | str | Behavior description ||
-
-# **Classification**
-## Required: 
-name, label, description
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| name | str | Classification name ||
-| label | str | Classification label ||
-| description | str | Classification description ||
-
-# **Classifications**
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| false_positives | list[Classification] | False positive classifications ||
-| classifications | list[Classification] | Main classifications ||
-
-# **GetCVEIPsResponsePage**
-## Required: 
-items, total, page, size, pages, links
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| items | list[IPItem] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
-| links | Links | None ||
-
-# **GetCVEResponse**
-## Required: 
-id, name, affected_components, let_score, first_seen, last_seen, nb_ips, published_date, cvss_score, references, description
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| id | str | ID of the CVE ||
-| name | str | Name of the CVE ||
-| affected_components | list[AffectedComponent] | List of affected components ||
-| let_score | int | LET score of the CVE ||
-| first_seen | str | First seen date ||
-| last_seen | str | Last seen date ||
-| nb_ips | int | Number of unique IPs affected ||
-| published_date | str | Published date of the CVE ||
-| cvss_score | float | CVSS score of the CVE ||
-| references | list[str] | List of references for the CVE ||
-| description | str | Description of the CVE ||
-
-# **History**
-## Required: 
-first_seen, last_seen, full_age, days_age
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| first_seen | str | First seen timestamp ||
-| last_seen | str | Last seen timestamp ||
-| full_age | int | Full age in days ||
-| days_age | int | Days age ||
-
-# **IPItem**
-## Required: 
-ip
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| ip | str | IP address ||
-| reputation | str | Reputation of the IP ||
-| ip_range | Optional[str] | IP range ||
-| ip_range_score | Optional[int] | IP range score ||
-| ip_range_24 | Optional[str] | IP range /24 ||
-| ip_range_24_reputation | Optional[str] | IP range /24 reputation ||
-| ip_range_24_score | Optional[int] | IP range /24 score ||
-| as_name | Optional[str] | AS name ||
-| as_num | Optional[int] | AS number ||
-| background_noise_score | int | Background noise score ||
-| background_noise | Optional[str] | Background noise level ||
-| confidence | Optional[str] | Confidence level ||
-| location | Optional[Location] | IP location information ||
-| reverse_dns | Optional[str] | Reverse DNS ||
-| behaviors | list[Behavior] | List of behaviors ||
-| references | list[Reference] | List of references ||
-| history | History | None ||
-| classifications | Classifications | None ||
-| mitre_techniques | list[MitreTechnique] | MITRE techniques ||
-| cves | list[str] | List of CVEs ||
-| attack_details | list[AttackDetail] | Attack details ||
-| target_countries | Target Countries | Target countries ||
-| scores | Scores | None ||
-
-# **Location**
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| country | Optional[str] | Country code ||
-| city | Optional[str] | City name ||
-| latitude | Optional[float] | Latitude coordinate ||
-| longitude | Optional[float] | Longitude coordinate ||
-
-# **MitreTechnique**
-## Required: 
-name, label, description
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| name | str | MITRE technique ID ||
-| label | str | MITRE technique label ||
-| description | str | MITRE technique description ||
-
-# **Reference**
-## Required: 
-name, label, description
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| name | str | Reference name ||
-| label | str | Reference label ||
-| description | str | Reference description ||
-
-# **ScoreBreakdown**
-## Required: 
-aggressiveness, threat, trust, anomaly, total
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| aggressiveness | int | Aggressiveness score ||
-| threat | int | Threat score ||
-| trust | int | Trust score ||
-| anomaly | int | Anomaly score ||
-| total | int | Total score ||
-
-# **Scores**
-## Required: 
-overall, last_day, last_week, last_month
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| overall | ScoreBreakdown | None ||
-| last_day | ScoreBreakdown | None ||
-| last_week | ScoreBreakdown | None ||
-| last_month | ScoreBreakdown | None ||
-
-# **SubscribeCVEIntegrationRequest**
-## Required: 
-name
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| name | str | Name of the integration to subscribe ||

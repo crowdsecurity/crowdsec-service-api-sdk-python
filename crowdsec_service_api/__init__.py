@@ -4,23 +4,23 @@ from .base_model import Page
 from .services.allowlists import Allowlists
 from .services.blocklists import Blocklists
 from .services.integrations import Integrations
+from .services.decisions import Decisions
 from .services.info import Info
 from .services.metrics import Metrics
 from .services.hub import Hub
-from .services.cves import Cves
 from .http_client import ApiKeyAuth
 
 class Server(Enum):
-    production_server = 'https://admin.api.crowdsec.net/v1/'
+    production_server = 'https://admin.api.crowdsec.net/v1'
 
 __all__ = [
     'Allowlists',
     'Blocklists',
     'Integrations',
+    'Decisions',
     'Info',
     'Metrics',
     'Hub',
-    'Cves',
     'AllowlistCreateRequest',
     'AllowlistCreateResponse',
     'AllowlistGetItemsResponse',
@@ -61,6 +61,7 @@ __all__ = [
     'BlocklistUpdateRequest',
     'BlocklistUsageStats',
     'Body_uploadBlocklistContent',
+    'CVESubscription',
     'ComputedMetrics',
     'ComputedSavedMetrics',
     'CtiAs',
@@ -69,7 +70,16 @@ __all__ = [
     'CtiCountry',
     'CtiIp',
     'CtiScenario',
+    'DecisionCreateRequest',
+    'DecisionCreateResponse',
+    'DecisionResponse',
+    'DecisionTargetModel',
+    'DecisionTargetType',
+    'DecisionsGetResponsePage',
+    'DecisionsSortBy',
+    'DecisionsSortOrder',
     'EntityType',
+    'FingerprintSubscription',
     'GetRemediationMetricsResponse',
     'HTTPValidationError',
     'InfoResponse',
@@ -97,6 +107,7 @@ __all__ = [
     'Stats',
     'SubscriberEntityType',
     'ValidationError',
+    'VendorSubscription',
     'AppsecConfigIndex',
     'AppsecRuleIndex',
     'CollectionIndex',
@@ -106,21 +117,6 @@ __all__ = [
     'PostoverflowIndex',
     'ScenarioIndex',
     'VersionDetail',
-    'AffectedComponent',
-    'AttackDetail',
-    'Behavior',
-    'Classification',
-    'Classifications',
-    'GetCVEIPsResponsePage',
-    'GetCVEResponse',
-    'History',
-    'IPItem',
-    'Location',
-    'MitreTechnique',
-    'Reference',
-    'ScoreBreakdown',
-    'Scores',
-    'SubscribeCVEIntegrationRequest',
     'ApiKeyAuth',
     'Server',
     'Page'
