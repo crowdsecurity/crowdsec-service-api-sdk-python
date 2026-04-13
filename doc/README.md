@@ -17,13 +17,13 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [Integrations](./Integrations.md)
 
+[Decisions](./Decisions.md)
+
 [Info](./Info.md)
 
 [Metrics](./Metrics.md)
 
 [Hub](./Hub.md)
-
-[Cves](./Cves.md)
 
 ## API Endpoint models
 
@@ -107,6 +107,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [Body_uploadBlocklistContent](./Models.md#body_uploadblocklistcontent)
 
+[CVESubscription](./Models.md#cvesubscription)
+
 [ComputedMetrics](./Models.md#computedmetrics)
 
 [ComputedSavedMetrics](./Models.md#computedsavedmetrics)
@@ -123,7 +125,25 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [CtiScenario](./Models.md#ctiscenario)
 
+[DecisionCreateRequest](./Models.md#decisioncreaterequest)
+
+[DecisionCreateResponse](./Models.md#decisioncreateresponse)
+
+[DecisionResponse](./Models.md#decisionresponse)
+
+[DecisionTargetModel](./Models.md#decisiontargetmodel)
+
+[DecisionTargetType](./Models.md#decisiontargettype)
+
+[DecisionsGetResponsePage](./Models.md#decisionsgetresponsepage)
+
+[DecisionsSortBy](./Models.md#decisionssortby)
+
+[DecisionsSortOrder](./Models.md#decisionssortorder)
+
 [EntityType](./Models.md#entitytype)
+
+[FingerprintSubscription](./Models.md#fingerprintsubscription)
 
 [GetRemediationMetricsResponse](./Models.md#getremediationmetricsresponse)
 
@@ -179,6 +199,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [ValidationError](./Models.md#validationerror)
 
+[VendorSubscription](./Models.md#vendorsubscription)
+
 [AppsecConfigIndex](./Models.md#appsecconfigindex)
 
 [AppsecRuleIndex](./Models.md#appsecruleindex)
@@ -196,33 +218,3 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [ScenarioIndex](./Models.md#scenarioindex)
 
 [VersionDetail](./Models.md#versiondetail)
-
-[AffectedComponent](./Models.md#affectedcomponent)
-
-[AttackDetail](./Models.md#attackdetail)
-
-[Behavior](./Models.md#behavior)
-
-[Classification](./Models.md#classification)
-
-[Classifications](./Models.md#classifications)
-
-[GetCVEIPsResponsePage](./Models.md#getcveipsresponsepage)
-
-[GetCVEResponse](./Models.md#getcveresponse)
-
-[History](./Models.md#history)
-
-[IPItem](./Models.md#ipitem)
-
-[Location](./Models.md#location)
-
-[MitreTechnique](./Models.md#mitretechnique)
-
-[Reference](./Models.md#reference)
-
-[ScoreBreakdown](./Models.md#scorebreakdown)
-
-[Scores](./Models.md#scores)
-
-[SubscribeCVEIntegrationRequest](./Models.md#subscribecveintegrationrequest)
