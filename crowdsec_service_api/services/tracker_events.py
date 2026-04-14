@@ -9,23 +9,25 @@ from pydantic.fields import FieldInfo
 from httpx import Auth
 from ..http_client import HttpClient
 
-class Metrics(Service):
+class TrackerEvents(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
         super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/v0.15.25")
     
-    def get_metrics_remediation(
+    def get_exploitation_phase_change_events(
         self,
-        start_date: str,
-        end_date: str,
-        engine_ids: list[str] = [],
-        integration_ids: list[str] = [],
-        tags: list[str] = [],
-    )-> GetRemediationMetricsResponse:
-        endpoint_url = "/metrics/remediation"
+        since: str = "30d",
+        sort_order: Optional[GetCVEsSortOrder] = GetCVEsSortOrder("desc"),
+        cve_id: Optional[str] = None,
+        previous_phase: Optional[CVEExploitationPhase] = None,
+        new_phase: Optional[CVEExploitationPhase] = None,
+        page: int = 1,
+        size: int = 50,
+    )-> ExploitationPhaseChangeEventsResponsePage:
+        endpoint_url = "/tracker-events/exploitation-phase-change"
         loc = locals()
         headers = {}
         params = json.loads(
-            MetricsGetMetricsRemediationQueryParameters(**loc).model_dump_json(
+            TrackerEventsGetExploitationPhaseChangeEventsQueryParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
@@ -35,5 +37,5 @@ class Metrics(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return GetRemediationMetricsResponse(**response.json())
+        return ExploitationPhaseChangeEventsResponsePage(_client=self, **response.json())
     

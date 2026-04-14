@@ -38,16 +38,19 @@
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
-response = client.list_allowlists(
-    page=1,
-    size=50,
-)
-print(response)
+client = Allowlists(auth=auth)
+try:
+    response = client.list_allowlists(
+        page=1,
+        size=50,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -71,20 +74,23 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
     AllowlistCreateRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
+client = Allowlists(auth=auth)
 request = AllowlistCreateRequest(
         name=None,
         description=None,
 )
-response = client.create_allowlist(
-    request=request,
-)
-print(response)
+try:
+    response = client.create_allowlist(
+        request=request,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -109,15 +115,18 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
-response = client.get_allowlist(
-    allowlist_id='allowlist_id',
-)
-print(response)
+client = Allowlists(auth=auth)
+try:
+    response = client.get_allowlist(
+        allowlist_id='allowlist_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -141,16 +150,19 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
-response = client.delete_allowlist(
-    allowlist_id='allowlist_id',
-    force=True,
-)
-print(response)
+client = Allowlists(auth=auth)
+try:
+    response = client.delete_allowlist(
+        allowlist_id='allowlist_id',
+        force=True,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -176,21 +188,24 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
     AllowlistUpdateRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
+client = Allowlists(auth=auth)
 request = AllowlistUpdateRequest(
         name=None,
         description=None,
 )
-response = client.update_allowlist(
-    request=request,
-    allowlist_id='allowlist_id',
-)
-print(response)
+try:
+    response = client.update_allowlist(
+        request=request,
+        allowlist_id='allowlist_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -217,17 +232,20 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
-response = client.get_allowlist_items(
-    allowlist_id='allowlist_id',
-    page=1,
-    size=50,
-)
-print(response)
+client = Allowlists(auth=auth)
+try:
+    response = client.get_allowlist_items(
+        allowlist_id='allowlist_id',
+        page=1,
+        size=50,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -251,22 +269,25 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
     AllowlistItemsCreateRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
+client = Allowlists(auth=auth)
 request = AllowlistItemsCreateRequest(
         items=None,
         description=None,
         expiration=None,
 )
-response = client.create_allowlist_items(
-    request=request,
-    allowlist_id='allowlist_id',
-)
-print(response)
+try:
+    response = client.create_allowlist_items(
+        request=request,
+        allowlist_id='allowlist_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -292,16 +313,19 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
-response = client.get_allowlist_item(
-    allowlist_id='allowlist_id',
-    item_id='item_id',
-)
-print(response)
+client = Allowlists(auth=auth)
+try:
+    response = client.get_allowlist_item(
+        allowlist_id='allowlist_id',
+        item_id='item_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -325,16 +349,19 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
-response = client.delete_allowlist_item(
-    allowlist_id='allowlist_id',
-    item_id='item_id',
-)
-print(response)
+client = Allowlists(auth=auth)
+try:
+    response = client.delete_allowlist_item(
+        allowlist_id='allowlist_id',
+        item_id='item_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -361,22 +388,25 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
     AllowlistItemUpdateRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
+client = Allowlists(auth=auth)
 request = AllowlistItemUpdateRequest(
         description=None,
         expiration=None,
 )
-response = client.update_allowlist_item(
-    request=request,
-    allowlist_id='allowlist_id',
-    item_id='item_id',
-)
-print(response)
+try:
+    response = client.update_allowlist_item(
+        request=request,
+        allowlist_id='allowlist_id',
+        item_id='item_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -403,17 +433,20 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
-response = client.get_allowlist_subscribers(
-    allowlist_id='allowlist_id',
-    page=1,
-    size=50,
-)
-print(response)
+client = Allowlists(auth=auth)
+try:
+    response = client.get_allowlist_subscribers(
+        allowlist_id='allowlist_id',
+        page=1,
+        size=50,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -439,21 +472,24 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
     AllowlistSubscriptionRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
+client = Allowlists(auth=auth)
 request = AllowlistSubscriptionRequest(
         ids=None,
         entity_type=None,
 )
-response = client.subscribe_allowlist(
-    request=request,
-    allowlist_id='allowlist_id',
-)
-print(response)
+try:
+    response = client.subscribe_allowlist(
+        request=request,
+        allowlist_id='allowlist_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -477,15 +513,18 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Allowlists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Allowlists(base_url=Server.production_server.value, auth=auth)
-response = client.unsubscribe_allowlist(
-    allowlist_id='allowlist_id',
-    entity_id='entity_id',
-)
-print(response)
+client = Allowlists(auth=auth)
+try:
+    response = client.unsubscribe_allowlist(
+        allowlist_id='allowlist_id',
+        entity_id='entity_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
