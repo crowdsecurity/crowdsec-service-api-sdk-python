@@ -1,6 +1,6 @@
 # crowdsec_service_api
 
-**crowdsec_service_api** is a Python SDK for the [CrowdSec Service API](https://docs.crowdsec.net/u/service_api/intro/).
+**crowdsec_service_api** is a Python SDK for the [CrowdSec Service API](https://docs.crowdsec.net/u/console/service_api/getting_started).
 This library enables you to manage CrowdSec resources such as blocklists, integrations in your python applications.
 
 ## Installation
@@ -11,10 +11,11 @@ pip install crowdsec_service_api
 
 ## Usage
 
-You can follow this [documentation](https://docs.crowdsec.net/u/service_api/quickstart/blocklists) to see the basic usage of the SDK.
+You can follow this [documentation](https://docs.crowdsec.net/u/console/service_api/sdks/python) to see the basic usage of the SDK.
 
 ## Documentation
-You can access the full usage documentation [here](https://github.com/crowdsecurity/crowdsec-service-api-sdk-python/tree/main/doc).
+You can access [the quickstart guide here](https://docs.crowdsec.net/u/console/service_api/quickstart/authentication).
+Or you have the full usage documentation [here](https://github.com/crowdsecurity/crowdsec-service-api-sdk-python/tree/main/doc).
 
 ## Contributing
 

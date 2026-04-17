@@ -45,21 +45,24 @@
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
-response = client.get_blocklists(
-    page=1,
-    page_size=100,
-    subscribed_only=True,
-    exclude_subscribed=True,
-    include_filter=['private', 'shared'],
-    category=None,
-    size=50,
-)
-print(response)
+client = Blocklists(auth=auth)
+try:
+    response = client.get_blocklists(
+        page=1,
+        page_size=100,
+        subscribed_only=True,
+        exclude_subscribed=True,
+        include_filter=['private', 'shared'],
+        category=None,
+        size=50,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -84,12 +87,12 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
     BlocklistCreateRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
+client = Blocklists(auth=auth)
 request = BlocklistCreateRequest(
         name=None,
         label=None,
@@ -97,10 +100,13 @@ request = BlocklistCreateRequest(
         references=None,
         tags=None,
 )
-response = client.create_blocklist(
-    request=request,
-)
-print(response)
+try:
+    response = client.create_blocklist(
+        request=request,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -126,12 +132,12 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
     BlocklistSearchRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
+client = Blocklists(auth=auth)
 request = BlocklistSearchRequest(
         page=None,
         page_size=None,
@@ -146,12 +152,15 @@ request = BlocklistSearchRequest(
         is_private=None,
         is_subscribed=None,
 )
-response = client.search_blocklist(
-    request=request,
-    page=1,
-    size=50,
-)
-print(response)
+try:
+    response = client.search_blocklist(
+        request=request,
+        page=1,
+        size=50,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -176,15 +185,18 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
-response = client.get_blocklist(
-    blocklist_id='sample-blocklist-id',
-)
-print(response)
+client = Blocklists(auth=auth)
+try:
+    response = client.get_blocklist(
+        blocklist_id='sample-blocklist-id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -208,16 +220,19 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
-response = client.delete_blocklist(
-    blocklist_id='sample-blocklist-id',
-    force=True,
-)
-print(response)
+client = Blocklists(auth=auth)
+try:
+    response = client.delete_blocklist(
+        blocklist_id='sample-blocklist-id',
+        force=True,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -245,12 +260,12 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
     BlocklistUpdateRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
+client = Blocklists(auth=auth)
 request = BlocklistUpdateRequest(
         label=None,
         description=None,
@@ -259,11 +274,14 @@ request = BlocklistUpdateRequest(
         from_cti_query=None,
         since=None,
 )
-response = client.update_blocklist(
-    request=request,
-    blocklist_id='sample-blocklist-id',
-)
-print(response)
+try:
+    response = client.update_blocklist(
+        request=request,
+        blocklist_id='sample-blocklist-id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -290,21 +308,24 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
     BlocklistAddIPsRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
+client = Blocklists(auth=auth)
 request = BlocklistAddIPsRequest(
         ips=None,
         expiration=None,
 )
-response = client.add_ips_to_blocklist(
-    request=request,
-    blocklist_id='sample-blocklist-id',
-)
-print(response)
+try:
+    response = client.add_ips_to_blocklist(
+        request=request,
+        blocklist_id='sample-blocklist-id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -331,21 +352,24 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
     BlocklistAddIPsRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
+client = Blocklists(auth=auth)
 request = BlocklistAddIPsRequest(
         ips=None,
         expiration=None,
 )
-response = client.overwrite_ips(
-    request=request,
-    blocklist_id='sample-blocklist-id',
-)
-print(response)
+try:
+    response = client.overwrite_ips(
+        request=request,
+        blocklist_id='sample-blocklist-id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -371,20 +395,23 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
     BlocklistDeleteIPsRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
+client = Blocklists(auth=auth)
 request = BlocklistDeleteIPsRequest(
         ips=None,
 )
-response = client.delete_ips_from_blocklist(
-    request=request,
-    blocklist_id='sample-blocklist-id',
-)
-print(response)
+try:
+    response = client.delete_ips_from_blocklist(
+        request=request,
+        blocklist_id='sample-blocklist-id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -413,17 +440,20 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
-response = client.download_blocklist_content(
-    blocklist_id='sample-blocklist-id',
-    if_modified_since=None,
-    if_none_match=None,
-)
-print(response)
+client = Blocklists(auth=auth)
+try:
+    response = client.download_blocklist_content(
+        blocklist_id='sample-blocklist-id',
+        if_modified_since=None,
+        if_none_match=None,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -450,17 +480,20 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
-response = client.get_blocklist_subscribers(
-    blocklist_id='sample-blocklist-id',
-    page=1,
-    size=50,
-)
-print(response)
+client = Blocklists(auth=auth)
+try:
+    response = client.get_blocklist_subscribers(
+        blocklist_id='sample-blocklist-id',
+        page=1,
+        size=50,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -486,22 +519,25 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
     BlocklistSubscriptionRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
+client = Blocklists(auth=auth)
 request = BlocklistSubscriptionRequest(
         ids=None,
         entity_type=None,
         remediation=None,
 )
-response = client.subscribe_blocklist(
-    request=request,
-    blocklist_id='sample-blocklist-id',
-)
-print(response)
+try:
+    response = client.subscribe_blocklist(
+        request=request,
+        blocklist_id='sample-blocklist-id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -525,16 +561,19 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
-response = client.unsubscribe_blocklist(
-    blocklist_id='sample-blocklist-id',
-    entity_id='entity_id',
-)
-print(response)
+client = Blocklists(auth=auth)
+try:
+    response = client.unsubscribe_blocklist(
+        blocklist_id='sample-blocklist-id',
+        entity_id='entity_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -559,20 +598,23 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
     BlocklistShareRequest,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
+client = Blocklists(auth=auth)
 request = BlocklistShareRequest(
         organizations=None,
 )
-response = client.share_blocklist(
-    request=request,
-    blocklist_id='sample-blocklist-id',
-)
-print(response)
+try:
+    response = client.share_blocklist(
+        request=request,
+        blocklist_id='sample-blocklist-id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -597,15 +639,18 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Blocklists,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Blocklists(base_url=Server.production_server.value, auth=auth)
-response = client.unshare_blocklist(
-    blocklist_id='sample-blocklist-id',
-    unshare_organization_id='unshare_organization_id',
-)
-print(response)
+client = Blocklists(auth=auth)
+try:
+    response = client.unshare_blocklist(
+        blocklist_id='sample-blocklist-id',
+        unshare_organization_id='unshare_organization_id',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 

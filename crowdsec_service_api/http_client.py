@@ -45,11 +45,20 @@ class ApiKeyAuth(httpx.Auth):
 
 
 class HttpClient:
-    def __init__(self, base_url: str, auth: httpx.Auth, aws_region="eu-west-1") -> None:
+    def __init__(
+        self,
+        base_url: str,
+        auth: httpx.Auth,
+        user_agent: str = None,
+        aws_region="eu-west-1",
+    ) -> None:
         self.aws_region = aws_region
         self.base_url = base_url
         self.auth = auth
-        self.client = httpx.Client()
+        headers = {"Accept-Encoding": "gzip"}
+        if user_agent:
+            headers["User-Agent"] = user_agent
+        self.client = httpx.Client(headers=headers)
         self.timeout = 30
 
     def _replace_path_params(self, url: str, path_params: dict):

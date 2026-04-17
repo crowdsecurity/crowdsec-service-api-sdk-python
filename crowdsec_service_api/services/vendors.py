@@ -9,24 +9,23 @@ from pydantic.fields import FieldInfo
 from httpx import Auth
 from ..http_client import HttpClient
 
-class Cves(Service):
+class Vendors(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
         super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/1.119.7")
     
-    def get_cves(
+    def get_vendors(
         self,
         query: Optional[str] = None,
-        sort_by: Optional[GetCVEsSortBy] = GetCVEsSortBy("rule_release_date"),
+        sort_by: Optional[VendorSortBy] = None,
         sort_order: Optional[GetCVEsSortOrder] = GetCVEsSortOrder("desc"),
-        exploitation_phase: Optional[CVEExploitationPhase] = None,
         page: int = 1,
         size: int = 50,
-    )-> GetCVEsResponsePage:
-        endpoint_url = "/cves"
+    )-> LookupListWithStatsResponsePage:
+        endpoint_url = "/vendors"
         loc = locals()
         headers = {}
         params = json.loads(
-            CvesGetCvesQueryParameters(**loc).model_dump_json(
+            VendorsGetVendorsQueryParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
@@ -36,18 +35,18 @@ class Cves(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return GetCVEsResponsePage(_client=self, **response.json())
+        return LookupListWithStatsResponsePage(_client=self, **response.json())
     
-    def get_cve(
+    def get_vendor_stats(
         self,
-        cve_id: str,
-    )-> GetCVEResponse:
-        endpoint_url = "/cves/{cve_id}"
+        vendor: str,
+    )-> VendorStatsResponse:
+        endpoint_url = "/vendors/{vendor}/stats"
         loc = locals()
         headers = {}
         params = {}
         path_params = json.loads(
-            CvesGetCvePathParameters(**loc).model_dump_json(
+            VendorsGetVendorStatsPathParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
@@ -56,38 +55,18 @@ class Cves(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return GetCVEResponse(**response.json())
+        return VendorStatsResponse(**response.json())
     
-    def get_cve_protect_rules(
+    def download_vendor_ips(
         self,
-        cve_id: str,
-    )-> GetCVEProtectRulesResponse:
-        endpoint_url = "/cves/{cve_id}/protect-rules"
-        loc = locals()
-        headers = {}
-        params = {}
-        path_params = json.loads(
-            CvesGetCveProtectRulesPathParameters(**loc).model_dump_json(
-                exclude_none=True
-            )
-        )
-        
-        response = self.http_client.get(
-            url=endpoint_url, path_params=path_params, params=params, headers=headers
-        )
-        
-        return GetCVEProtectRulesResponse(**response.json())
-    
-    def download_cve_ips(
-        self,
-        cve_id: str,
+        vendor: str,
     )-> str:
-        endpoint_url = "/cves/{cve_id}/ips-download"
+        endpoint_url = "/vendors/{vendor}/ips-download"
         loc = locals()
         headers = {}
         params = {}
         path_params = json.loads(
-            CvesDownloadCveIpsPathParameters(**loc).model_dump_json(
+            VendorsDownloadVendorIpsPathParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
@@ -98,23 +77,23 @@ class Cves(Service):
         
         return response.text
     
-    def get_cve_ips_details(
+    def get_vendor_ips_details(
         self,
-        cve_id: str,
+        vendor: str,
         since: Optional[str] = "14d",
         page: int = 1,
         size: int = 50,
-    )-> GetCVEIPsResponsePage:
-        endpoint_url = "/cves/{cve_id}/ips-details"
+    )-> GetVendorIPsResponsePage:
+        endpoint_url = "/vendors/{vendor}/ips-details"
         loc = locals()
         headers = {}
         params = json.loads(
-            CvesGetCveIpsDetailsQueryParameters(**loc).model_dump_json(
+            VendorsGetVendorIpsDetailsQueryParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
         path_params = json.loads(
-            CvesGetCveIpsDetailsPathParameters(**loc).model_dump_json(
+            VendorsGetVendorIpsDetailsPathParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
@@ -123,23 +102,23 @@ class Cves(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return GetCVEIPsResponsePage(_client=self, **response.json())
+        return GetVendorIPsResponsePage(_client=self, **response.json())
     
-    def get_cve_ips_details_stats(
+    def get_vendor_ips_details_stats(
         self,
-        cve_id: str,
+        vendor: str,
         since: Optional[str] = "14d",
     )-> IpsDetailsStats:
-        endpoint_url = "/cves/{cve_id}/ips-details-stats"
+        endpoint_url = "/vendors/{vendor}/ips-details-stats"
         loc = locals()
         headers = {}
         params = json.loads(
-            CvesGetCveIpsDetailsStatsQueryParameters(**loc).model_dump_json(
+            VendorsGetVendorIpsDetailsStatsQueryParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
         path_params = json.loads(
-            CvesGetCveIpsDetailsStatsPathParameters(**loc).model_dump_json(
+            VendorsGetVendorIpsDetailsStatsPathParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
@@ -150,22 +129,22 @@ class Cves(Service):
         
         return IpsDetailsStats(**response.json())
     
-    def get_cve_subscribed_integrations(
+    def get_vendor_subscribed_integrations(
         self,
-        cve_id: str,
+        vendor: str,
         page: int = 1,
         size: int = 50,
-    )-> GetCVESubscribedIntegrationsResponsePage:
-        endpoint_url = "/cves/{cve_id}/integrations"
+    )-> GetVendorSubscribedIntegrationsResponsePage:
+        endpoint_url = "/vendors/{vendor}/integrations"
         loc = locals()
         headers = {}
         params = json.loads(
-            CvesGetCveSubscribedIntegrationsQueryParameters(**loc).model_dump_json(
+            VendorsGetVendorSubscribedIntegrationsQueryParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
         path_params = json.loads(
-            CvesGetCveSubscribedIntegrationsPathParameters(**loc).model_dump_json(
+            VendorsGetVendorSubscribedIntegrationsPathParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
@@ -174,19 +153,19 @@ class Cves(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return GetCVESubscribedIntegrationsResponsePage(_client=self, **response.json())
+        return GetVendorSubscribedIntegrationsResponsePage(_client=self, **response.json())
     
-    def subscribe_integration_to_cve(
+    def subscribe_integration_to_vendor(
         self,
-        request: SubscribeCVEIntegrationRequest,
-        cve_id: str,
+        request: SubscribeVendorIntegrationRequest,
+        vendor: str,
     ):
-        endpoint_url = "/cves/{cve_id}/integrations"
+        endpoint_url = "/vendors/{vendor}/integrations"
         loc = locals()
         headers = {}
         params = {}
         path_params = json.loads(
-            CvesSubscribeIntegrationToCvePathParameters(**loc).model_dump_json(
+            VendorsSubscribeIntegrationToVendorPathParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
@@ -202,17 +181,17 @@ class Cves(Service):
         
         return None
     
-    def unsubscribe_integration_from_cve(
+    def unsubscribe_integration_from_vendor(
         self,
-        cve_id: str,
+        vendor: str,
         integration_name: str,
     ):
-        endpoint_url = "/cves/{cve_id}/integrations/{integration_name}"
+        endpoint_url = "/vendors/{vendor}/integrations/{integration_name}"
         loc = locals()
         headers = {}
         params = {}
         path_params = json.loads(
-            CvesUnsubscribeIntegrationFromCvePathParameters(**loc).model_dump_json(
+            VendorsUnsubscribeIntegrationFromVendorPathParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
@@ -223,21 +202,24 @@ class Cves(Service):
         
         return None
     
-    def get_cve_timeline(
+    def get_vendor_impact(
         self,
-        cve_id: str,
-        since_days: SinceOptions,
-    )-> list[TimelineItem]:
-        endpoint_url = "/cves/{cve_id}/timeline"
+        vendor: str,
+        sort_by: Optional[GetCVEsSortBy] = GetCVEsSortBy("rule_release_date"),
+        sort_order: Optional[GetCVEsSortOrder] = GetCVEsSortOrder("desc"),
+        page: int = 1,
+        size: int = 50,
+    )-> LookupImpactResponsePage:
+        endpoint_url = "/vendors/{vendor}"
         loc = locals()
         headers = {}
         params = json.loads(
-            CvesGetCveTimelineQueryParameters(**loc).model_dump_json(
+            VendorsGetVendorImpactQueryParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
         path_params = json.loads(
-            CvesGetCveTimelinePathParameters(**loc).model_dump_json(
+            VendorsGetVendorImpactPathParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
@@ -246,5 +228,5 @@ class Cves(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return [TimelineItem(**item) for item in response.json()]
+        return LookupImpactResponsePage(_client=self, **response.json())
     
