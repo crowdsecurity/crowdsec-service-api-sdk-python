@@ -10,6 +10,8 @@ from httpx import Auth
 from ..http_client import HttpClient
 
 class Blocklists(Service):
+    def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
+        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/0.15.26")
     
     def get_blocklists(
         self,
@@ -35,7 +37,7 @@ class Blocklists(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return PublicBlocklistResponsePage(**response.json())
+        return PublicBlocklistResponsePage(_client=self, **response.json())
     
     def create_blocklist(
         self,
@@ -83,7 +85,7 @@ class Blocklists(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers, json=payload
         )
         
-        return PublicBlocklistResponsePage(**response.json())
+        return PublicBlocklistResponsePage(_client=self, **response.json())
     
     def get_blocklist(
         self,
@@ -283,7 +285,7 @@ class Blocklists(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return BlocklistSubscriberEntityPage(**response.json())
+        return BlocklistSubscriberEntityPage(_client=self, **response.json())
     
     def subscribe_blocklist(
         self,

@@ -17,6 +17,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [Integrations](./Integrations.md)
 
+[Decisions](./Decisions.md)
+
 [Info](./Info.md)
 
 [Metrics](./Metrics.md)
@@ -24,6 +26,16 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [Hub](./Hub.md)
 
 [Cves](./Cves.md)
+
+[Vendors](./Vendors.md)
+
+[Products](./Products.md)
+
+[TrackerTags](./TrackerTags.md)
+
+[Fingerprints](./Fingerprints.md)
+
+[TrackerEvents](./TrackerEvents.md)
 
 ## API Endpoint models
 
@@ -107,6 +119,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [Body_uploadBlocklistContent](./Models.md#body_uploadblocklistcontent)
 
+[CVESubscription](./Models.md#cvesubscription)
+
 [ComputedMetrics](./Models.md#computedmetrics)
 
 [ComputedSavedMetrics](./Models.md#computedsavedmetrics)
@@ -123,7 +137,25 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [CtiScenario](./Models.md#ctiscenario)
 
+[DecisionCreateRequest](./Models.md#decisioncreaterequest)
+
+[DecisionCreateResponse](./Models.md#decisioncreateresponse)
+
+[DecisionResponse](./Models.md#decisionresponse)
+
+[DecisionTargetModel](./Models.md#decisiontargetmodel)
+
+[DecisionTargetType](./Models.md#decisiontargettype)
+
+[DecisionsGetResponsePage](./Models.md#decisionsgetresponsepage)
+
+[DecisionsSortBy](./Models.md#decisionssortby)
+
+[DecisionsSortOrder](./Models.md#decisionssortorder)
+
 [EntityType](./Models.md#entitytype)
+
+[FingerprintSubscription](./Models.md#fingerprintsubscription)
 
 [GetRemediationMetricsResponse](./Models.md#getremediationmetricsresponse)
 
@@ -179,6 +211,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [ValidationError](./Models.md#validationerror)
 
+[VendorSubscription](./Models.md#vendorsubscription)
+
 [AppsecConfigIndex](./Models.md#appsecconfigindex)
 
 [AppsecRuleIndex](./Models.md#appsecruleindex)
@@ -197,27 +231,97 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [VersionDetail](./Models.md#versiondetail)
 
+[AdjustmentScore](./Models.md#adjustmentscore)
+
 [AffectedComponent](./Models.md#affectedcomponent)
+
+[AllowlistSubscription](./Models.md#allowlistsubscription)
 
 [AttackDetail](./Models.md#attackdetail)
 
 [Behavior](./Models.md#behavior)
 
+[CVEEventOutput](./Models.md#cveeventoutput)
+
+[CVEExploitationPhase](./Models.md#cveexploitationphase)
+
+[CVEResponseBase](./Models.md#cveresponsebase)
+
+[CVEsubscription](./Models.md#cvesubscription)
+
+[CWE](./Models.md#cwe)
+
 [Classification](./Models.md#classification)
 
 [Classifications](./Models.md#classifications)
 
+[ExploitationPhase](./Models.md#exploitationphase)
+
+[ExploitationPhaseChangeEventItem](./Models.md#exploitationphasechangeeventitem)
+
+[ExploitationPhaseChangeEventsResponsePage](./Models.md#exploitationphasechangeeventsresponsepage)
+
+[FacetBucket](./Models.md#facetbucket)
+
+[FingerprintEventOutput](./Models.md#fingerprinteventoutput)
+
+[FingerprintRuleResponse](./Models.md#fingerprintruleresponse)
+
+[FingerprintRuleSummary](./Models.md#fingerprintrulesummary)
+
+[FingerprintTimelineItem](./Models.md#fingerprinttimelineitem)
+
 [GetCVEIPsResponsePage](./Models.md#getcveipsresponsepage)
 
+[GetCVEProtectRulesResponse](./Models.md#getcveprotectrulesresponse)
+
 [GetCVEResponse](./Models.md#getcveresponse)
+
+[GetCVESubscribedIntegrationsResponsePage](./Models.md#getcvesubscribedintegrationsresponsepage)
+
+[GetCVEsResponsePage](./Models.md#getcvesresponsepage)
+
+[GetCVEsSortBy](./Models.md#getcvessortby)
+
+[GetCVEsSortOrder](./Models.md#getcvessortorder)
+
+[GetFingerprintIPsResponsePage](./Models.md#getfingerprintipsresponsepage)
+
+[GetFingerprintRulesResponsePage](./Models.md#getfingerprintrulesresponsepage)
+
+[GetFingerprintSubscribedIntegrationsResponsePage](./Models.md#getfingerprintsubscribedintegrationsresponsepage)
+
+[GetVendorIPsResponsePage](./Models.md#getvendoripsresponsepage)
+
+[GetVendorSubscribedIntegrationsResponsePage](./Models.md#getvendorsubscribedintegrationsresponsepage)
 
 [History](./Models.md#history)
 
 [IPItem](./Models.md#ipitem)
 
+[IntegrationResponse](./Models.md#integrationresponse)
+
+[IntervalOptions](./Models.md#intervaloptions)
+
+[IpsDetailsStats](./Models.md#ipsdetailsstats)
+
 [Location](./Models.md#location)
 
+[LookupImpactCVEItem](./Models.md#lookupimpactcveitem)
+
+[LookupImpactFingerprintItem](./Models.md#lookupimpactfingerprintitem)
+
+[LookupImpactResponsePage](./Models.md#lookupimpactresponsepage)
+
+[LookupListItemWithStats](./Models.md#lookuplistitemwithstats)
+
+[LookupListWithStatsResponsePage](./Models.md#lookuplistwithstatsresponsepage)
+
 [MitreTechnique](./Models.md#mitretechnique)
+
+[ProtectRule](./Models.md#protectrule)
+
+[ProtectRuleTag](./Models.md#protectruletag)
 
 [Reference](./Models.md#reference)
 
@@ -225,4 +329,20 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [Scores](./Models.md#scores)
 
+[SinceOptions](./Models.md#sinceoptions)
+
 [SubscribeCVEIntegrationRequest](./Models.md#subscribecveintegrationrequest)
+
+[SubscribeFingerprintIntegrationRequest](./Models.md#subscribefingerprintintegrationrequest)
+
+[SubscribeVendorIntegrationRequest](./Models.md#subscribevendorintegrationrequest)
+
+[ThreatContext](./Models.md#threatcontext)
+
+[TimelineItem](./Models.md#timelineitem)
+
+[TopProductItem](./Models.md#topproductitem)
+
+[VendorSortBy](./Models.md#vendorsortby)
+
+[VendorStatsResponse](./Models.md#vendorstatsresponse)

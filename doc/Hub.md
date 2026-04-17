@@ -36,17 +36,20 @@ content is returned. |
 ```python
 from crowdsec_service_api import (
     Hub,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Hub(base_url=Server.production_server.value, auth=auth)
-response = client.get_index(
-    branch='branch',
-    tenant='tenant',
-    with_content=True,
-)
-print(response)
+client = Hub(auth=auth)
+try:
+    response = client.get_index(
+        branch='branch',
+        tenant='tenant',
+        with_content=True,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -74,17 +77,20 @@ cache expiration policies. No body content is returned.
 ```python
 from crowdsec_service_api import (
     Hub,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Hub(base_url=Server.production_server.value, auth=auth)
-response = client.head_index(
-    branch='branch',
-    tenant='tenant',
-    with_content=True,
-)
-print(response)
+client = Hub(auth=auth)
+try:
+    response = client.head_index(
+        branch='branch',
+        tenant='tenant',
+        with_content=True,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -109,17 +115,20 @@ print(response)
 ```python
 from crowdsec_service_api import (
     Hub,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Hub(base_url=Server.production_server.value, auth=auth)
-response = client.get_item_content(
-    item_path='item_path',
-    branch='branch',
-    tenant='tenant',
-)
-print(response)
+client = Hub(auth=auth)
+try:
+    response = client.get_item_content(
+        item_path='item_path',
+        branch='branch',
+        tenant='tenant',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
 
@@ -145,16 +154,19 @@ content is returned.
 ```python
 from crowdsec_service_api import (
     Hub,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Hub(base_url=Server.production_server.value, auth=auth)
-response = client.head_item_content(
-    item_path='item_path',
-    branch='branch',
-    tenant='tenant',
-)
-print(response)
+client = Hub(auth=auth)
+try:
+    response = client.head_item_content(
+        item_path='item_path',
+        branch='branch',
+        tenant='tenant',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 

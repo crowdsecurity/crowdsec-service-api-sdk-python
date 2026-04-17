@@ -29,18 +29,21 @@
 ```python
 from crowdsec_service_api import (
     Metrics,
-    Server,
     ApiKeyAuth,
 )
+from httpx import HTTPStatusError
 auth = ApiKeyAuth(api_key='your_api_key')
-client = Metrics(base_url=Server.production_server.value, auth=auth)
-response = client.get_metrics_remediation(
-    start_date='start_date',
-    end_date='end_date',
-    engine_ids=['sample-item'],
-    integration_ids=['sample-item'],
-    tags=['sample-item'],
-)
-print(response)
+client = Metrics(auth=auth)
+try:
+    response = client.get_metrics_remediation(
+        start_date='start_date',
+        end_date='end_date',
+        engine_ids=['sample-item'],
+        integration_ids=['sample-item'],
+        tags=['sample-item'],
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
 ```
 
