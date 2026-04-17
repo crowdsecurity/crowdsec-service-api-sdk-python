@@ -9,48 +9,50 @@ from pydantic.fields import FieldInfo
 from httpx import Auth
 from ..http_client import HttpClient
 
-class Hub(Service):
+class Products(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
         super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/1.119.7")
     
-    def get_index(
+    def get_products(
         self,
-        branch: str,
-        tenant: str,
-        with_content: bool = False,
-    )-> Index:
-        endpoint_url = "/hub/index/{tenant}/{branch}/.index.json"
+        query: Optional[str] = None,
+        page: int = 1,
+        size: int = 50,
+    )-> LookupListWithStatsResponsePage:
+        endpoint_url = "/products"
         loc = locals()
         headers = {}
         params = json.loads(
-            HubGetIndexQueryParameters(**loc).model_dump_json(
+            ProductsGetProductsQueryParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
-        path_params = json.loads(
-            HubGetIndexPathParameters(**loc).model_dump_json(
-                exclude_none=True
-            )
-        )
+        path_params = {}
         
         response = self.http_client.get(
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return Index(**response.json())
+        return LookupListWithStatsResponsePage(_client=self, **response.json())
     
-    def get_item_content(
+    def get_product_impact(
         self,
-        item_path: str,
-        branch: str,
-        tenant: str,
-    ):
-        endpoint_url = "/hub/index/{tenant}/{branch}/{item_path}"
+        product: str,
+        sort_by: Optional[GetCVEsSortBy] = GetCVEsSortBy("rule_release_date"),
+        sort_order: Optional[GetCVEsSortOrder] = GetCVEsSortOrder("desc"),
+        page: int = 1,
+        size: int = 50,
+    )-> LookupImpactResponsePage:
+        endpoint_url = "/products/{product}"
         loc = locals()
         headers = {}
-        params = {}
+        params = json.loads(
+            ProductsGetProductImpactQueryParameters(**loc).model_dump_json(
+                exclude_none=True
+            )
+        )
         path_params = json.loads(
-            HubGetItemContentPathParameters(**loc).model_dump_json(
+            ProductsGetProductImpactPathParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
@@ -59,5 +61,5 @@ class Hub(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return None
+        return LookupImpactResponsePage(_client=self, **response.json())
     

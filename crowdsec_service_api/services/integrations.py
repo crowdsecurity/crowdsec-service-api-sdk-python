@@ -10,6 +10,8 @@ from httpx import Auth
 from ..http_client import HttpClient
 
 class Integrations(Service):
+    def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
+        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/1.119.7")
     
     def get_integrations(
         self,
@@ -31,7 +33,7 @@ class Integrations(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return IntegrationGetResponsePage(**response.json())
+        return IntegrationGetResponsePage(_client=self, **response.json())
     
     def create_integration(
         self,
@@ -77,11 +79,16 @@ class Integrations(Service):
     def delete_integration(
         self,
         integration_id: str,
+        force: bool = False,
     ):
         endpoint_url = "/integrations/{integration_id}"
         loc = locals()
         headers = {}
-        params = {}
+        params = json.loads(
+            IntegrationsDeleteIntegrationQueryParameters(**loc).model_dump_json(
+                exclude_none=True
+            )
+        )
         path_params = json.loads(
             IntegrationsDeleteIntegrationPathParameters(**loc).model_dump_json(
                 exclude_none=True
@@ -124,7 +131,9 @@ class Integrations(Service):
         integration_id: str,
         page: int = 1,
         page_size: Optional[int] = None,
-    ):
+        pull_limit: Optional[int] = None,
+        enable_ip_aggregation: bool = False,
+    )-> str:
         endpoint_url = "/integrations/{integration_id}/content"
         loc = locals()
         headers = {}
@@ -143,7 +152,7 @@ class Integrations(Service):
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return None
+        return response.text
     
     def get_integration_content_stream(
         self,
