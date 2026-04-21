@@ -239,6 +239,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [AttackDetail](./Models.md#attackdetail)
 
+[AttackerObjective](./Models.md#attackerobjective)
+
 [Behavior](./Models.md#behavior)
 
 [CVEEventOutput](./Models.md#cveeventoutput)
@@ -298,6 +300,10 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [History](./Models.md#history)
 
 [IPItem](./Models.md#ipitem)
+
+[IndustryRiskProfile](./Models.md#industryriskprofile)
+
+[IndustryType](./Models.md#industrytype)
 
 [IntegrationResponse](./Models.md#integrationresponse)
 

@@ -1069,6 +1069,10 @@ name, label, description
 | description | str | Attack detail description ||
 | references | list[str] | Attack detail references ||
 
+# **AttackerObjective**
+## Enum: 
+INFRASTRUCTURE_TAKEOVER, RANSOMWARE, DATA_EXFILTRATION
+
 # **Behavior**
 ## Required: 
 name, label, description
@@ -1455,6 +1459,14 @@ ip
 | attack_details | list[AttackDetail] | Attack details ||
 | target_countries | Target Countries | Target countries ||
 | scores | Optional[Scores] | Scoring information ||
+
+# **IndustryRiskProfile**
+## Enum: 
+TECHNOLOGY_BUSINESS, TRADITIONAL_BUSINESS, CRITICAL_INFRASTRUCTURE, PUBLIC_SERVICE, SOHO
+
+# **IndustryType**
+## Enum: 
+COMMERCE, FINANCIAL_SERVICES, HEALTHCARE, GOVERNMENT, NON_PROFIT, INDUSTRY, MEDIA, EDUCATION, SOHO
 
 # **IntegrationResponse**
 ## Required: 

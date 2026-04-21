@@ -3,7 +3,7 @@
   "info": {
     "title": "Service API",
     "description": "This is the API to manage Crowdsec services",
-    "version": "1.70.3",
+    "version": "1.70.4",
     "contact": {
       "name": "CrowdSec",
       "url": "https://crowdsec.net",
@@ -10541,6 +10541,15 @@
         ],
         "title": "AttackDetail"
       },
+      "AttackerObjective": {
+        "type": "string",
+        "enum": [
+          "infrastructure_takeover",
+          "ransomware",
+          "data_exfiltration"
+        ],
+        "title": "AttackerObjective"
+      },
       "Behavior": {
         "properties": {
           "name": {
@@ -12256,6 +12265,32 @@
         ],
         "title": "IPItem"
       },
+      "IndustryRiskProfile": {
+        "type": "string",
+        "enum": [
+          "technology_business",
+          "traditional_business",
+          "critical_infrastructure",
+          "public_service",
+          "SOHO"
+        ],
+        "title": "IndustryRiskProfile"
+      },
+      "IndustryType": {
+        "type": "string",
+        "enum": [
+          "commerce",
+          "financial_services",
+          "healthcare",
+          "government",
+          "non_profit",
+          "industry",
+          "media",
+          "education",
+          "SOHO"
+        ],
+        "title": "IndustryType"
+      },
       "IntegrationResponse": {
         "properties": {
           "tags": {
@@ -13381,6 +13416,9 @@
             "additionalProperties": {
               "type": "integer"
             },
+            "propertyNames": {
+              "$ref": "#/components/schemas/IndustryType"
+            },
             "type": "object",
             "title": "Industry Types",
             "description": "Industry type distribution (type \u2192 count)"
@@ -13389,6 +13427,9 @@
             "additionalProperties": {
               "type": "integer"
             },
+            "propertyNames": {
+              "$ref": "#/components/schemas/IndustryRiskProfile"
+            },
             "type": "object",
             "title": "Industry Risk Profiles",
             "description": "Industry risk profile distribution (profile \u2192 count)"
@@ -13396,6 +13437,9 @@
           "attacker_objectives": {
             "additionalProperties": {
               "type": "integer"
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/AttackerObjective"
             },
             "type": "object",
             "title": "Attacker Objectives",
