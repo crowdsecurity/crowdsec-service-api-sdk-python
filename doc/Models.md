@@ -630,6 +630,7 @@ raw, computed
 |----------|------|-------------|---------|
 | raw | RawMetrics | None ||
 | computed | ComputedMetrics | None ||
+| stats | RemediationStats | None ||
 
 # **HTTPValidationError**
 ## Properties
@@ -864,6 +865,13 @@ value, timestamp
 |----------|------|-------------|---------|
 | value | Union[int, float] | Value of the metric ||
 | timestamp | str | Timestamp of the metric ||
+
+# **RemediationStats**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| dropped_rate | Dropped Rate | Percentage of dropped traffic over total processed traffic, per unit, rounded to 2 decimals. Null when no processed traffic was observed for the unit. ||
+| allowed_rate | Allowed Rate | Percentage of allowed (passed-through) traffic over total processed traffic, per unit, rounded to 2 decimals. Null when no processed traffic was observed for the unit. ||
 
 # **Share**
 ## Required: 
