@@ -3,7 +3,7 @@
   "info": {
     "title": "Service API",
     "description": "This is the API to manage Crowdsec services",
-    "version": "1.70.4",
+    "version": "1.70.10",
     "contact": {
       "name": "CrowdSec",
       "url": "https://crowdsec.net",
@@ -1243,7 +1243,7 @@
               ],
               "description": "Blocklist expiration",
               "examples": [
-                "2026-04-17T08:43:44.302226+00:00"
+                "2026-05-06T14:21:31.719009+00:00"
               ],
               "title": "Expiration"
             },
@@ -7980,6 +7980,10 @@
           "computed": {
             "$ref": "#/components/schemas/ComputedMetrics",
             "description": "Computed metrics data"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/RemediationStats",
+            "description": "Aggregate stats computed over the time window"
           }
         },
         "type": "object",
@@ -9093,6 +9097,48 @@
           "timestamp"
         ],
         "title": "RemediationMetricsData"
+      },
+      "RemediationStats": {
+        "properties": {
+          "dropped_rate": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/MetricUnits"
+            },
+            "type": "object",
+            "title": "Dropped Rate",
+            "description": "Percentage of dropped traffic over total processed traffic, per unit, rounded to 2 decimals. Null when no processed traffic was observed for the unit."
+          },
+          "allowed_rate": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/MetricUnits"
+            },
+            "type": "object",
+            "title": "Allowed Rate",
+            "description": "Percentage of allowed (passed-through) traffic over total processed traffic, per unit, rounded to 2 decimals. Null when no processed traffic was observed for the unit."
+          }
+        },
+        "type": "object",
+        "title": "RemediationStats"
       },
       "Share": {
         "properties": {
@@ -13402,7 +13448,14 @@
             },
             "type": "object",
             "title": "Attacker Countries",
-            "description": "Attacker country distribution (country code \u2192 count)"
+            "description": "Attacker country distribution (country code \u2192 count)",
+            "examples": [
+              {
+                "FR": 18,
+                "NL": 23,
+                "US": 36
+              }
+            ]
           },
           "defender_countries": {
             "additionalProperties": {
@@ -13410,7 +13463,14 @@
             },
             "type": "object",
             "title": "Defender Countries",
-            "description": "Defender country distribution (country code \u2192 count)"
+            "description": "Defender country distribution (country code \u2192 count)",
+            "examples": [
+              {
+                "BE": 13,
+                "FR": 22,
+                "NL": 22
+              }
+            ]
           },
           "industry_types": {
             "additionalProperties": {
@@ -13421,7 +13481,14 @@
             },
             "type": "object",
             "title": "Industry Types",
-            "description": "Industry type distribution (type \u2192 count)"
+            "description": "Industry type distribution (type \u2192 count)",
+            "examples": [
+              {
+                "commerce": 65,
+                "government": 5,
+                "non_profit": 30
+              }
+            ]
           },
           "industry_risk_profiles": {
             "additionalProperties": {
@@ -13432,7 +13499,14 @@
             },
             "type": "object",
             "title": "Industry Risk Profiles",
-            "description": "Industry risk profile distribution (profile \u2192 count)"
+            "description": "Industry risk profile distribution (profile \u2192 count)",
+            "examples": [
+              {
+                "SOHO": 25,
+                "public_service": 10,
+                "technology_business": 65
+              }
+            ]
           },
           "attacker_objectives": {
             "additionalProperties": {
@@ -13443,7 +13517,13 @@
             },
             "type": "object",
             "title": "Attacker Objectives",
-            "description": "Attacker objective distribution (objective \u2192 count)"
+            "description": "Attacker objective distribution (objective \u2192 count)",
+            "examples": [
+              {
+                "data_exfiltration": 10,
+                "infrastructure_takeover": 90
+              }
+            ]
           }
         },
         "type": "object",
