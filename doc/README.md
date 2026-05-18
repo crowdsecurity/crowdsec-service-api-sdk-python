@@ -199,6 +199,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [RemediationMetricsData](./Models.md#remediationmetricsdata)
 
+[RemediationStats](./Models.md#remediationstats)
+
 [Share](./Models.md#share)
 
 [SourceInfo](./Models.md#sourceinfo)
