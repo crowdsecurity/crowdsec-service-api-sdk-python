@@ -113,6 +113,7 @@ __all__ = [
     'RawMetrics',
     'RemediationMetrics',
     'RemediationMetricsData',
+    'RemediationStats',
     'Share',
     'SourceInfo',
     'SourceType',
