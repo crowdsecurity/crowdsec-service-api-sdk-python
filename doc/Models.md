@@ -630,6 +630,7 @@ raw, computed
 |----------|------|-------------|---------|
 | raw | RawMetrics | None ||
 | computed | ComputedMetrics | None ||
+| stats | RemediationStats | None ||
 
 # **HTTPValidationError**
 ## Properties
@@ -864,6 +865,13 @@ value, timestamp
 |----------|------|-------------|---------|
 | value | Union[int, float] | Value of the metric ||
 | timestamp | str | Timestamp of the metric ||
+
+# **RemediationStats**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| dropped_rate | Dropped Rate | Percentage of dropped traffic over total processed traffic, per unit, rounded to 2 decimals. Null when no processed traffic was observed for the unit. ||
+| allowed_rate | Allowed Rate | Percentage of allowed (passed-through) traffic over total processed traffic, per unit, rounded to 2 decimals. Null when no processed traffic was observed for the unit. ||
 
 # **Share**
 ## Required: 
@@ -1459,6 +1467,33 @@ ip
 | attack_details | list[AttackDetail] | Attack details ||
 | target_countries | Target Countries | Target countries ||
 | scores | Optional[Scores] | Scoring information ||
+
+# **IndicatorHttpPath**
+## Required: 
+value, first_seen, last_seen
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| indicator_type | str | None ||
+| value | str | None ||
+| first_seen | str | None ||
+| last_seen | str | None ||
+| nb_ips | int | None ||
+
+# **IndicatorType**
+Kind of IOC carried in an indicator entry. Add new variants here
+as we extend coverage (user_agent, ja3h, …).
+## Enum: 
+HTTP_PATH
+
+# **IndicatorsSortBy**
+How the caller wants the indicators ordered.
+
+``popular`` returns the cache's ``popular`` slice; ``most_recent`` returns
+the ``recent`` slice. Both come pre-ranked from the Athena query so the
+API doesn't re-sort.
+## Enum: 
+POPULAR, MOST_RECENT
 
 # **IndustryRiskProfile**
 ## Enum: 
