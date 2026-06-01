@@ -199,6 +199,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [RemediationMetricsData](./Models.md#remediationmetricsdata)
 
+[RemediationStats](./Models.md#remediationstats)
+
 [Share](./Models.md#share)
 
 [SourceInfo](./Models.md#sourceinfo)
@@ -300,6 +302,12 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [History](./Models.md#history)
 
 [IPItem](./Models.md#ipitem)
+
+[IndicatorHttpPath](./Models.md#indicatorhttppath)
+
+[IndicatorType](./Models.md#indicatortype)
+
+[IndicatorsSortBy](./Models.md#indicatorssortby)
 
 [IndustryRiskProfile](./Models.md#industryriskprofile)
 
