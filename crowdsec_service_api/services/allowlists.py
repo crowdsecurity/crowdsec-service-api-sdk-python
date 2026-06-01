@@ -11,7 +11,7 @@ from ..http_client import HttpClient
 
 class Allowlists(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
-        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/v0.15.26")
+        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/v0.15.34")
     
     def list_allowlists(
         self,
