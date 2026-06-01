@@ -3,7 +3,7 @@
   "info": {
     "title": "Service API",
     "description": "This is the API to manage Crowdsec services",
-    "version": "1.70.4",
+    "version": "1.70.19",
     "contact": {
       "name": "CrowdSec",
       "url": "https://crowdsec.net",
@@ -1243,7 +1243,7 @@
               ],
               "description": "Blocklist expiration",
               "examples": [
-                "2026-04-17T08:43:44.302226+00:00"
+                "2026-06-01T08:51:54.168480+00:00"
               ],
               "title": "Expiration"
             },
@@ -3576,6 +3576,88 @@
         }
       }
     },
+    "/cves/{cve_id}/indicators": {
+      "get": {
+        "tags": [
+          "Cves"
+        ],
+        "summary": "Get top indicators for a CVE ID",
+        "description": "Get the top indicators (e.g. http_path) observed for a specific CVE ID. Each item is tagged with its ``indicator_type``. The list is pre-ranked by ``sort_by`` (popular = most reported, most_recent = newly discovered variations). Pass ``indicator_type`` one or more times to narrow to specific IOC types.",
+        "operationId": "getCveIndicators",
+        "parameters": [
+          {
+            "name": "cve_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cve Id"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/IndicatorsSortBy",
+              "description": "Ranking applied to the returned list.",
+              "default": "popular"
+            },
+            "description": "Ranking applied to the returned list."
+          },
+          {
+            "name": "indicator_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IndicatorType"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Restrict to one or more IOC types.",
+              "title": "Indicator Type"
+            },
+            "description": "Restrict to one or more IOC types."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IndicatorHttpPath"
+                  },
+                  "title": "Response Getcveindicators"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "CVE Not Found"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/cves/{cve_id}/timeline": {
       "get": {
         "tags": [
@@ -5371,6 +5453,85 @@
                     "$ref": "#/components/schemas/FingerprintTimelineItem"
                   },
                   "title": "Response Getfingerprinttimeline"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fingerprints/{fingerprint}/indicators": {
+      "get": {
+        "tags": [
+          "Fingerprints"
+        ],
+        "summary": "Get top indicators for a fingerprint rule",
+        "description": "Get the top indicators (e.g. http_path) observed for a specific fingerprint rule. Each item is tagged with its ``indicator_type``. The list is pre-ranked by ``sort_by`` (popular = most reported, most_recent = newly discovered variations). Pass ``indicator_type`` one or more times to narrow to specific IOC types.",
+        "operationId": "getFingerprintIndicators",
+        "parameters": [
+          {
+            "name": "fingerprint",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Fingerprint"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/IndicatorsSortBy",
+              "description": "Ranking applied to the returned list.",
+              "default": "popular"
+            },
+            "description": "Ranking applied to the returned list."
+          },
+          {
+            "name": "indicator_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IndicatorType"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Restrict to one or more IOC types.",
+              "title": "Indicator Type"
+            },
+            "description": "Restrict to one or more IOC types."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IndicatorHttpPath"
+                  },
+                  "title": "Response Getfingerprintindicators"
                 }
               }
             }
@@ -7980,6 +8141,10 @@
           "computed": {
             "$ref": "#/components/schemas/ComputedMetrics",
             "description": "Computed metrics data"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/RemediationStats",
+            "description": "Aggregate stats computed over the time window"
           }
         },
         "type": "object",
@@ -9093,6 +9258,48 @@
           "timestamp"
         ],
         "title": "RemediationMetricsData"
+      },
+      "RemediationStats": {
+        "properties": {
+          "dropped_rate": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/MetricUnits"
+            },
+            "type": "object",
+            "title": "Dropped Rate",
+            "description": "Percentage of dropped traffic over total processed traffic, per unit, rounded to 2 decimals. Null when no processed traffic was observed for the unit."
+          },
+          "allowed_rate": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/MetricUnits"
+            },
+            "type": "object",
+            "title": "Allowed Rate",
+            "description": "Percentage of allowed (passed-through) traffic over total processed traffic, per unit, rounded to 2 decimals. Null when no processed traffic was observed for the unit."
+          }
+        },
+        "type": "object",
+        "title": "RemediationStats"
       },
       "Share": {
         "properties": {
@@ -12265,6 +12472,60 @@
         ],
         "title": "IPItem"
       },
+      "IndicatorHttpPath": {
+        "properties": {
+          "indicator_type": {
+            "type": "string",
+            "const": "http_path",
+            "title": "Indicator Type",
+            "default": "http_path"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value"
+          },
+          "first_seen": {
+            "type": "string",
+            "format": "date-time",
+            "title": "First Seen"
+          },
+          "last_seen": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Seen"
+          },
+          "nb_ips": {
+            "type": "integer",
+            "title": "Nb Ips",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "value",
+          "first_seen",
+          "last_seen"
+        ],
+        "title": "IndicatorHttpPath",
+        "description": "One HTTP-path indicator (a single row from http_path_context).\n\n``value`` is the reconstructed HTTP request line: ``\"<METHOD> <PATH>\"``\n(e.g. ``\"POST /wp-login.php\"``). Future indicator types use the same\n``value`` field with different semantics \u2014 clients dispatch on\n``indicator_type``.\n\nThe internal scoring columns ``watcher_count`` and ``cve_count`` drive\nSQL filtering/ranking but are never exposed. ``pokemon_count`` is\nsurfaced as ``nb_ips`` so the API speaks in user-facing terms."
+      },
+      "IndicatorType": {
+        "type": "string",
+        "enum": [
+          "http_path"
+        ],
+        "title": "IndicatorType",
+        "description": "Kind of IOC carried in an indicator entry. Add new variants here\nas we extend coverage (user_agent, ja3h, \u2026)."
+      },
+      "IndicatorsSortBy": {
+        "type": "string",
+        "enum": [
+          "popular",
+          "most_recent"
+        ],
+        "title": "IndicatorsSortBy",
+        "description": "How the caller wants the indicators ordered.\n\n``popular`` returns the cache's ``popular`` slice; ``most_recent`` returns\nthe ``recent`` slice. Both come pre-ranked from the Athena query so the\nAPI doesn't re-sort."
+      },
       "IndustryRiskProfile": {
         "type": "string",
         "enum": [
@@ -13402,7 +13663,14 @@
             },
             "type": "object",
             "title": "Attacker Countries",
-            "description": "Attacker country distribution (country code \u2192 count)"
+            "description": "Attacker country distribution (country code \u2192 count)",
+            "examples": [
+              {
+                "FR": 18,
+                "NL": 23,
+                "US": 36
+              }
+            ]
           },
           "defender_countries": {
             "additionalProperties": {
@@ -13410,7 +13678,14 @@
             },
             "type": "object",
             "title": "Defender Countries",
-            "description": "Defender country distribution (country code \u2192 count)"
+            "description": "Defender country distribution (country code \u2192 count)",
+            "examples": [
+              {
+                "BE": 13,
+                "FR": 22,
+                "NL": 22
+              }
+            ]
           },
           "industry_types": {
             "additionalProperties": {
@@ -13421,7 +13696,14 @@
             },
             "type": "object",
             "title": "Industry Types",
-            "description": "Industry type distribution (type \u2192 count)"
+            "description": "Industry type distribution (type \u2192 count)",
+            "examples": [
+              {
+                "commerce": 65,
+                "government": 5,
+                "non_profit": 30
+              }
+            ]
           },
           "industry_risk_profiles": {
             "additionalProperties": {
@@ -13432,7 +13714,14 @@
             },
             "type": "object",
             "title": "Industry Risk Profiles",
-            "description": "Industry risk profile distribution (profile \u2192 count)"
+            "description": "Industry risk profile distribution (profile \u2192 count)",
+            "examples": [
+              {
+                "SOHO": 25,
+                "public_service": 10,
+                "technology_business": 65
+              }
+            ]
           },
           "attacker_objectives": {
             "additionalProperties": {
@@ -13443,7 +13732,13 @@
             },
             "type": "object",
             "title": "Attacker Objectives",
-            "description": "Attacker objective distribution (objective \u2192 count)"
+            "description": "Attacker objective distribution (objective \u2192 count)",
+            "examples": [
+              {
+                "data_exfiltration": 10,
+                "infrastructure_takeover": 90
+              }
+            ]
           }
         },
         "type": "object",
