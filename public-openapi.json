@@ -3,7 +3,7 @@
   "info": {
     "title": "Service API",
     "description": "This is the API to manage Crowdsec services",
-    "version": "1.70.4",
+    "version": "1.70.22",
     "contact": {
       "name": "CrowdSec",
       "url": "https://crowdsec.net",
@@ -253,6 +253,9 @@
             "schema": {
               "type": "boolean",
               "description": "Force delete the allowlist, even if it has subscribers",
+              "examples": [
+                true
+              ],
               "default": false,
               "title": "Force"
             },
@@ -860,6 +863,9 @@
               "type": "integer",
               "maximum": 1000,
               "description": "Page size",
+              "examples": [
+                50
+              ],
               "default": 100,
               "title": "Page Size"
             },
@@ -872,6 +878,9 @@
             "schema": {
               "type": "boolean",
               "description": "only subscribed blocklists",
+              "examples": [
+                true
+              ],
               "default": false,
               "title": "Subscribed Only"
             },
@@ -884,6 +893,9 @@
             "schema": {
               "type": "boolean",
               "description": "exclude subscribed blocklists",
+              "examples": [
+                false
+              ],
               "default": false,
               "title": "Exclude Subscribed"
             },
@@ -899,6 +911,12 @@
                 "$ref": "#/components/schemas/BlocklistIncludeFilters"
               },
               "description": "Include blocklists with the specified filters",
+              "examples": [
+                [
+                  "public",
+                  "shared"
+                ]
+              ],
               "default": [
                 "private",
                 "shared"
@@ -924,6 +942,12 @@
                 }
               ],
               "description": "Filter by category",
+              "examples": [
+                [
+                  "proxy",
+                  "scanner"
+                ]
+              ],
               "title": "Category"
             },
             "description": "Filter by category"
@@ -1179,6 +1203,9 @@
             "schema": {
               "type": "boolean",
               "description": "Force delete the blocklist if it is shared or subscribed",
+              "examples": [
+                false
+              ],
               "default": false,
               "title": "Force"
             },
@@ -1243,7 +1270,7 @@
               ],
               "description": "Blocklist expiration",
               "examples": [
-                "2026-04-17T08:43:44.302226+00:00"
+                "2026-06-03T09:15:25.938310+00:00"
               ],
               "title": "Expiration"
             },
@@ -1263,6 +1290,9 @@
                 }
               ],
               "description": "Ignore invalid IPs",
+              "examples": [
+                false
+              ],
               "default": false,
               "title": "Ignore Invalid Ips"
             },
@@ -1963,6 +1993,12 @@
                 }
               ],
               "description": "List of tags associated with the integrations (any of)",
+              "examples": [
+                [
+                  "firewall",
+                  "remediation"
+                ]
+              ],
               "title": "Tag"
             },
             "description": "List of tags associated with the integrations (any of)"
@@ -2136,6 +2172,9 @@
             "schema": {
               "type": "boolean",
               "description": "Force delete the integration even if it has active subscriptions (it will unsubscribe from all lists)",
+              "examples": [
+                true
+              ],
               "default": false,
               "title": "Force"
             },
@@ -2238,6 +2277,9 @@
               "type": "integer",
               "minimum": 1,
               "description": "Page number to return",
+              "examples": [
+                1
+              ],
               "default": 1,
               "title": "Page"
             },
@@ -2258,6 +2300,9 @@
                 }
               ],
               "description": "Maximum number of items to return, 0 means no limit (default), should be greater than 10000",
+              "examples": [
+                50000
+              ],
               "title": "Page Size"
             },
             "description": "Maximum number of items to return, 0 means no limit (default), should be greater than 10000"
@@ -2275,6 +2320,9 @@
                   "type": "null"
                 }
               ],
+              "examples": [
+                5000
+              ],
               "title": "Pull Limit"
             }
           },
@@ -2284,6 +2332,9 @@
             "required": false,
             "schema": {
               "type": "boolean",
+              "examples": [
+                true
+              ],
               "default": false,
               "title": "Enable Ip Aggregation"
             }
@@ -2348,6 +2399,9 @@
             "schema": {
               "type": "boolean",
               "description": "Set to true if it's the first run to fetch all the content, otherwise only changes since the last pull.",
+              "examples": [
+                false
+              ],
               "default": false,
               "title": "Startup"
             },
@@ -2401,6 +2455,12 @@
                 "type": "string"
               },
               "description": "Filter decisions by instance IDs",
+              "examples": [
+                [
+                  "inst-001",
+                  "inst-002"
+                ]
+              ],
               "default": [],
               "title": "Instance Ids"
             },
@@ -2416,6 +2476,12 @@
                 "type": "string"
               },
               "description": "Filter decisions by tag IDs",
+              "examples": [
+                [
+                  "64b8f0c2a1d3e4f5a6b7c8d9",
+                  "64b8f0c2a1d3e4f5a6b7c8da"
+                ]
+              ],
               "default": [],
               "title": "Tag Ids"
             },
@@ -2431,6 +2497,12 @@
                 "type": "string"
               },
               "description": "Filter decisions by remediation types",
+              "examples": [
+                [
+                  "ban",
+                  "captcha"
+                ]
+              ],
               "default": [],
               "title": "Remediation Types"
             },
@@ -2446,6 +2518,12 @@
                 "type": "string"
               },
               "description": "Filter decisions by IPs (only for IP decisions)",
+              "examples": [
+                [
+                  "203.0.113.7",
+                  "203.0.113.8"
+                ]
+              ],
               "default": [],
               "title": "Ips"
             },
@@ -2465,6 +2543,9 @@
                 }
               ],
               "description": "Field to sort by (e.g., created_at, duration)",
+              "examples": [
+                "created_at"
+              ],
               "default": "created_at",
               "title": "Sort By"
             },
@@ -2484,6 +2565,9 @@
                 }
               ],
               "description": "Sort order: 'asc' for ascending, 'desc' for descending",
+              "examples": [
+                "desc"
+              ],
               "default": "desc",
               "title": "Sort Order"
             },
@@ -2590,6 +2674,42 @@
         }
       }
     },
+    "/decisions/{decision_id}": {
+      "delete": {
+        "tags": [
+          "Decisions"
+        ],
+        "summary": "Delete Decision",
+        "description": "Delete a decision by its UUID.",
+        "operationId": "deleteDecision",
+        "parameters": [
+          {
+            "name": "decision_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Decision Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/info": {
       "get": {
         "tags": [
@@ -2629,6 +2749,9 @@
               "type": "string",
               "format": "date-time",
               "description": "Start date of the metrics, default to last day",
+              "examples": [
+                "2025-03-14T09:30:00Z"
+              ],
               "title": "Start Date"
             },
             "description": "Start date of the metrics, default to last day"
@@ -2641,6 +2764,9 @@
               "type": "string",
               "format": "date-time",
               "description": "End date of the metrics",
+              "examples": [
+                "2025-03-15T09:30:00Z"
+              ],
               "title": "End Date"
             },
             "description": "End date of the metrics"
@@ -2655,6 +2781,12 @@
                 "type": "string"
               },
               "description": "List of engine ids",
+              "examples": [
+                [
+                  "engine_1",
+                  "engine_2"
+                ]
+              ],
               "default": [],
               "title": "Engine Ids"
             },
@@ -2670,6 +2802,12 @@
                 "type": "string"
               },
               "description": "List of integration ids",
+              "examples": [
+                [
+                  "integration_1",
+                  "integration_2"
+                ]
+              ],
               "default": [],
               "title": "Integration Ids"
             },
@@ -2685,6 +2823,12 @@
                 "type": "string"
               },
               "description": "List of tags",
+              "examples": [
+                [
+                  "tag_1",
+                  "tag_2"
+                ]
+              ],
               "default": [],
               "title": "Tags"
             },
@@ -3562,6 +3706,88 @@
           },
           "400": {
             "description": "CVE Already Unsubscribed"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cves/{cve_id}/indicators": {
+      "get": {
+        "tags": [
+          "Cves"
+        ],
+        "summary": "Get top indicators for a CVE ID",
+        "description": "Get the top indicators (e.g. http_path) observed for a specific CVE ID. Each item is tagged with its ``indicator_type``. The list is pre-ranked by ``sort_by`` (popular = most reported, most_recent = newly discovered variations). Pass ``indicator_type`` one or more times to narrow to specific IOC types.",
+        "operationId": "getCveIndicators",
+        "parameters": [
+          {
+            "name": "cve_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Cve Id"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/IndicatorsSortBy",
+              "description": "Ranking applied to the returned list.",
+              "default": "popular"
+            },
+            "description": "Ranking applied to the returned list."
+          },
+          {
+            "name": "indicator_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IndicatorType"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Restrict to one or more IOC types.",
+              "title": "Indicator Type"
+            },
+            "description": "Restrict to one or more IOC types."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IndicatorHttpPath"
+                  },
+                  "title": "Response Getcveindicators"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "CVE Not Found"
           },
           "422": {
             "description": "Validation Error",
@@ -5388,6 +5614,85 @@
         }
       }
     },
+    "/fingerprints/{fingerprint}/indicators": {
+      "get": {
+        "tags": [
+          "Fingerprints"
+        ],
+        "summary": "Get top indicators for a fingerprint rule",
+        "description": "Get the top indicators (e.g. http_path) observed for a specific fingerprint rule. Each item is tagged with its ``indicator_type``. The list is pre-ranked by ``sort_by`` (popular = most reported, most_recent = newly discovered variations). Pass ``indicator_type`` one or more times to narrow to specific IOC types.",
+        "operationId": "getFingerprintIndicators",
+        "parameters": [
+          {
+            "name": "fingerprint",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Fingerprint"
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/IndicatorsSortBy",
+              "description": "Ranking applied to the returned list.",
+              "default": "popular"
+            },
+            "description": "Ranking applied to the returned list."
+          },
+          {
+            "name": "indicator_type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IndicatorType"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Restrict to one or more IOC types.",
+              "title": "Indicator Type"
+            },
+            "description": "Restrict to one or more IOC types."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/IndicatorHttpPath"
+                  },
+                  "title": "Response Getfingerprintindicators"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/fingerprints/{fingerprint}": {
       "get": {
         "tags": [
@@ -5808,23 +6113,51 @@
             "title": "Items"
           },
           "total": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Total"
           },
           "page": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Page"
           },
           "size": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Size"
           },
           "pages": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Pages"
           },
           "links": {
@@ -5835,10 +6168,8 @@
         "type": "object",
         "required": [
           "items",
-          "total",
           "page",
           "size",
-          "pages",
           "links"
         ],
         "title": "AllowlistGetItemsResponsePage"
@@ -5947,23 +6278,51 @@
             "title": "Items"
           },
           "total": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Total"
           },
           "page": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Page"
           },
           "size": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Size"
           },
           "pages": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Pages"
           },
           "links": {
@@ -5974,10 +6333,8 @@
         "type": "object",
         "required": [
           "items",
-          "total",
           "page",
           "size",
-          "pages",
           "links"
         ],
         "title": "AllowlistGetResponsePage"
@@ -6181,23 +6538,51 @@
             "title": "Items"
           },
           "total": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Total"
           },
           "page": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Page"
           },
           "size": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Size"
           },
           "pages": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Pages"
           },
           "links": {
@@ -6208,10 +6593,8 @@
         "type": "object",
         "required": [
           "items",
-          "total",
           "page",
           "size",
-          "pages",
           "links"
         ],
         "title": "AllowlistSubscriberEntityPage"
@@ -7030,23 +7413,51 @@
             "title": "Items"
           },
           "total": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Total"
           },
           "page": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Page"
           },
           "size": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Size"
           },
           "pages": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Pages"
           },
           "links": {
@@ -7057,10 +7468,8 @@
         "type": "object",
         "required": [
           "items",
-          "total",
           "page",
           "size",
-          "pages",
           "links"
         ],
         "title": "BlocklistSubscriberEntityPage"
@@ -7893,23 +8302,51 @@
             "title": "Items"
           },
           "total": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Total"
           },
           "page": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Page"
           },
           "size": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Size"
           },
           "pages": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Pages"
           },
           "links": {
@@ -7920,10 +8357,8 @@
         "type": "object",
         "required": [
           "items",
-          "total",
           "page",
           "size",
-          "pages",
           "links"
         ],
         "title": "DecisionsGetResponsePage"
@@ -7980,6 +8415,10 @@
           "computed": {
             "$ref": "#/components/schemas/ComputedMetrics",
             "description": "Computed metrics data"
+          },
+          "stats": {
+            "$ref": "#/components/schemas/RemediationStats",
+            "description": "Aggregate stats computed over the time window"
           }
         },
         "type": "object",
@@ -8395,23 +8834,51 @@
             "title": "Items"
           },
           "total": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Total"
           },
           "page": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Page"
           },
           "size": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Size"
           },
           "pages": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Pages"
           },
           "links": {
@@ -8422,10 +8889,8 @@
         "type": "object",
         "required": [
           "items",
-          "total",
           "page",
           "size",
-          "pages",
           "links"
         ],
         "title": "IntegrationGetResponsePage"
@@ -8959,23 +9424,51 @@
             "title": "Items"
           },
           "total": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Total"
           },
           "page": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Page"
           },
           "size": {
-            "type": "integer",
-            "minimum": 1.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Size"
           },
           "pages": {
-            "type": "integer",
-            "minimum": 0.0,
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Pages"
           },
           "links": {
@@ -8986,10 +9479,8 @@
         "type": "object",
         "required": [
           "items",
-          "total",
           "page",
           "size",
-          "pages",
           "links"
         ],
         "title": "PublicBlocklistResponsePage"
@@ -9093,6 +9584,48 @@
           "timestamp"
         ],
         "title": "RemediationMetricsData"
+      },
+      "RemediationStats": {
+        "properties": {
+          "dropped_rate": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/MetricUnits"
+            },
+            "type": "object",
+            "title": "Dropped Rate",
+            "description": "Percentage of dropped traffic over total processed traffic, per unit, rounded to 2 decimals. Null when no processed traffic was observed for the unit."
+          },
+          "allowed_rate": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "propertyNames": {
+              "$ref": "#/components/schemas/MetricUnits"
+            },
+            "type": "object",
+            "title": "Allowed Rate",
+            "description": "Percentage of allowed (passed-through) traffic over total processed traffic, per unit, rounded to 2 decimals. Null when no processed traffic was observed for the unit."
+          }
+        },
+        "type": "object",
+        "title": "RemediationStats"
       },
       "Share": {
         "properties": {
@@ -12265,6 +12798,60 @@
         ],
         "title": "IPItem"
       },
+      "IndicatorHttpPath": {
+        "properties": {
+          "indicator_type": {
+            "type": "string",
+            "const": "http_path",
+            "title": "Indicator Type",
+            "default": "http_path"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value"
+          },
+          "first_seen": {
+            "type": "string",
+            "format": "date-time",
+            "title": "First Seen"
+          },
+          "last_seen": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Seen"
+          },
+          "nb_ips": {
+            "type": "integer",
+            "title": "Nb Ips",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "required": [
+          "value",
+          "first_seen",
+          "last_seen"
+        ],
+        "title": "IndicatorHttpPath",
+        "description": "One HTTP-path indicator (a single row from http_path_context).\n\n``value`` is the reconstructed HTTP request line: ``\"<METHOD> <PATH>\"``\n(e.g. ``\"POST /wp-login.php\"``). Future indicator types use the same\n``value`` field with different semantics \u2014 clients dispatch on\n``indicator_type``.\n\nThe internal scoring columns ``watcher_count`` and ``cve_count`` drive\nSQL filtering/ranking but are never exposed. ``pokemon_count`` is\nsurfaced as ``nb_ips`` so the API speaks in user-facing terms."
+      },
+      "IndicatorType": {
+        "type": "string",
+        "enum": [
+          "http_path"
+        ],
+        "title": "IndicatorType",
+        "description": "Kind of IOC carried in an indicator entry. Add new variants here\nas we extend coverage (user_agent, ja3h, \u2026)."
+      },
+      "IndicatorsSortBy": {
+        "type": "string",
+        "enum": [
+          "popular",
+          "most_recent"
+        ],
+        "title": "IndicatorsSortBy",
+        "description": "How the caller wants the indicators ordered.\n\n``popular`` returns the cache's ``popular`` slice; ``most_recent`` returns\nthe ``recent`` slice. Both come pre-ranked from the Athena query so the\nAPI doesn't re-sort."
+      },
       "IndustryRiskProfile": {
         "type": "string",
         "enum": [
@@ -13402,7 +13989,14 @@
             },
             "type": "object",
             "title": "Attacker Countries",
-            "description": "Attacker country distribution (country code \u2192 count)"
+            "description": "Attacker country distribution (country code \u2192 count)",
+            "examples": [
+              {
+                "FR": 18,
+                "NL": 23,
+                "US": 36
+              }
+            ]
           },
           "defender_countries": {
             "additionalProperties": {
@@ -13410,7 +14004,14 @@
             },
             "type": "object",
             "title": "Defender Countries",
-            "description": "Defender country distribution (country code \u2192 count)"
+            "description": "Defender country distribution (country code \u2192 count)",
+            "examples": [
+              {
+                "BE": 13,
+                "FR": 22,
+                "NL": 22
+              }
+            ]
           },
           "industry_types": {
             "additionalProperties": {
@@ -13421,7 +14022,14 @@
             },
             "type": "object",
             "title": "Industry Types",
-            "description": "Industry type distribution (type \u2192 count)"
+            "description": "Industry type distribution (type \u2192 count)",
+            "examples": [
+              {
+                "commerce": 65,
+                "government": 5,
+                "non_profit": 30
+              }
+            ]
           },
           "industry_risk_profiles": {
             "additionalProperties": {
@@ -13432,7 +14040,14 @@
             },
             "type": "object",
             "title": "Industry Risk Profiles",
-            "description": "Industry risk profile distribution (profile \u2192 count)"
+            "description": "Industry risk profile distribution (profile \u2192 count)",
+            "examples": [
+              {
+                "SOHO": 25,
+                "public_service": 10,
+                "technology_business": 65
+              }
+            ]
           },
           "attacker_objectives": {
             "additionalProperties": {
@@ -13443,7 +14058,13 @@
             },
             "type": "object",
             "title": "Attacker Objectives",
-            "description": "Attacker objective distribution (objective \u2192 count)"
+            "description": "Attacker objective distribution (objective \u2192 count)",
+            "examples": [
+              {
+                "data_exfiltration": 10,
+                "infrastructure_takeover": 90
+              }
+            ]
           }
         },
         "type": "object",
