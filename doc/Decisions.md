@@ -5,6 +5,7 @@
 | ------ | ----------- |
 | [get_decisions](#get_decisions) | Get decisions |
 | [create_decision](#create_decision) | Create a new decision. |
+| [delete_decision](#delete_decision) | Delete a decision by its UUID. |
 
 ## **get_decisions**
 ### Get decisions 
@@ -105,6 +106,39 @@ request = DecisionCreateRequest(
 try:
     response = client.create_decision(
         request=request,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
+```
+
+
+## **delete_decision**
+### Delete a decision by its UUID. 
+- Endpoint: `/decisions/{decision_id}`
+- Method: `DELETE`
+
+### Parameters:
+| Parameter | Type | Description | Required | Default |
+| --------- | ---- | ----------- | -------- | ------- |
+| decision_id | str |  | True |  |
+### Errors:
+| Code | Description |
+| ---- | ----------- |
+| 422 | Validation Error |
+### Usage
+
+```python
+from crowdsec_service_api import (
+    Decisions,
+    ApiKeyAuth,
+)
+from httpx import HTTPStatusError
+auth = ApiKeyAuth(api_key='your_api_key')
+client = Decisions(auth=auth)
+try:
+    response = client.delete_decision(
+        decision_id='decision_id',
     )
     print(response)
 except HTTPStatusError as e:
