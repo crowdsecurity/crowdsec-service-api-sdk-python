@@ -11,6 +11,7 @@
 | [subscribe_integration_to_fingerprint](#subscribe_integration_to_fingerprint) | Subscribe an integration to receive threats related to a specific fingerprint rule |
 | [unsubscribe_integration_from_fingerprint](#unsubscribe_integration_from_fingerprint) | Unsubscribe an integration from receiving threats related to a specific fingerprint rule |
 | [get_fingerprint_timeline](#get_fingerprint_timeline) | Get timeline data of occurrences for a specific fingerprint rule |
+| [get_fingerprint_indicators](#get_fingerprint_indicators) | Get the top indicators (e.g. http_path) observed for a specific fingerprint rule. Each item is tagged with its ``indicator_type``. The list is pre-ranked by ``sort_by`` (popular = most reported, most_recent = newly discovered variations). Pass ``indicator_type`` one or more times to narrow to specific IOC types. |
 | [get_fingerprint_rule](#get_fingerprint_rule) | Get information about a specific fingerprint rule |
 
 ## **get_fingerprint_rules**
@@ -314,6 +315,45 @@ try:
         fingerprint='fingerprint',
         since_days=None,
         interval=None,
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
+```
+
+
+## **get_fingerprint_indicators**
+### Get the top indicators (e.g. http_path) observed for a specific fingerprint rule. Each item is tagged with its ``indicator_type``. The list is pre-ranked by ``sort_by`` (popular = most reported, most_recent = newly discovered variations). Pass ``indicator_type`` one or more times to narrow to specific IOC types. 
+- Endpoint: `/fingerprints/{fingerprint}/indicators`
+- Method: `GET`
+
+### Parameters:
+| Parameter | Type | Description | Required | Default |
+| --------- | ---- | ----------- | -------- | ------- |
+| fingerprint | str |  | True |  |
+| sort_by | IndicatorsSortBy | Ranking applied to the returned list. | False |  |
+| indicator_type | Optional[list[IndicatorType]] | Restrict to one or more IOC types. | False | None |
+### Returns:
+[list[IndicatorHttpPath]](./Models.md#list[indicatorhttppath])
+### Errors:
+| Code | Description |
+| ---- | ----------- |
+| 422 | Validation Error |
+### Usage
+
+```python
+from crowdsec_service_api import (
+    Fingerprints,
+    ApiKeyAuth,
+)
+from httpx import HTTPStatusError
+auth = ApiKeyAuth(api_key='your_api_key')
+client = Fingerprints(auth=auth)
+try:
+    response = client.get_fingerprint_indicators(
+        fingerprint='fingerprint',
+        sort_by=None,
+        indicator_type=None,
     )
     print(response)
 except HTTPStatusError as e:
