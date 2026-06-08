@@ -12,6 +12,7 @@
 | [get_cve_subscribed_integrations](#get_cve_subscribed_integrations) | Get the list of integrations subscribed to a specific CVE ID |
 | [subscribe_integration_to_cve](#subscribe_integration_to_cve) | Subscribe an integration to receive threats related to a specific CVE ID |
 | [unsubscribe_integration_from_cve](#unsubscribe_integration_from_cve) | Unsubscribe an integration from receiving threats related to a specific CVE ID |
+| [get_cve_indicators](#get_cve_indicators) | Get the top indicators (e.g. http_path) observed for a specific CVE ID. Each item is tagged with its ``indicator_type``. The list is pre-ranked by ``sort_by`` (popular = most reported, most_recent = newly discovered variations). Pass ``indicator_type`` one or more times to narrow to specific IOC types. |
 | [get_cve_timeline](#get_cve_timeline) | Get timeline data of occurrences for a specific CVE ID |
 
 ## **get_cves**
@@ -358,6 +359,46 @@ try:
     response = client.unsubscribe_integration_from_cve(
         cve_id='cve_id',
         integration_name='integration_name',
+    )
+    print(response)
+except HTTPStatusError as e:
+    print(f"An error occurred: {e.response.status_code} - {e.response.text}")
+```
+
+
+## **get_cve_indicators**
+### Get the top indicators (e.g. http_path) observed for a specific CVE ID. Each item is tagged with its ``indicator_type``. The list is pre-ranked by ``sort_by`` (popular = most reported, most_recent = newly discovered variations). Pass ``indicator_type`` one or more times to narrow to specific IOC types. 
+- Endpoint: `/cves/{cve_id}/indicators`
+- Method: `GET`
+
+### Parameters:
+| Parameter | Type | Description | Required | Default |
+| --------- | ---- | ----------- | -------- | ------- |
+| cve_id | str |  | True |  |
+| sort_by | IndicatorsSortBy | Ranking applied to the returned list. | False |  |
+| indicator_type | Optional[list[IndicatorType]] | Restrict to one or more IOC types. | False | None |
+### Returns:
+[list[IndicatorHttpPath]](./Models.md#list[indicatorhttppath])
+### Errors:
+| Code | Description |
+| ---- | ----------- |
+| 404 | CVE Not Found |
+| 422 | Validation Error |
+### Usage
+
+```python
+from crowdsec_service_api import (
+    Cves,
+    ApiKeyAuth,
+)
+from httpx import HTTPStatusError
+auth = ApiKeyAuth(api_key='your_api_key')
+client = Cves(auth=auth)
+try:
+    response = client.get_cve_indicators(
+        cve_id='cve_id',
+        sort_by=None,
+        indicator_type=None,
     )
     print(response)
 except HTTPStatusError as e:
