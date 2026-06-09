@@ -44,15 +44,15 @@ id, allowlist_id, description, scope, value, created_at, created_by
 
 # **AllowlistGetItemsResponsePage**
 ## Required: 
-items, total, page, size, pages, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[AllowlistGetItemsResponse] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
 | links | Links | None ||
 
 # **AllowlistGetResponse**
@@ -74,15 +74,15 @@ id, organization_id, name, created_at, total_items
 
 # **AllowlistGetResponsePage**
 ## Required: 
-items, total, page, size, pages, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[AllowlistGetResponse] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
 | links | Links | None ||
 
 # **AllowlistItemUpdateRequest**
@@ -134,15 +134,15 @@ id, entity_type
 
 # **AllowlistSubscriberEntityPage**
 ## Required: 
-items, total, page, size, pages, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[AllowlistSubscriberEntity] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
 | links | Links | None ||
 
 # **AllowlistSubscribersCount**
@@ -352,15 +352,15 @@ id, entity_type, remediation
 
 # **BlocklistSubscriberEntityPage**
 ## Required: 
-items, total, page, size, pages, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[BlocklistSubscriberEntity] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
 | links | Links | None ||
 
 # **BlocklistSubscribersCount**
@@ -591,15 +591,15 @@ ORG, TAG, ENTITY
 
 # **DecisionsGetResponsePage**
 ## Required: 
-items, total, page, size, pages, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[DecisionResponse] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
 | links | Links | None ||
 
 # **DecisionsSortBy**
@@ -630,6 +630,7 @@ raw, computed
 |----------|------|-------------|---------|
 | raw | RawMetrics | None ||
 | computed | ComputedMetrics | None ||
+| stats | RemediationStats | None ||
 
 # **HTTPValidationError**
 ## Properties
@@ -713,15 +714,15 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 
 # **IntegrationGetResponsePage**
 ## Required: 
-items, total, page, size, pages, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[IntegrationGetResponse] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
 | links | Links | None ||
 
 # **IntegrationType**
@@ -827,15 +828,15 @@ id, created_at, updated_at, name, description, is_private, pricing_tier, source,
 
 # **PublicBlocklistResponsePage**
 ## Required: 
-items, total, page, size, pages, links
+items, page, size, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | items | list[PublicBlocklistResponse] | None ||
-| total | int | None ||
-| page | int | None ||
-| size | int | None ||
-| pages | int | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
 | links | Links | None ||
 
 # **RawMetrics**
@@ -864,6 +865,13 @@ value, timestamp
 |----------|------|-------------|---------|
 | value | Union[int, float] | Value of the metric ||
 | timestamp | str | Timestamp of the metric ||
+
+# **RemediationStats**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| dropped_rate | Dropped Rate | Percentage of dropped traffic over total processed traffic, per unit, rounded to 2 decimals. Null when no processed traffic was observed for the unit. ||
+| allowed_rate | Allowed Rate | Percentage of allowed (passed-through) traffic over total processed traffic, per unit, rounded to 2 decimals. Null when no processed traffic was observed for the unit. ||
 
 # **Share**
 ## Required: 
@@ -1459,6 +1467,33 @@ ip
 | attack_details | list[AttackDetail] | Attack details ||
 | target_countries | Target Countries | Target countries ||
 | scores | Optional[Scores] | Scoring information ||
+
+# **IndicatorHttpPath**
+## Required: 
+value, first_seen, last_seen
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| indicator_type | str | None ||
+| value | str | None ||
+| first_seen | str | None ||
+| last_seen | str | None ||
+| nb_ips | int | None ||
+
+# **IndicatorType**
+Kind of IOC carried in an indicator entry. Add new variants here
+as we extend coverage (user_agent, ja3h, …).
+## Enum: 
+HTTP_PATH
+
+# **IndicatorsSortBy**
+How the caller wants the indicators ordered.
+
+``popular`` returns the cache's ``popular`` slice; ``most_recent`` returns
+the ``recent`` slice. Both come pre-ranked from the Athena query so the
+API doesn't re-sort.
+## Enum: 
+POPULAR, MOST_RECENT
 
 # **IndustryRiskProfile**
 ## Enum: 

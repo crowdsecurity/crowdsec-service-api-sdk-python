@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "crowdsec_service_api"
-version = "v0.15.26"
+version = "v0.15.38"
 license = { text = "MIT" }
 authors = [
 	{ name="crowdsec", email="info@crowdsec.net" }
