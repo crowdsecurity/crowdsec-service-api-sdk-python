@@ -11,7 +11,7 @@ from ..http_client import HttpClient
 
 class Decisions(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
-        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/v0.15.26")
+        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/1.128.0")
     
     def get_decisions(
         self,
@@ -60,4 +60,24 @@ class Decisions(Service):
         )
         
         return DecisionCreateResponse(**response.json())
+    
+    def delete_decision(
+        self,
+        decision_id: str,
+    ):
+        endpoint_url = "/decisions/{decision_id}"
+        loc = locals()
+        headers = {}
+        params = {}
+        path_params = json.loads(
+            DecisionsDeleteDecisionPathParameters(**loc).model_dump_json(
+                exclude_none=True
+            )
+        )
+        
+        response = self.http_client.delete(
+            url=endpoint_url, path_params=path_params, params=params, headers=headers
+        )
+        
+        return None
     
