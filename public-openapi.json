@@ -3,7 +3,7 @@
   "info": {
     "title": "Service API",
     "description": "This is the API to manage Crowdsec services",
-    "version": "1.70.29",
+    "version": "1.70.30",
     "contact": {
       "name": "CrowdSec",
       "url": "https://crowdsec.net",
