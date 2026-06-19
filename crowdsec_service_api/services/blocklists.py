@@ -11,7 +11,7 @@ from ..http_client import HttpClient
 
 class Blocklists(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
-        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/1.128.0")
+        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/1.129.0")
     
     def get_blocklists(
         self,

@@ -3,7 +3,7 @@
   "info": {
     "title": "Service API",
     "description": "This is the API to manage Crowdsec services",
-    "version": "1.70.29",
+    "version": "1.70.33",
     "contact": {
       "name": "CrowdSec",
       "url": "https://crowdsec.net",
@@ -1270,7 +1270,7 @@
               ],
               "description": "Blocklist expiration",
               "examples": [
-                "2026-06-11T08:40:13.370581+00:00"
+                "2026-06-19T08:54:44.914456+00:00"
               ],
               "title": "Expiration"
             },
