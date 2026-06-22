@@ -11,7 +11,7 @@ from ..http_client import HttpClient
 
 class Cves(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
-        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/1.128.0")
+        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/v0.16.0")
     
     def get_cves(
         self,
@@ -19,6 +19,7 @@ class Cves(Service):
         sort_by: Optional[GetCVEsSortBy] = GetCVEsSortBy("rule_release_date"),
         sort_order: Optional[GetCVEsSortOrder] = GetCVEsSortOrder("desc"),
         exploitation_phase: Optional[CVEExploitationPhase] = None,
+        detailed: bool = False,
         page: int = 1,
         size: int = 50,
     )-> GetCVEsResponsePage:

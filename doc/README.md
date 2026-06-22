@@ -249,7 +249,7 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [CVEExploitationPhase](./Models.md#cveexploitationphase)
 
-[CVEResponseBase](./Models.md#cveresponsebase)
+[CVEResponseDetailed](./Models.md#cveresponsedetailed)
 
 [CVEsubscription](./Models.md#cvesubscription)
 
@@ -270,8 +270,6 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [FingerprintEventOutput](./Models.md#fingerprinteventoutput)
 
 [FingerprintRuleResponse](./Models.md#fingerprintruleresponse)
-
-[FingerprintRuleSummary](./Models.md#fingerprintrulesummary)
 
 [FingerprintTimelineItem](./Models.md#fingerprinttimelineitem)
 

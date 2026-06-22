@@ -3,7 +3,7 @@
   "info": {
     "title": "Service API",
     "description": "This is the API to manage Crowdsec services",
-    "version": "1.70.29",
+    "version": "1.70.35",
     "contact": {
       "name": "CrowdSec",
       "url": "https://crowdsec.net",
@@ -1270,7 +1270,7 @@
               ],
               "description": "Blocklist expiration",
               "examples": [
-                "2026-06-11T08:40:13.370581+00:00"
+                "2026-06-19T08:54:44.914456+00:00"
               ],
               "title": "Expiration"
             },
@@ -3110,7 +3110,7 @@
           "Cves"
         ],
         "summary": "Get list of CVEs CrowdSec is tracking",
-        "description": "Get a paginated list of CVEs that CrowdSec is tracking",
+        "description": "Get a paginated list of CVEs that CrowdSec is tracking. Pass detailed=true to also include the heavy detail fields (description, crowdsec_analysis, cwes, references, events, tags) for each CVE; they are omitted by default to keep the list light.",
         "operationId": "getCves",
         "parameters": [
           {
@@ -3198,6 +3198,21 @@
               "title": "Exploitation Phase"
             },
             "description": "Filter by exploitation phase"
+          },
+          {
+            "name": "detailed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Include the heavy detail fields (description, crowdsec_analysis, cwes, references, events, tags) for each CVE in the list. Defaults to false to keep the response lightweight.",
+              "examples": [
+                true
+              ],
+              "default": false,
+              "title": "Detailed"
+            },
+            "description": "Include the heavy detail fields (description, crowdsec_analysis, cwes, references, events, tags) for each CVE in the list. Defaults to false to keep the response lightweight."
           },
           {
             "name": "page",
@@ -5139,7 +5154,7 @@
           "Fingerprints"
         ],
         "summary": "Get list of fingerprint rules",
-        "description": "Get a paginated list of fingerprint rules",
+        "description": "Get a paginated list of fingerprint rules. Pass detailed=true to also include the heavy detail fields (description, crowdsec_analysis, references, events, tags) for each rule; they are omitted by default to keep the list light.",
         "operationId": "getFingerprintRules",
         "parameters": [
           {
@@ -5206,6 +5221,21 @@
               "title": "Sort Order"
             },
             "description": "Sort order: ascending or descending"
+          },
+          {
+            "name": "detailed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Include the heavy detail fields (description, crowdsec_analysis, references, events, tags) for each fingerprint rule in the list. Defaults to false to keep the response lightweight.",
+              "examples": [
+                true
+              ],
+              "default": false,
+              "title": "Detailed"
+            },
+            "description": "Include the heavy detail fields (description, crowdsec_analysis, references, events, tags) for each fingerprint rule in the list. Defaults to false to keep the response lightweight."
           },
           {
             "name": "page",
@@ -11278,7 +11308,7 @@
         ],
         "title": "CVEExploitationPhase"
       },
-      "CVEResponseBase": {
+      "CVEResponseDetailed": {
         "properties": {
           "id": {
             "type": "string",
@@ -11421,6 +11451,62 @@
               }
             ],
             "description": "Threat context (attacker/defender countries, industries, objectives)"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags",
+            "description": "Tags associated with the CVE"
+          },
+          "references": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "References",
+            "description": "List of references for the CVE"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "Description of the CVE"
+          },
+          "crowdsec_analysis": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crowdsec Analysis",
+            "description": "CrowdSec analysis of the CVE"
+          },
+          "cwes": {
+            "items": {
+              "$ref": "#/components/schemas/CWE"
+            },
+            "type": "array",
+            "title": "Cwes",
+            "description": "List of CWEs associated with the CVE"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/CVEEventOutput"
+            },
+            "type": "array",
+            "title": "Events",
+            "description": "List of events related to the CVE"
           }
         },
         "type": "object",
@@ -11435,8 +11521,8 @@
           "has_public_exploit",
           "exploitation_phase"
         ],
-        "title": "CVEResponseBase",
-        "description": "GET CVE ID Response"
+        "title": "CVEResponseDetailed",
+        "description": "List item able to carry the heavy detail fields.\n\nThe list endpoint only populates these when ``detailed=true`` is passed;\notherwise they are left unset and stripped from the response via\n``response_model_exclude_unset``. All fields are therefore optional so a\nlean list item stays valid. Values are served straight from the cache\n(same source as the detail endpoint)."
       },
       "CVEsubscription": {
         "properties": {
@@ -11876,138 +11962,6 @@
         ],
         "title": "FingerprintRuleResponse"
       },
-      "FingerprintRuleSummary": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id",
-            "description": "Fingerprint rule identifier"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name",
-            "description": "Fingerprint rule name"
-          },
-          "title": {
-            "type": "string",
-            "title": "Title",
-            "description": "Fingerprint rule title"
-          },
-          "affected_components": {
-            "items": {
-              "$ref": "#/components/schemas/AffectedComponent"
-            },
-            "type": "array",
-            "title": "Affected Components",
-            "description": "List of affected components"
-          },
-          "crowdsec_score": {
-            "type": "integer",
-            "maximum": 10.0,
-            "minimum": 0.0,
-            "title": "Crowdsec Score",
-            "description": "Live Exploit Tracker score for the fingerprint rule"
-          },
-          "opportunity_score": {
-            "type": "integer",
-            "maximum": 5.0,
-            "minimum": 0.0,
-            "title": "Opportunity Score",
-            "description": "Opportunity score",
-            "default": 0
-          },
-          "momentum_score": {
-            "type": "integer",
-            "maximum": 5.0,
-            "minimum": 0.0,
-            "title": "Momentum Score",
-            "description": "Momentum score",
-            "default": 0
-          },
-          "first_seen": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "First Seen",
-            "description": "First seen date"
-          },
-          "last_seen": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Last Seen",
-            "description": "Last seen date"
-          },
-          "nb_ips": {
-            "type": "integer",
-            "minimum": 0.0,
-            "title": "Nb Ips",
-            "description": "Number of unique IPs observed"
-          },
-          "rule_release_date": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Rule Release Date",
-            "description": "Release date of the fingerprint rule"
-          },
-          "exploitation_phase": {
-            "$ref": "#/components/schemas/ExploitationPhase",
-            "description": "Current exploitation phase"
-          },
-          "adjustment_score": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AdjustmentScore"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Score adjustment details"
-          },
-          "threat_context": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ThreatContext"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Threat context (attacker/defender countries, industries, objectives)"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "title",
-          "affected_components",
-          "crowdsec_score",
-          "nb_ips",
-          "exploitation_phase"
-        ],
-        "title": "FingerprintRuleSummary"
-      },
       "FingerprintTimelineItem": {
         "properties": {
           "timestamp": {
@@ -12350,7 +12304,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/CVEResponseBase"
+              "$ref": "#/components/schemas/CVEResponseDetailed"
             },
             "type": "array",
             "title": "Items"
@@ -12459,7 +12413,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/FingerprintRuleSummary"
+              "$ref": "#/components/schemas/FingerprintRuleResponse"
             },
             "type": "array",
             "title": "Items"

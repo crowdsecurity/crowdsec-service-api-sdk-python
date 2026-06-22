@@ -1107,7 +1107,7 @@ name, date, description, label, sorting_priority
 ## Enum: 
 INSUFFICIENT_DATA, EARLY_EXPLOITATION, FRESH_AND_POPULAR, TARGETED_EXPLOITATION, MASS_EXPLOITATION, BACKGROUND_NOISE, UNPOPULAR, WEARING_OUT, UNCLASSIFIED
 
-# **CVEResponseBase**
+# **CVEResponseDetailed**
 ## Required: 
 id, name, title, affected_components, crowdsec_score, nb_ips, published_date, has_public_exploit, exploitation_phase
 ## Properties
@@ -1130,6 +1130,12 @@ id, name, title, affected_components, crowdsec_score, nb_ips, published_date, ha
 | exploitation_phase | ExploitationPhase | None ||
 | adjustment_score | Optional[AdjustmentScore] | Score adjustments applied to the CVE score based on various factors ||
 | threat_context | Optional[ThreatContext] | Threat context (attacker/defender countries, industries, objectives) ||
+| tags | list[str] | Tags associated with the CVE ||
+| references | list[str] | List of references for the CVE ||
+| description | Optional[str] | Description of the CVE ||
+| crowdsec_analysis | Optional[str] | CrowdSec analysis of the CVE ||
+| cwes | list[CWE] | List of CWEs associated with the CVE ||
+| events | list[CVEEventOutput] | List of events related to the CVE ||
 
 # **CVEsubscription**
 ## Required: 
@@ -1249,27 +1255,6 @@ id, name, title, affected_components, crowdsec_score, nb_ips, exploitation_phase
 | crowdsec_analysis | Optional[str] | CrowdSec analysis for this fingerprint rule ||
 | events | list[FingerprintEventOutput] | List of events related to the fingerprint rule ||
 
-# **FingerprintRuleSummary**
-## Required: 
-id, name, title, affected_components, crowdsec_score, nb_ips, exploitation_phase
-## Properties
-| Property | Type | Description | Example |
-|----------|------|-------------|---------|
-| id | str | Fingerprint rule identifier ||
-| name | str | Fingerprint rule name ||
-| title | str | Fingerprint rule title ||
-| affected_components | list[AffectedComponent] | List of affected components ||
-| crowdsec_score | int | Live Exploit Tracker score for the fingerprint rule ||
-| opportunity_score | int | Opportunity score ||
-| momentum_score | int | Momentum score ||
-| first_seen | Optional[str] | First seen date ||
-| last_seen | Optional[str] | Last seen date ||
-| nb_ips | int | Number of unique IPs observed ||
-| rule_release_date | Optional[str] | Release date of the fingerprint rule ||
-| exploitation_phase | ExploitationPhase | None ||
-| adjustment_score | Optional[AdjustmentScore] | Score adjustment details ||
-| threat_context | Optional[ThreatContext] | Threat context (attacker/defender countries, industries, objectives) ||
-
 # **FingerprintTimelineItem**
 ## Required: 
 timestamp, count
@@ -1347,7 +1332,7 @@ items, total, page, size, pages, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| items | list[CVEResponseBase] | None ||
+| items | list[CVEResponseDetailed] | None ||
 | total | int | None ||
 | page | int | None ||
 | size | int | None ||
@@ -1381,7 +1366,7 @@ items, total, page, size, pages, links
 ## Properties
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
-| items | list[FingerprintRuleSummary] | None ||
+| items | list[FingerprintRuleResponse] | None ||
 | total | int | None ||
 | page | int | None ||
 | size | int | None ||
