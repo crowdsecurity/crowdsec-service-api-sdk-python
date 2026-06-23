@@ -3,7 +3,7 @@
 # Cves Methods
 | Method | Description |
 | ------ | ----------- |
-| [get_cves](#get_cves) | Get a paginated list of CVEs that CrowdSec is tracking |
+| [get_cves](#get_cves) | Get a paginated list of CVEs that CrowdSec is tracking. Pass detailed=true to also include the heavy detail fields (description, crowdsec_analysis, cwes, references, events, tags) for each CVE; they are omitted by default to keep the list light. |
 | [get_cve](#get_cve) | Get information about a specific CVE ID |
 | [get_cve_protect_rules](#get_cve_protect_rules) | Get protection/detection rules associated with a specific CVE ID |
 | [download_cve_ips](#download_cve_ips) | Download the list of IPs exploiting a specific CVE ID in raw format |
@@ -16,7 +16,7 @@
 | [get_cve_timeline](#get_cve_timeline) | Get timeline data of occurrences for a specific CVE ID |
 
 ## **get_cves**
-### Get a paginated list of CVEs that CrowdSec is tracking 
+### Get a paginated list of CVEs that CrowdSec is tracking. Pass detailed=true to also include the heavy detail fields (description, crowdsec_analysis, cwes, references, events, tags) for each CVE; they are omitted by default to keep the list light. 
 - Endpoint: `/cves`
 - Method: `GET`
 
@@ -27,6 +27,7 @@
 | sort_by | Optional[GetCVEsSortBy] | Field to sort by | False | GetCVEsSortBy("rule_release_date") |
 | sort_order | Optional[GetCVEsSortOrder] | Sort order: ascending or descending | False | GetCVEsSortOrder("desc") |
 | exploitation_phase | Optional[CVEExploitationPhase] | Filter by exploitation phase | False | None |
+| detailed | bool | Include the heavy detail fields (description, crowdsec_analysis, cwes, references, events, tags) for each CVE in the list. Defaults to false to keep the response lightweight. | False | False |
 | page | int | Page number | False | 1 |
 | size | int | Page size | False | 50 |
 ### Returns:
@@ -51,6 +52,7 @@ try:
         sort_by=rule_release_date,
         sort_order=desc,
         exploitation_phase=None,
+        detailed=True,
         page=1,
         size=50,
     )
