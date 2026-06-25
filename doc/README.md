@@ -39,6 +39,14 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 ## API Endpoint models
 
+[AggregatedDecisionItem](./Models.md#aggregateddecisionitem)
+
+[AggregatedDecisionsGetResponse](./Models.md#aggregateddecisionsgetresponse)
+
+[AggregatedDecisionsGetResponsePage](./Models.md#aggregateddecisionsgetresponsepage)
+
+[AggregatedDecisionsSortBy](./Models.md#aggregateddecisionssortby)
+
 [AllowlistCreateRequest](./Models.md#allowlistcreaterequest)
 
 [AllowlistCreateResponse](./Models.md#allowlistcreateresponse)
@@ -140,6 +148,10 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [DecisionCreateRequest](./Models.md#decisioncreaterequest)
 
 [DecisionCreateResponse](./Models.md#decisioncreateresponse)
+
+[DecisionMachineState](./Models.md#decisionmachinestate)
+
+[DecisionMachineStateEnum](./Models.md#decisionmachinestateenum)
 
 [DecisionResponse](./Models.md#decisionresponse)
 
@@ -249,7 +261,7 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [CVEExploitationPhase](./Models.md#cveexploitationphase)
 
-[CVEResponseBase](./Models.md#cveresponsebase)
+[CVEResponseDetailed](./Models.md#cveresponsedetailed)
 
 [CVEsubscription](./Models.md#cvesubscription)
 
@@ -270,8 +282,6 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [FingerprintEventOutput](./Models.md#fingerprinteventoutput)
 
 [FingerprintRuleResponse](./Models.md#fingerprintruleresponse)
-
-[FingerprintRuleSummary](./Models.md#fingerprintrulesummary)
 
 [FingerprintTimelineItem](./Models.md#fingerprinttimelineitem)
 
