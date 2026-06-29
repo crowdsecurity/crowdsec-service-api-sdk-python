@@ -3,7 +3,7 @@
   "info": {
     "title": "Service API",
     "description": "This is the API to manage Crowdsec services",
-    "version": "1.70.29",
+    "version": "1.70.42",
     "contact": {
       "name": "CrowdSec",
       "url": "https://crowdsec.net",
@@ -820,7 +820,7 @@
             }
           },
           "409": {
-            "description": "Blocklist already exists"
+            "description": "Already exists"
           },
           "422": {
             "description": "Validation Error",
@@ -1097,7 +1097,7 @@
             }
           },
           "404": {
-            "description": "Blocklist not found"
+            "description": "Not found"
           },
           "422": {
             "description": "Validation Error",
@@ -1155,10 +1155,10 @@
             }
           },
           "403": {
-            "description": "Blocklist is read-only"
+            "description": "Read-only"
           },
           "404": {
-            "description": "Blocklist not found"
+            "description": "Not found"
           },
           "500": {
             "description": "Internal server error"
@@ -1270,7 +1270,7 @@
               ],
               "description": "Blocklist expiration",
               "examples": [
-                "2026-06-11T08:40:13.370581+00:00"
+                "2026-06-29T16:36:00.442507+00:00"
               ],
               "title": "Expiration"
             },
@@ -2446,6 +2446,33 @@
         "operationId": "getDecisions",
         "parameters": [
           {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Page number",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Page size",
+              "default": 50,
+              "title": "Size"
+            },
+            "description": "Page size"
+          },
+          {
             "name": "instance_ids",
             "in": "query",
             "required": false,
@@ -2530,6 +2557,70 @@
             "description": "Filter decisions by IPs (only for IP decisions)"
           },
           {
+            "name": "alert_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Filter decisions by associated alert IDs",
+              "examples": [
+                [
+                  "alert-abc123",
+                  "alert-def456"
+                ]
+              ],
+              "default": [],
+              "title": "Alert Ids"
+            },
+            "description": "Filter decisions by associated alert IDs"
+          },
+          {
+            "name": "decision_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Filter decisions by decision IDs",
+              "examples": [
+                [
+                  "dec-abc123",
+                  "dec-def456"
+                ]
+              ],
+              "default": [],
+              "title": "Decision Ids"
+            },
+            "description": "Filter decisions by decision IDs"
+          },
+          {
+            "name": "created_at_from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter decisions created after this date (inclusive)",
+              "examples": [
+                "2023-01-01T00:00:00Z"
+              ],
+              "title": "Created At From"
+            },
+            "description": "Filter decisions created after this date (inclusive)"
+          },
+          {
             "name": "sort_by",
             "in": "query",
             "required": false,
@@ -2572,33 +2663,6 @@
               "title": "Sort Order"
             },
             "description": "Sort order: 'asc' for ascending, 'desc' for descending"
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "description": "Page number",
-              "default": 1,
-              "title": "Page"
-            },
-            "description": "Page number"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "description": "Page size",
-              "default": 50,
-              "title": "Size"
-            },
-            "description": "Page size"
           }
         ],
         "responses": {
@@ -2614,9 +2678,6 @@
           },
           "404": {
             "description": "Not found"
-          },
-          "500": {
-            "description": "Internal server error"
           },
           "422": {
             "description": "Validation Error",
@@ -2659,7 +2720,7 @@
             }
           },
           "409": {
-            "description": "Conflict: Decision value is in allowlists; cannot create decision."
+            "description": "Already exists"
           },
           "422": {
             "description": "Validation Error",
@@ -2695,7 +2756,261 @@
         ],
         "responses": {
           "204": {
-            "description": "Successful Response"
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable entity"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/decisions/aggregated": {
+      "get": {
+        "tags": [
+          "Decisions"
+        ],
+        "summary": "Get Aggregated Decisions",
+        "operationId": "getAggregatedDecisions",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Page number",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Page size",
+              "default": 50,
+              "title": "Size"
+            },
+            "description": "Page size"
+          },
+          {
+            "name": "instance_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Filter decisions by instance IDs",
+              "examples": [
+                [
+                  "inst-abc123",
+                  "inst-def456"
+                ]
+              ],
+              "default": [],
+              "title": "Instance Ids"
+            },
+            "description": "Filter decisions by instance IDs"
+          },
+          {
+            "name": "tag_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Filter decisions by tag IDs",
+              "examples": [
+                [
+                  "tag-001",
+                  "tag-002"
+                ]
+              ],
+              "default": [],
+              "title": "Tag Ids"
+            },
+            "description": "Filter decisions by tag IDs"
+          },
+          {
+            "name": "remediation_types",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Filter decisions by remediation types",
+              "examples": [
+                [
+                  "ban",
+                  "captcha"
+                ]
+              ],
+              "default": [],
+              "title": "Remediation Types"
+            },
+            "description": "Filter decisions by remediation types"
+          },
+          {
+            "name": "ips",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Filter decisions by IPs (only for IP decisions)",
+              "examples": [
+                [
+                  "203.0.113.7",
+                  "198.51.100.42"
+                ]
+              ],
+              "default": [],
+              "title": "Ips"
+            },
+            "description": "Filter decisions by IPs (only for IP decisions)"
+          },
+          {
+            "name": "alert_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Filter decisions by associated alert IDs",
+              "examples": [
+                [
+                  "alert-abc123",
+                  "alert-def456"
+                ]
+              ],
+              "default": [],
+              "title": "Alert Ids"
+            },
+            "description": "Filter decisions by associated alert IDs"
+          },
+          {
+            "name": "decision_ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Filter decisions by decision IDs",
+              "examples": [
+                [
+                  "dec-abc123",
+                  "dec-def456"
+                ]
+              ],
+              "default": [],
+              "title": "Decision Ids"
+            },
+            "description": "Filter decisions by decision IDs"
+          },
+          {
+            "name": "created_at_from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter decisions created after this date (inclusive)",
+              "examples": [
+                "2023-01-01T00:00:00Z"
+              ],
+              "title": "Created At From"
+            },
+            "description": "Filter decisions created after this date (inclusive)"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AggregatedDecisionsSortBy"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Field to sort by (e.g., created_at, duration)",
+              "examples": [
+                "created_at"
+              ],
+              "default": "first_created_at",
+              "title": "Sort By"
+            },
+            "description": "Field to sort by (e.g., created_at, duration)"
+          },
+          {
+            "name": "sort_order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/DecisionsSortOrder"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Sort order: 'asc' for ascending, 'desc' for descending",
+              "examples": [
+                "desc"
+              ],
+              "default": "desc",
+              "title": "Sort Order"
+            },
+            "description": "Sort order: 'asc' for ascending, 'desc' for descending"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AggregatedDecisionsGetResponsePage"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
           },
           "422": {
             "description": "Validation Error",
@@ -2706,6 +3021,85 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/decisions/aggregated/{aggregated_id}": {
+      "delete": {
+        "tags": [
+          "Decisions"
+        ],
+        "summary": "Delete Aggregated Decision",
+        "description": "Delete one decision by ID",
+        "operationId": "deleteAggregatedDecisions",
+        "parameters": [
+          {
+            "name": "aggregated_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Aggregated Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable entity"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/decisions/aggregated/{aggregated_id}/items/{decision_id}": {
+      "delete": {
+        "tags": [
+          "Decisions"
+        ],
+        "summary": "Delete Aggregated Decision Item",
+        "description": "Delete one decision by ID",
+        "operationId": "deleteAggregatedDecisionItem",
+        "parameters": [
+          {
+            "name": "aggregated_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Aggregated Id"
+            }
+          },
+          {
+            "name": "decision_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Decision Id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable entity"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -3110,7 +3504,7 @@
           "Cves"
         ],
         "summary": "Get list of CVEs CrowdSec is tracking",
-        "description": "Get a paginated list of CVEs that CrowdSec is tracking",
+        "description": "Get a paginated list of CVEs that CrowdSec is tracking. Pass detailed=true to also include the heavy detail fields (description, crowdsec_analysis, cwes, references, events, tags) for each CVE; they are omitted by default to keep the list light.",
         "operationId": "getCves",
         "parameters": [
           {
@@ -3198,6 +3592,21 @@
               "title": "Exploitation Phase"
             },
             "description": "Filter by exploitation phase"
+          },
+          {
+            "name": "detailed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Include the heavy detail fields (description, crowdsec_analysis, cwes, references, events, tags) for each CVE in the list. Defaults to false to keep the response lightweight.",
+              "examples": [
+                true
+              ],
+              "default": false,
+              "title": "Detailed"
+            },
+            "description": "Include the heavy detail fields (description, crowdsec_analysis, cwes, references, events, tags) for each CVE in the list. Defaults to false to keep the response lightweight."
           },
           {
             "name": "page",
@@ -5139,7 +5548,7 @@
           "Fingerprints"
         ],
         "summary": "Get list of fingerprint rules",
-        "description": "Get a paginated list of fingerprint rules",
+        "description": "Get a paginated list of fingerprint rules. Pass detailed=true to also include the heavy detail fields (description, crowdsec_analysis, references, events, tags) for each rule; they are omitted by default to keep the list light.",
         "operationId": "getFingerprintRules",
         "parameters": [
           {
@@ -5206,6 +5615,21 @@
               "title": "Sort Order"
             },
             "description": "Sort order: ascending or descending"
+          },
+          {
+            "name": "detailed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Include the heavy detail fields (description, crowdsec_analysis, references, events, tags) for each fingerprint rule in the list. Defaults to false to keep the response lightweight.",
+              "examples": [
+                true
+              ],
+              "default": false,
+              "title": "Detailed"
+            },
+            "description": "Include the heavy detail fields (description, crowdsec_analysis, references, events, tags) for each fingerprint rule in the list. Defaults to false to keep the response lightweight."
           },
           {
             "name": "page",
@@ -6006,6 +6430,308 @@
   },
   "components": {
     "schemas": {
+      "AggregatedDecisionItem": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "ID of the decision aggregated item"
+          },
+          "first_created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "First Created At",
+            "description": "Creation date of the first decision in the group"
+          },
+          "last_created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Created At",
+            "description": "Creation date of the last decision in the group"
+          },
+          "origin": {
+            "type": "string",
+            "title": "Origin",
+            "description": "Origin of the decision"
+          },
+          "scenario": {
+            "type": "string",
+            "title": "Scenario",
+            "description": "Scenario of the decision"
+          },
+          "min_duration": {
+            "type": "string",
+            "title": "Min Duration",
+            "description": "Min duration in the group of decisions"
+          },
+          "max_duration": {
+            "type": "string",
+            "title": "Max Duration",
+            "description": "Max durations in the group of decisions"
+          },
+          "first_expiration": {
+            "type": "string",
+            "format": "date-time",
+            "title": "First Expiration",
+            "description": "First expiration date in the group of decisions"
+          },
+          "last_expiration": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Expiration",
+            "description": "Last expiration date in the group of decisions"
+          },
+          "count": {
+            "type": "integer",
+            "title": "Count",
+            "description": "Number of decisions in the group"
+          },
+          "machines": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/DecisionMachineState"
+            },
+            "type": "object",
+            "title": "Machines",
+            "description": "Machines object (the instance ID is the key) with the decision status and timestamp"
+          },
+          "target": {
+            "$ref": "#/components/schemas/DecisionTargetModel",
+            "description": "Target of the decision"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "first_created_at",
+          "last_created_at",
+          "origin",
+          "scenario",
+          "min_duration",
+          "max_duration",
+          "first_expiration",
+          "last_expiration",
+          "count",
+          "machines",
+          "target"
+        ],
+        "title": "AggregatedDecisionItem"
+      },
+      "AggregatedDecisionsGetResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "ID of the decision aggregated item"
+          },
+          "scope": {
+            "type": "string",
+            "title": "Scope",
+            "description": "Scope of the decision"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "description": "Type of the decision"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value",
+            "description": "Value of the decision"
+          },
+          "country": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country",
+            "description": "Country associated with the decision"
+          },
+          "as_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "As Name",
+            "description": "AS name associated with the decision"
+          },
+          "as_num": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "As Num",
+            "description": "AS number associated with the decision"
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "City",
+            "description": "City associated with the decision"
+          },
+          "latitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latitude",
+            "description": "Latitude associated with the decision"
+          },
+          "longitude": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Longitude",
+            "description": "Longitude associated with the decision"
+          },
+          "first_created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "First Created At",
+            "description": "Creation date of the first decision in the group"
+          },
+          "last_created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Created At",
+            "description": "Creation date of the last decision in the group"
+          },
+          "first_expiration": {
+            "type": "string",
+            "format": "date-time",
+            "title": "First Expiration",
+            "description": "Expiration date of the first decision in the group"
+          },
+          "last_expiration": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Expiration",
+            "description": "Expiration date of the last decision in the group"
+          },
+          "decisions": {
+            "items": {
+              "$ref": "#/components/schemas/AggregatedDecisionItem"
+            },
+            "type": "array",
+            "title": "Decisions",
+            "description": "List of decisions in the group"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "scope",
+          "type",
+          "value",
+          "decisions"
+        ],
+        "title": "AggregatedDecisionsGetResponse"
+      },
+      "AggregatedDecisionsGetResponsePage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/AggregatedDecisionsGetResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total"
+          },
+          "page": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          },
+          "pages": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pages"
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links",
+            "readOnly": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "page",
+          "size",
+          "links"
+        ],
+        "title": "AggregatedDecisionsGetResponsePage"
+      },
+      "AggregatedDecisionsSortBy": {
+        "type": "string",
+        "enum": [
+          "first_created_at",
+          "first_expiration"
+        ],
+        "title": "AggregatedDecisionsSortBy"
+      },
       "AllowlistCreateRequest": {
         "properties": {
           "name": {
@@ -8246,6 +8972,35 @@
           "uuid"
         ],
         "title": "DecisionCreateResponse"
+      },
+      "DecisionMachineState": {
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "Date of when the state has been set"
+          },
+          "state": {
+            "$ref": "#/components/schemas/DecisionMachineStateEnum",
+            "description": "State of the decision"
+          }
+        },
+        "type": "object",
+        "required": [
+          "timestamp",
+          "state"
+        ],
+        "title": "DecisionMachineState"
+      },
+      "DecisionMachineStateEnum": {
+        "type": "string",
+        "enum": [
+          "PENDING_CREATE",
+          "PENDING_DELETE",
+          "APPLIED"
+        ],
+        "title": "DecisionMachineStateEnum"
       },
       "DecisionResponse": {
         "properties": {
@@ -11278,7 +12033,7 @@
         ],
         "title": "CVEExploitationPhase"
       },
-      "CVEResponseBase": {
+      "CVEResponseDetailed": {
         "properties": {
           "id": {
             "type": "string",
@@ -11421,6 +12176,62 @@
               }
             ],
             "description": "Threat context (attacker/defender countries, industries, objectives)"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags",
+            "description": "Tags associated with the CVE"
+          },
+          "references": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "References",
+            "description": "List of references for the CVE"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "Description of the CVE"
+          },
+          "crowdsec_analysis": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Crowdsec Analysis",
+            "description": "CrowdSec analysis of the CVE"
+          },
+          "cwes": {
+            "items": {
+              "$ref": "#/components/schemas/CWE"
+            },
+            "type": "array",
+            "title": "Cwes",
+            "description": "List of CWEs associated with the CVE"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/CVEEventOutput"
+            },
+            "type": "array",
+            "title": "Events",
+            "description": "List of events related to the CVE"
           }
         },
         "type": "object",
@@ -11435,8 +12246,8 @@
           "has_public_exploit",
           "exploitation_phase"
         ],
-        "title": "CVEResponseBase",
-        "description": "GET CVE ID Response"
+        "title": "CVEResponseDetailed",
+        "description": "List item able to carry the heavy detail fields.\n\nThe list endpoint only populates these when ``detailed=true`` is passed;\notherwise they are left unset and stripped from the response via\n``response_model_exclude_unset``. All fields are therefore optional so a\nlean list item stays valid. Values are served straight from the cache\n(same source as the detail endpoint)."
       },
       "CVEsubscription": {
         "properties": {
@@ -11876,138 +12687,6 @@
         ],
         "title": "FingerprintRuleResponse"
       },
-      "FingerprintRuleSummary": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "title": "Id",
-            "description": "Fingerprint rule identifier"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name",
-            "description": "Fingerprint rule name"
-          },
-          "title": {
-            "type": "string",
-            "title": "Title",
-            "description": "Fingerprint rule title"
-          },
-          "affected_components": {
-            "items": {
-              "$ref": "#/components/schemas/AffectedComponent"
-            },
-            "type": "array",
-            "title": "Affected Components",
-            "description": "List of affected components"
-          },
-          "crowdsec_score": {
-            "type": "integer",
-            "maximum": 10.0,
-            "minimum": 0.0,
-            "title": "Crowdsec Score",
-            "description": "Live Exploit Tracker score for the fingerprint rule"
-          },
-          "opportunity_score": {
-            "type": "integer",
-            "maximum": 5.0,
-            "minimum": 0.0,
-            "title": "Opportunity Score",
-            "description": "Opportunity score",
-            "default": 0
-          },
-          "momentum_score": {
-            "type": "integer",
-            "maximum": 5.0,
-            "minimum": 0.0,
-            "title": "Momentum Score",
-            "description": "Momentum score",
-            "default": 0
-          },
-          "first_seen": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "First Seen",
-            "description": "First seen date"
-          },
-          "last_seen": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Last Seen",
-            "description": "Last seen date"
-          },
-          "nb_ips": {
-            "type": "integer",
-            "minimum": 0.0,
-            "title": "Nb Ips",
-            "description": "Number of unique IPs observed"
-          },
-          "rule_release_date": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Rule Release Date",
-            "description": "Release date of the fingerprint rule"
-          },
-          "exploitation_phase": {
-            "$ref": "#/components/schemas/ExploitationPhase",
-            "description": "Current exploitation phase"
-          },
-          "adjustment_score": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AdjustmentScore"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Score adjustment details"
-          },
-          "threat_context": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ThreatContext"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Threat context (attacker/defender countries, industries, objectives)"
-          }
-        },
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "title",
-          "affected_components",
-          "crowdsec_score",
-          "nb_ips",
-          "exploitation_phase"
-        ],
-        "title": "FingerprintRuleSummary"
-      },
       "FingerprintTimelineItem": {
         "properties": {
           "timestamp": {
@@ -12350,7 +13029,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/CVEResponseBase"
+              "$ref": "#/components/schemas/CVEResponseDetailed"
             },
             "type": "array",
             "title": "Items"
@@ -12459,7 +13138,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/FingerprintRuleSummary"
+              "$ref": "#/components/schemas/FingerprintRuleResponse"
             },
             "type": "array",
             "title": "Items"
