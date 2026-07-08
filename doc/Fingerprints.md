@@ -3,7 +3,7 @@
 # Fingerprints Methods
 | Method | Description |
 | ------ | ----------- |
-| [get_fingerprint_rules](#get_fingerprint_rules) | Get a paginated list of fingerprint rules |
+| [get_fingerprint_rules](#get_fingerprint_rules) | Get a paginated list of fingerprint rules. Pass detailed=true to also include the heavy detail fields (description, crowdsec_analysis, references, events, tags) for each rule; they are omitted by default to keep the list light. |
 | [download_fingerprint_ips](#download_fingerprint_ips) | Download the list of IPs exploiting a specific fingerprint rule in raw format |
 | [get_fingerprint_ips_details](#get_fingerprint_ips_details) | Get detailed information about IPs exploiting a specific fingerprint rule |
 | [get_fingerprint_ips_details_stats](#get_fingerprint_ips_details_stats) | Get aggregated statistics about IPs exploiting a specific fingerprint rule |
@@ -15,7 +15,7 @@
 | [get_fingerprint_rule](#get_fingerprint_rule) | Get information about a specific fingerprint rule |
 
 ## **get_fingerprint_rules**
-### Get a paginated list of fingerprint rules 
+### Get a paginated list of fingerprint rules. Pass detailed=true to also include the heavy detail fields (description, crowdsec_analysis, references, events, tags) for each rule; they are omitted by default to keep the list light. 
 - Endpoint: `/fingerprints`
 - Method: `GET`
 
@@ -25,6 +25,7 @@
 | query | Optional[str] | Search query for fingerprint rules | False | None |
 | sort_by | Optional[GetCVEsSortBy] | Field to sort by | False | GetCVEsSortBy("rule_release_date") |
 | sort_order | Optional[GetCVEsSortOrder] | Sort order: ascending or descending | False | GetCVEsSortOrder("desc") |
+| detailed | bool | Include the heavy detail fields (description, crowdsec_analysis, references, events, tags) for each fingerprint rule in the list. Defaults to false to keep the response lightweight. | False | False |
 | page | int | Page number | False | 1 |
 | size | int | Page size | False | 50 |
 ### Returns:
@@ -48,6 +49,7 @@ try:
         query=None,
         sort_by=rule_release_date,
         sort_order=desc,
+        detailed=True,
         page=1,
         size=50,
     )
