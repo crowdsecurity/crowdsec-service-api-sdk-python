@@ -80,7 +80,7 @@ except HTTPStatusError as e:
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
-| 409 | Blocklist already exists |
+| 409 | Already exists |
 | 422 | Validation Error |
 ### Usage
 
@@ -99,6 +99,7 @@ request = BlocklistCreateRequest(
         description=None,
         references=None,
         tags=None,
+        store_full_content_in_s3=None,
 )
 try:
     response = client.create_blocklist(
@@ -178,7 +179,7 @@ except HTTPStatusError as e:
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
-| 404 | Blocklist not found |
+| 404 | Not found |
 | 422 | Validation Error |
 ### Usage
 
@@ -251,8 +252,8 @@ except HTTPStatusError as e:
 ### Errors:
 | Code | Description |
 | ---- | ----------- |
-| 403 | Blocklist is read-only |
-| 404 | Blocklist not found |
+| 403 | Read-only |
+| 404 | Not found |
 | 500 | Internal server error |
 | 422 | Validation Error |
 ### Usage
