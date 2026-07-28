@@ -11,13 +11,14 @@ from ..http_client import HttpClient
 
 class Fingerprints(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
-        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/1.128.0")
+        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/v0.18.3")
     
     def get_fingerprint_rules(
         self,
         query: Optional[str] = None,
         sort_by: Optional[GetCVEsSortBy] = GetCVEsSortBy("rule_release_date"),
         sort_order: Optional[GetCVEsSortOrder] = GetCVEsSortOrder("desc"),
+        detailed: bool = False,
         page: int = 1,
         size: int = 50,
     )-> GetFingerprintRulesResponsePage:
