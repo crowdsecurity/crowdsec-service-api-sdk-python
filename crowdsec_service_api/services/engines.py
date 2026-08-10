@@ -9,22 +9,29 @@ from pydantic.fields import FieldInfo
 from httpx import Auth
 from ..http_client import HttpClient
 
-class Info(Service):
+class Engines(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
         super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/v0.18.5")
     
-    def get_info(
+    def get_engines(
         self,
-    )-> InfoResponse:
-        endpoint_url = "/info"
+        tag: Optional[list[str]] = None,
+        page: int = 1,
+        size: int = 50,
+    )-> EngineGetResponsePage:
+        endpoint_url = "/engines"
         loc = locals()
         headers = {}
-        params = {}
+        params = json.loads(
+            EnginesGetEnginesQueryParameters(**loc).model_dump_json(
+                exclude_none=True
+            )
+        )
         path_params = {}
         
         response = self.http_client.get(
             url=endpoint_url, path_params=path_params, params=params, headers=headers
         )
         
-        return InfoResponse(**response.json())
+        return EngineGetResponsePage(_client=self, **response.json())
     
