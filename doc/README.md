@@ -19,6 +19,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [Decisions](./Decisions.md)
 
+[Engines](./Engines.md)
+
 [Info](./Info.md)
 
 [Metrics](./Metrics.md)
@@ -38,6 +40,14 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [TrackerEvents](./TrackerEvents.md)
 
 ## API Endpoint models
+
+[AggregatedDecisionItem](./Models.md#aggregateddecisionitem)
+
+[AggregatedDecisionsGetResponse](./Models.md#aggregateddecisionsgetresponse)
+
+[AggregatedDecisionsGetResponsePage](./Models.md#aggregateddecisionsgetresponsepage)
+
+[AggregatedDecisionsSortBy](./Models.md#aggregateddecisionssortby)
 
 [AllowlistCreateRequest](./Models.md#allowlistcreaterequest)
 
@@ -64,6 +74,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [AllowlistSubscriberEntityPage](./Models.md#allowlistsubscriberentitypage)
 
 [AllowlistSubscribersCount](./Models.md#allowlistsubscriberscount)
+
+[AllowlistSubscription](./Models.md#allowlistsubscription)
 
 [AllowlistSubscriptionRequest](./Models.md#allowlistsubscriptionrequest)
 
@@ -107,8 +119,6 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [BlocklistSubscribersCount](./Models.md#blocklistsubscriberscount)
 
-[BlocklistSubscription](./Models.md#blocklistsubscription)
-
 [BlocklistSubscriptionRequest](./Models.md#blocklistsubscriptionrequest)
 
 [BlocklistSubscriptionResponse](./Models.md#blocklistsubscriptionresponse)
@@ -141,6 +151,10 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [DecisionCreateResponse](./Models.md#decisioncreateresponse)
 
+[DecisionMachineState](./Models.md#decisionmachinestate)
+
+[DecisionMachineStateEnum](./Models.md#decisionmachinestateenum)
+
 [DecisionResponse](./Models.md#decisionresponse)
 
 [DecisionTargetModel](./Models.md#decisiontargetmodel)
@@ -152,6 +166,10 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [DecisionsSortBy](./Models.md#decisionssortby)
 
 [DecisionsSortOrder](./Models.md#decisionssortorder)
+
+[EngineGetResponse](./Models.md#enginegetresponse)
+
+[EngineGetResponsePage](./Models.md#enginegetresponsepage)
 
 [EntityType](./Models.md#entitytype)
 
@@ -180,6 +198,8 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [Links](./Models.md#links)
 
 [MetricUnits](./Models.md#metricunits)
+
+[OperatingSystem](./Models.md#operatingsystem)
 
 [OriginMetrics](./Models.md#originmetrics)
 
@@ -215,6 +235,10 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [VendorSubscription](./Models.md#vendorsubscription)
 
+[capi__entities__lists_subscriber_entity__BlocklistSubscription](./Models.md#capi__entities__lists_subscriber_entity__blocklistsubscription)
+
+[src__api__v1__models__integrations__BlocklistSubscription](./Models.md#src__api__v1__models__integrations__blocklistsubscription)
+
 [AppsecConfigIndex](./Models.md#appsecconfigindex)
 
 [AppsecRuleIndex](./Models.md#appsecruleindex)
@@ -237,19 +261,19 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [AffectedComponent](./Models.md#affectedcomponent)
 
-[AllowlistSubscription](./Models.md#allowlistsubscription)
-
 [AttackDetail](./Models.md#attackdetail)
 
 [AttackerObjective](./Models.md#attackerobjective)
 
 [Behavior](./Models.md#behavior)
 
+[BlocklistSubscription](./Models.md#blocklistsubscription)
+
 [CVEEventOutput](./Models.md#cveeventoutput)
 
 [CVEExploitationPhase](./Models.md#cveexploitationphase)
 
-[CVEResponseBase](./Models.md#cveresponsebase)
+[CVEResponseDetailed](./Models.md#cveresponsedetailed)
 
 [CVEsubscription](./Models.md#cvesubscription)
 
@@ -270,8 +294,6 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [FingerprintEventOutput](./Models.md#fingerprinteventoutput)
 
 [FingerprintRuleResponse](./Models.md#fingerprintruleresponse)
-
-[FingerprintRuleSummary](./Models.md#fingerprintrulesummary)
 
 [FingerprintTimelineItem](./Models.md#fingerprinttimelineitem)
 
