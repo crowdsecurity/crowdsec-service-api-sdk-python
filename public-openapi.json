@@ -3,7 +3,7 @@
   "info": {
     "title": "Service API",
     "description": "This is the API to manage Crowdsec services",
-    "version": "1.70.56",
+    "version": "1.70.59",
     "contact": {
       "name": "CrowdSec",
       "url": "https://crowdsec.net",
@@ -1270,7 +1270,7 @@
               ],
               "description": "Blocklist expiration",
               "examples": [
-                "2026-08-13T14:31:02.942186+00:00"
+                "2026-09-03T14:36:28.031595+00:00"
               ],
               "title": "Expiration"
             },
@@ -9425,6 +9425,21 @@
             "title": "Tags",
             "description": "List of tags associated with the engine",
             "default": []
+          },
+          "scenarios": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scenarios",
+            "description": "List of scenarios associated with the engine"
           }
         },
         "type": "object",
