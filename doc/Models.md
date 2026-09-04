@@ -699,6 +699,7 @@ id, organization_id, created_at
 | last_push | str | Last time the engine pushed to CAPI ||
 | last_login | str | Last time the engine logged in CAPI ||
 | tags | list[str] | List of tags associated with the engine ||
+| scenarios | Optional[list[str]] | List of scenarios associated with the engine ||
 
 # **EngineGetResponsePage**
 ## Required: 
