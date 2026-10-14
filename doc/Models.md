@@ -339,7 +339,6 @@ name, description
 | description | str | Blocklist description ||
 | references | list[str] | Useful references on the list's origins ||
 | tags | list[str] | Classification tags ||
-| store_full_content_in_s3 | bool | Whether to store the full blocklist content in S3 or not ||
 
 # **BlocklistDeleteIPsRequest**
 ## Required: 
@@ -699,6 +698,7 @@ id, organization_id, created_at
 | last_push | str | Last time the engine pushed to CAPI ||
 | last_login | str | Last time the engine logged in CAPI ||
 | tags | list[str] | List of tags associated with the engine ||
+| scenarios | Optional[list[str]] | List of scenarios associated with the engine ||
 
 # **EngineGetResponsePage**
 ## Required: 

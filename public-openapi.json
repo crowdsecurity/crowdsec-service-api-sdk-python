@@ -3,7 +3,7 @@
   "info": {
     "title": "Service API",
     "description": "This is the API to manage Crowdsec services",
-    "version": "1.70.56",
+    "version": "1.70.73",
     "contact": {
       "name": "CrowdSec",
       "url": "https://crowdsec.net",
@@ -1270,7 +1270,7 @@
               ],
               "description": "Blocklist expiration",
               "examples": [
-                "2026-08-13T14:31:02.942186+00:00"
+                "2026-10-14T13:08:17.596712+00:00"
               ],
               "title": "Expiration"
             },
@@ -1369,73 +1369,6 @@
         },
         "responses": {
           "201": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "403": {
-            "description": "Blocklist is read-only"
-          },
-          "404": {
-            "description": "Blocklist not found"
-          },
-          "412": {
-            "description": "Payload too large for one operation, limit is 20000 IPs per request"
-          },
-          "500": {
-            "description": "Internal server error"
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/blocklists/{blocklist_id}/ips/bulk_overwrite": {
-      "post": {
-        "tags": [
-          "Blocklists"
-        ],
-        "summary": "Bulk Overwrite Blocklist Ips",
-        "description": "Overwrite blocklist content",
-        "operationId": "overwriteIps",
-        "parameters": [
-          {
-            "name": "blocklist_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "ObjectId",
-              "examples": [
-                "5f9d88b9e5c4f5b9a3d3e8b1"
-              ],
-              "title": "Blocklist Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BlocklistAddIPsRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "202": {
             "description": "Successful Response",
             "content": {
               "application/json": {
@@ -8037,12 +7970,6 @@
             "title": "Tags",
             "description": "Classification tags",
             "default": []
-          },
-          "store_full_content_in_s3": {
-            "type": "boolean",
-            "title": "Store Full Content In S3",
-            "description": "Whether to store the full blocklist content in S3 or not",
-            "default": false
           }
         },
         "additionalProperties": false,
@@ -9425,6 +9352,21 @@
             "title": "Tags",
             "description": "List of tags associated with the engine",
             "default": []
+          },
+          "scenarios": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scenarios",
+            "description": "List of scenarios associated with the engine"
           }
         },
         "type": "object",
