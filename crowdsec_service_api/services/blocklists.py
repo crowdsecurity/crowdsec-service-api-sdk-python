@@ -11,7 +11,7 @@ from ..http_client import HttpClient
 
 class Blocklists(Service):
     def __init__(self, auth: Auth, base_url: str = "https://admin.api.crowdsec.net/v1") -> None:
-        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/1.135.0")
+        super().__init__(base_url=base_url, auth=auth, user_agent="crowdsec_service_api/1.142.3")
     
     def get_blocklists(
         self,
@@ -168,32 +168,6 @@ class Blocklists(Service):
         params = {}
         path_params = json.loads(
             BlocklistsAddIpsToBlocklistPathParameters(**loc).model_dump_json(
-                exclude_none=True
-            )
-        )
-        
-        payload = json.loads(
-            request.model_dump_json(
-                exclude_none=True
-            )
-        ) if "request" in loc else None
-        response = self.http_client.post(
-            url=endpoint_url, path_params=path_params, params=params, headers=headers, json=payload
-        )
-        
-        return None
-    
-    def overwrite_ips(
-        self,
-        request: BlocklistAddIPsRequest,
-        blocklist_id: str,
-    ):
-        endpoint_url = "/blocklists/{blocklist_id}/ips/bulk_overwrite"
-        loc = locals()
-        headers = {}
-        params = {}
-        path_params = json.loads(
-            BlocklistsOverwriteIpsPathParameters(**loc).model_dump_json(
                 exclude_none=True
             )
         )
