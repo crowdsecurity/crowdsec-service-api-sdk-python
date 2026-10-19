@@ -339,7 +339,6 @@ name, description
 | description | str | Blocklist description ||
 | references | list[str] | Useful references on the list's origins ||
 | tags | list[str] | Classification tags ||
-| store_full_content_in_s3 | bool | Whether to store the full blocklist content in S3 or not ||
 
 # **BlocklistDeleteIPsRequest**
 ## Required: 
@@ -689,16 +688,17 @@ id, organization_id, created_at
 | organization_id | str | ID of the owner organization ||
 | created_at | str | Time the engine was created ||
 | entity_type | EntityType | None ||
-| blocklists | list[BlocklistSubscription] | None ||
-| allowlists | list[AllowlistSubscription] | None ||
-| version | Optional[str] | None ||
-| enrolled_at | Optional[str] | None ||
+| blocklists | list[BlocklistSubscription] | List of blocklist subscriptions for the engine ||
+| allowlists | list[AllowlistSubscription] | List of allowlist subscriptions for the engine ||
+| version | Optional[str] | Version of the engine ||
+| enrolled_at | Optional[str] | Time the engine was enrolled ||
 | os | OperatingSystem | None ||
-| meta | Meta | None ||
+| meta | Meta | Metadata for the engine, including feature flags, console options, and datasources ||
 | last_pull | str | Last time the engine pulled CAPI ||
 | last_push | str | Last time the engine pushed to CAPI ||
 | last_login | str | Last time the engine logged in CAPI ||
 | tags | list[str] | List of tags associated with the engine ||
+| scenarios | Optional[list[str]] | List of scenarios installed on the engine ||
 
 # **EngineGetResponsePage**
 ## Required: 
