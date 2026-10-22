@@ -3,7 +3,7 @@
   "info": {
     "title": "Service API",
     "description": "This is the API to manage Crowdsec services",
-    "version": "1.70.56",
+    "version": "1.70.81",
     "contact": {
       "name": "CrowdSec",
       "url": "https://crowdsec.net",
@@ -1270,7 +1270,7 @@
               ],
               "description": "Blocklist expiration",
               "examples": [
-                "2026-08-13T14:31:02.942186+00:00"
+                "2026-10-22T07:45:34.288291+00:00"
               ],
               "title": "Expiration"
             },
@@ -1369,73 +1369,6 @@
         },
         "responses": {
           "201": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "403": {
-            "description": "Blocklist is read-only"
-          },
-          "404": {
-            "description": "Blocklist not found"
-          },
-          "412": {
-            "description": "Payload too large for one operation, limit is 20000 IPs per request"
-          },
-          "500": {
-            "description": "Internal server error"
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/blocklists/{blocklist_id}/ips/bulk_overwrite": {
-      "post": {
-        "tags": [
-          "Blocklists"
-        ],
-        "summary": "Bulk Overwrite Blocklist Ips",
-        "description": "Overwrite blocklist content",
-        "operationId": "overwriteIps",
-        "parameters": [
-          {
-            "name": "blocklist_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "ObjectId",
-              "examples": [
-                "5f9d88b9e5c4f5b9a3d3e8b1"
-              ],
-              "title": "Blocklist Id"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BlocklistAddIPsRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "202": {
             "description": "Successful Response",
             "content": {
               "application/json": {
@@ -3175,6 +3108,287 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/EngineGetResponsePage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/engines/{engine_id}": {
+      "get": {
+        "tags": [
+          "Engines"
+        ],
+        "summary": "Get Engine",
+        "description": "Get an engine for an organization",
+        "operationId": "getEngine",
+        "parameters": [
+          {
+            "name": "engine_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Engine Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EngineGetResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/engines/{engine_id}/tags": {
+      "post": {
+        "tags": [
+          "Engines"
+        ],
+        "summary": "Associate Tags With Engine",
+        "description": "Associate tags with an engine",
+        "operationId": "associateTagsWithEngine",
+        "parameters": [
+          {
+            "name": "engine_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Engine Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EngineAssociateTagsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EngineAssociateTagsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/engines/{engine_id}/tags/{tag_name}": {
+      "delete": {
+        "tags": [
+          "Engines"
+        ],
+        "summary": "Disassociate Tags With Engine",
+        "description": "Disassociate tags from an engine",
+        "operationId": "disassociateTagsWithEngine",
+        "parameters": [
+          {
+            "name": "engine_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Engine Id"
+            }
+          },
+          {
+            "name": "tag_name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Tag Name"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/engines/{engine_id}/log_processors": {
+      "get": {
+        "tags": [
+          "Engines"
+        ],
+        "summary": "Get Engine Log Processors",
+        "description": "Get log processors for an engine",
+        "operationId": "getEngineLogProcessors",
+        "parameters": [
+          {
+            "name": "engine_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Engine Id"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Page number",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Page size",
+              "default": 50,
+              "title": "Size"
+            },
+            "description": "Page size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogProcessorsGetResponsePage"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/engines/{engine_id}/remediation_components": {
+      "get": {
+        "tags": [
+          "Engines"
+        ],
+        "summary": "Get Engine Remediation Components",
+        "description": "Get remediation components for an engine",
+        "operationId": "getEngineRemediationComponents",
+        "parameters": [
+          {
+            "name": "engine_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Engine Id"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Page number",
+              "default": 1,
+              "title": "Page"
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "Page size",
+              "default": 50,
+              "title": "Size"
+            },
+            "description": "Page size"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemediationComponentsGetResponsePage"
                 }
               }
             }
@@ -8037,12 +8251,6 @@
             "title": "Tags",
             "description": "Classification tags",
             "default": []
-          },
-          "store_full_content_in_s3": {
-            "type": "boolean",
-            "title": "Store Full Content In S3",
-            "description": "Whether to store the full blocklist content in S3 or not",
-            "default": false
           }
         },
         "additionalProperties": false,
@@ -9328,6 +9536,45 @@
         ],
         "title": "DecisionsSortOrder"
       },
+      "EngineAssociateTagsRequest": {
+        "properties": {
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags",
+            "description": "List of tags to associate with the engine"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "tags"
+        ],
+        "title": "EngineAssociateTagsRequest"
+      },
+      "EngineAssociateTagsResponse": {
+        "properties": {
+          "modified_count": {
+            "type": "integer",
+            "title": "Modified Count",
+            "description": "Count of tags associated with the engine",
+            "default": 0
+          },
+          "errors": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Errors",
+            "description": "Tags that could not be associated with the engine with associated error",
+            "default": {}
+          }
+        },
+        "type": "object",
+        "title": "EngineAssociateTagsResponse"
+      },
       "EngineGetResponse": {
         "properties": {
           "id": {
@@ -9348,7 +9595,7 @@
           },
           "entity_type": {
             "$ref": "#/components/schemas/EntityType",
-            "description": "Type of the entity",
+            "description": "Type of the entity, fixed to `engine`",
             "default": "engine"
           },
           "blocklists": {
@@ -9357,6 +9604,7 @@
             },
             "type": "array",
             "title": "Blocklists",
+            "description": "List of blocklist subscriptions for the engine",
             "default": []
           },
           "allowlists": {
@@ -9365,6 +9613,7 @@
             },
             "type": "array",
             "title": "Allowlists",
+            "description": "List of allowlist subscriptions for the engine",
             "default": []
           },
           "version": {
@@ -9376,7 +9625,8 @@
                 "type": "null"
               }
             ],
-            "title": "Version"
+            "title": "Version",
+            "description": "Version of the engine"
           },
           "enrolled_at": {
             "anyOf": [
@@ -9388,15 +9638,18 @@
                 "type": "null"
               }
             ],
-            "title": "Enrolled At"
+            "title": "Enrolled At",
+            "description": "Time the engine was enrolled"
           },
           "os": {
-            "$ref": "#/components/schemas/OperatingSystem"
+            "$ref": "#/components/schemas/OperatingSystem",
+            "description": "Operating system of the engine"
           },
           "meta": {
             "additionalProperties": true,
             "type": "object",
             "title": "Meta",
+            "description": "Metadata for the engine, including feature flags, console options, and datasources",
             "default": {}
           },
           "last_pull": {
@@ -9417,6 +9670,18 @@
             "title": "Last Login",
             "description": "Last time the engine logged in CAPI"
           },
+          "last_ip": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Ip",
+            "description": "Last IP address used by the engine"
+          },
           "tags": {
             "items": {
               "type": "string"
@@ -9425,6 +9690,21 @@
             "title": "Tags",
             "description": "List of tags associated with the engine",
             "default": []
+          },
+          "scenarios": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scenarios",
+            "description": "List of scenarios installed on the engine"
           }
         },
         "type": "object",
@@ -9567,6 +9847,159 @@
         },
         "type": "object",
         "title": "HTTPValidationError"
+      },
+      "HubItem": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "name of the item"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version",
+            "description": "version of the item"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status",
+            "description": "status of the item"
+          }
+        },
+        "type": "object",
+        "title": "HubItem"
+      },
+      "HubItems": {
+        "properties": {
+          "scenarios": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/HubItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scenarios",
+            "description": "scenarios"
+          },
+          "parsers": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/HubItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parsers",
+            "description": "parsers"
+          },
+          "postoverflows": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/HubItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Postoverflows",
+            "description": "postoverflows"
+          },
+          "appsec-configs": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/HubItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Appsec-Configs",
+            "description": "appsec configs"
+          },
+          "appsec-rules": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/HubItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Appsec-Rules",
+            "description": "appsec rules"
+          },
+          "collections": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/HubItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Collections",
+            "description": "collections"
+          },
+          "contexts": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/HubItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contexts",
+            "description": "contexts"
+          }
+        },
+        "type": "object",
+        "title": "HubItems"
       },
       "InfoResponse": {
         "properties": {
@@ -10314,6 +10747,169 @@
         "type": "object",
         "title": "Links"
       },
+      "LogProcessorGetResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "ID of the log processor"
+          },
+          "organization_id": {
+            "type": "string",
+            "title": "Organization Id",
+            "description": "ID of the owner organization"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Time the log processor was created"
+          },
+          "entity_type": {
+            "$ref": "#/components/schemas/EntityType",
+            "description": "Type of the entity",
+            "default": "log_processor"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the log processor"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version",
+            "description": "Version of the log processor"
+          },
+          "last_push": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Push",
+            "description": "Last time the log processor pushed to CAPI"
+          },
+          "last_update": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Update",
+            "description": "Last time the log processor was updated in CAPI"
+          },
+          "last_heartbeat": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Heartbeat",
+            "description": "Last time the log processor sent a heartbeat to CAPI"
+          },
+          "feature_flags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Feature Flags",
+            "description": "Feature flags associated with the log processor",
+            "default": []
+          },
+          "hub_items": {
+            "$ref": "#/components/schemas/HubItems",
+            "description": "Hub items associated with the log processor"
+          },
+          "os": {
+            "$ref": "#/components/schemas/OperatingSystem"
+          },
+          "datasources": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Datasources",
+            "description": "Datasources associated with the log processor"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "organization_id",
+          "created_at",
+          "name"
+        ],
+        "title": "LogProcessorGetResponse"
+      },
+      "LogProcessorsGetResponsePage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/LogProcessorGetResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total"
+          },
+          "page": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          },
+          "pages": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pages"
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links",
+            "readOnly": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "page",
+          "size",
+          "links"
+        ],
+        "title": "LogProcessorsGetResponsePage"
+      },
       "MetricUnits": {
         "type": "string",
         "enum": [
@@ -10664,6 +11260,148 @@
         },
         "type": "object",
         "title": "RawMetrics"
+      },
+      "RemediationComponentGetResponse": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "ID of the remediation component"
+          },
+          "organization_id": {
+            "type": "string",
+            "title": "Organization Id",
+            "description": "ID of the owner organization"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "Time the remediation component was created"
+          },
+          "entity_type": {
+            "$ref": "#/components/schemas/EntityType",
+            "description": "Type of the entity",
+            "default": "remediation_component"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of the remediation component"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version",
+            "description": "Version of the remediation component"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Type",
+            "description": "Type of the remediation component"
+          },
+          "last_pull": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Last Pull",
+            "description": "Last time the remediation component pulled from CAPI"
+          },
+          "os": {
+            "$ref": "#/components/schemas/OperatingSystem"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "organization_id",
+          "created_at",
+          "name"
+        ],
+        "title": "RemediationComponentGetResponse"
+      },
+      "RemediationComponentsGetResponsePage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RemediationComponentGetResponse"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total"
+          },
+          "page": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          },
+          "pages": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pages"
+          },
+          "links": {
+            "$ref": "#/components/schemas/Links",
+            "readOnly": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "page",
+          "size",
+          "links"
+        ],
+        "title": "RemediationComponentsGetResponsePage"
       },
       "RemediationMetrics": {
         "properties": {
