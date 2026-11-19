@@ -167,6 +167,10 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [DecisionsSortOrder](./Models.md#decisionssortorder)
 
+[EngineAssociateTagsRequest](./Models.md#engineassociatetagsrequest)
+
+[EngineAssociateTagsResponse](./Models.md#engineassociatetagsresponse)
+
 [EngineGetResponse](./Models.md#enginegetresponse)
 
 [EngineGetResponsePage](./Models.md#enginegetresponsepage)
@@ -178,6 +182,10 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [GetRemediationMetricsResponse](./Models.md#getremediationmetricsresponse)
 
 [HTTPValidationError](./Models.md#httpvalidationerror)
+
+[HubItem](./Models.md#hubitem)
+
+[HubItems](./Models.md#hubitems)
 
 [InfoResponse](./Models.md#inforesponse)
 
@@ -197,6 +205,10 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 
 [Links](./Models.md#links)
 
+[LogProcessorGetResponse](./Models.md#logprocessorgetresponse)
+
+[LogProcessorsGetResponsePage](./Models.md#logprocessorsgetresponsepage)
+
 [MetricUnits](./Models.md#metricunits)
 
 [OperatingSystem](./Models.md#operatingsystem)
@@ -214,6 +226,10 @@ You can find a Quickstart about this SDK, following this [documentation](https:/
 [PublicBlocklistResponsePage](./Models.md#publicblocklistresponsepage)
 
 [RawMetrics](./Models.md#rawmetrics)
+
+[RemediationComponentGetResponse](./Models.md#remediationcomponentgetresponse)
+
+[RemediationComponentsGetResponsePage](./Models.md#remediationcomponentsgetresponsepage)
 
 [RemediationMetrics](./Models.md#remediationmetrics)
 
