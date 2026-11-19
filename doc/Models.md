@@ -339,7 +339,6 @@ name, description
 | description | str | Blocklist description ||
 | references | list[str] | Useful references on the list's origins ||
 | tags | list[str] | Classification tags ||
-| store_full_content_in_s3 | bool | Whether to store the full blocklist content in S3 or not ||
 
 # **BlocklistDeleteIPsRequest**
 ## Required: 
@@ -679,6 +678,21 @@ CREATED_AT, EXPIRE_AT
 ## Enum: 
 ASC, DESC
 
+# **EngineAssociateTagsRequest**
+## Required: 
+tags
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| tags | list[str] | List of tags to associate with the engine ||
+
+# **EngineAssociateTagsResponse**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| modified_count | int | Count of tags associated with the engine ||
+| errors | Errors | Tags that could not be associated with the engine with associated error ||
+
 # **EngineGetResponse**
 ## Required: 
 id, organization_id, created_at
@@ -689,16 +703,18 @@ id, organization_id, created_at
 | organization_id | str | ID of the owner organization ||
 | created_at | str | Time the engine was created ||
 | entity_type | EntityType | None ||
-| blocklists | list[BlocklistSubscription] | None ||
-| allowlists | list[AllowlistSubscription] | None ||
-| version | Optional[str] | None ||
-| enrolled_at | Optional[str] | None ||
+| blocklists | list[BlocklistSubscription] | List of blocklist subscriptions for the engine ||
+| allowlists | list[AllowlistSubscription] | List of allowlist subscriptions for the engine ||
+| version | Optional[str] | Version of the engine ||
+| enrolled_at | Optional[str] | Time the engine was enrolled ||
 | os | OperatingSystem | None ||
-| meta | Meta | None ||
+| meta | Meta | Metadata for the engine, including feature flags, console options, and datasources ||
 | last_pull | str | Last time the engine pulled CAPI ||
 | last_push | str | Last time the engine pushed to CAPI ||
 | last_login | str | Last time the engine logged in CAPI ||
+| last_ip | Optional[str] | Last IP address used by the engine ||
 | tags | list[str] | List of tags associated with the engine ||
+| scenarios | Optional[list[str]] | List of scenarios installed on the engine ||
 
 # **EngineGetResponsePage**
 ## Required: 
@@ -740,6 +756,26 @@ raw, computed
 | Property | Type | Description | Example |
 |----------|------|-------------|---------|
 | detail | list[ValidationError] | None ||
+
+# **HubItem**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| name | Optional[str] | name of the item ||
+| version | Optional[str] | version of the item ||
+| status | Optional[str] | status of the item ||
+
+# **HubItems**
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| scenarios | Optional[list[HubItem]] | scenarios ||
+| parsers | Optional[list[HubItem]] | parsers ||
+| postoverflows | Optional[list[HubItem]] | postoverflows ||
+| appsec-configs | Optional[list[HubItem]] | appsec configs ||
+| appsec-rules | Optional[list[HubItem]] | appsec rules ||
+| collections | Optional[list[HubItem]] | collections ||
+| contexts | Optional[list[HubItem]] | contexts ||
 
 # **InfoResponse**
 ## Required: 
@@ -879,6 +915,39 @@ id, name, organization_id, created_at, updated_at, entity_type, output_format, b
 | next | Optional[str] | None ||
 | prev | Optional[str] | None ||
 
+# **LogProcessorGetResponse**
+## Required: 
+id, organization_id, created_at, name
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | ID of the log processor ||
+| organization_id | str | ID of the owner organization ||
+| created_at | str | Time the log processor was created ||
+| entity_type | EntityType | None ||
+| name | str | Name of the log processor ||
+| version | Optional[str] | Version of the log processor ||
+| last_push | str | Last time the log processor pushed to CAPI ||
+| last_update | str | Last time the log processor was updated in CAPI ||
+| last_heartbeat | str | Last time the log processor sent a heartbeat to CAPI ||
+| feature_flags | list[str] | Feature flags associated with the log processor ||
+| hub_items | HubItems | None ||
+| os | OperatingSystem | None ||
+| datasources | Datasources | Datasources associated with the log processor ||
+
+# **LogProcessorsGetResponsePage**
+## Required: 
+items, page, size, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[LogProcessorGetResponse] | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
+| links | Links | None ||
+
 # **MetricUnits**
 ## Enum: 
 BYTE, PACKET, REQUEST, IP, LINE, EVENT
@@ -958,6 +1027,35 @@ items, page, size, links
 |----------|------|-------------|---------|
 | dropped | list[RemediationMetrics] | dropped metrics ||
 | processed | list[RemediationMetrics] | processed metrics ||
+
+# **RemediationComponentGetResponse**
+## Required: 
+id, organization_id, created_at, name
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| id | str | ID of the remediation component ||
+| organization_id | str | ID of the owner organization ||
+| created_at | str | Time the remediation component was created ||
+| entity_type | EntityType | None ||
+| name | str | Name of the remediation component ||
+| version | Optional[str] | Version of the remediation component ||
+| type | Optional[str] | Type of the remediation component ||
+| last_pull | str | Last time the remediation component pulled from CAPI ||
+| os | OperatingSystem | None ||
+
+# **RemediationComponentsGetResponsePage**
+## Required: 
+items, page, size, links
+## Properties
+| Property | Type | Description | Example |
+|----------|------|-------------|---------|
+| items | list[RemediationComponentGetResponse] | None ||
+| total | Optional[int] | None ||
+| page | Optional[int] | None ||
+| size | Optional[int] | None ||
+| pages | Optional[int] | None ||
+| links | Links | None ||
 
 # **RemediationMetrics**
 ## Required: 
